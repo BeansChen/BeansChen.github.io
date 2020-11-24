@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>angularJS基本概念 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="angularJS">
+    <meta name="description" content="angularJS简介历史AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。 核心MVVM，模块化，语义化标签，双向数据绑定，依赖注入。 常用模块引入相应的头文件，再依赖注入既可以使用  ui-Route    AngularJS是一套前端的MVC框架。那么，为了实现视图的中转，肯定会涉及到路由的概念。ui-Route即是AngularJS的路由模块">
+<meta name="keywords" content="angularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularJS基本概念">
+<meta property="og:url" content="https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="angularJS简介历史AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。 核心MVVM，模块化，语义化标签，双向数据绑定，依赖注入。 常用模块引入相应的头文件，再依赖注入既可以使用  ui-Route    AngularJS是一套前端的MVC框架。那么，为了实现视图的中转，肯定会涉及到路由的概念。ui-Route即是AngularJS的路由模块">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.075Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularJS基本概念">
+<meta name="twitter:description" content="angularJS简介历史AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。 核心MVVM，模块化，语义化标签，双向数据绑定，依赖注入。 常用模块引入相应的头文件，再依赖注入既可以使用  ui-Route    AngularJS是一套前端的MVC框架。那么，为了实现视图的中转，肯定会涉及到路由的概念。ui-Route即是AngularJS的路由模块">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">angularJS基本概念</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">angularJS基本概念</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-03T09:30:13.000Z" itemprop="datePublished" class="page-time">
+  2018-12-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/angularJS/">angularJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#angularJS简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">angularJS简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#历史"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">历史</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">核心</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用模块"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">常用模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#框架和类库"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">框架和类库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#angularJS的优势"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">angularJS的优势</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#angularJS的不足之处"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">angularJS的不足之处</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#angularJS减少了我们哪些工作"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">angularJS减少了我们哪些工作</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-angularjs/angularJS学习笔记一-基本概念"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">angularJS基本概念</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-03 17:30:13" datetime="2018-12-03T09:30:13.000Z"  itemprop="datePublished">2018-12-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/angularJS/">angularJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="angularJS简介"><a href="#angularJS简介" class="headerlink" title="angularJS简介"></a>angularJS简介</h2><h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。</p>
+<h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><p>MVVM，模块化，语义化标签，双向数据绑定，依赖注入。</p>
+<h3 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h3><p>引入相应的<strong>头文件</strong>，再<strong>依赖注入</strong>既可以使用</p>
+<ol>
+<li>ui-Route    AngularJS是一套前端的MVC框架。那么，为了实现视图的中转，肯定会涉及到路由的概念。ui-Route即是AngularJS的路由模块。</li>
+<li>ngAnimate AngularJS的动画模块，使用ngAnimate各种核心指令能为你的应用程序提供动画效果。动画可使用css或者JavaScript回调函数。</li>
+<li>ngCookies ngCookies模块提供了一个方便的包用于读取和写入浏览器的cookies。</li>
+<li>ngSanitize ngSanitize模块可安全地在你的应用程序中解析和操作HTML数据。和$sce服务转化ng-bind-html一样，只是不用在js里面转化，直接引入便可以。</li>
+<li>ngMessages AngularJS表单验证模块。ngMessages模块完美的实现了很多表单验证的常用功能，简化你的开发流程。</li>
+<li>(本人弃用)ngAria 使用ngaria为指令注入共同的可达性属性和提高残疾人用户体验。</li>
+<li>(本人弃用)ngResource 当查询和发送数据到一个REST 服务器时，使用ngResource模块。</li>
+<li>(本人弃用)ngTouch    ngRoute模块提供触摸事件，方便的应用于移动触摸设备。它的实现是实现是基于jQuery移动触摸事件处理。</li>
+</ol>
+<h3 id="框架和类库"><a href="#框架和类库" class="headerlink" title="框架和类库"></a>框架和类库</h3><p>html用于构建静态的网页文档，如果需要构建动态的web应用，就需要浏览器脚本语言JavaScript来配合工作，原生js并不会那么容易，一般会用到框架或类库。</p>
+<ul>
+<li><strong>类库：</strong> 一些很有用的函数的集合，开发时自己的代码起主导作用，你在合适的时候调用它。</li>
+<li><strong>框架：</strong> 一个完整的应用解决方案，你在合适的地方写上自己的业务代码，框架来决定何时调用它。</li>
+</ul>
+<h3 id="angularJS的优势"><a href="#angularJS的优势" class="headerlink" title="angularJS的优势"></a>angularJS的优势</h3><p>在构建WEB应用的前端时，Angular提供的不是一个部分解决方案，而是一个完整的解决方案。它能够处理所有你写过的混杂了DOM和AJAX的代码，并能够将它们组织的结构良好。这使得Angular在决定应该怎样构建一个CRUD应用时显得甚至有些“偏执（opinionated）”，但是尽管它“偏执”，它也尝试确保使用它构建的应用能够灵活的适应变化。下面是Angular的一些出众之处：</p>
+<ul>
+<li>构建一个CRUD应用时可能用到的所有技术：数据绑定、基本模板指令、表单验证、路由、深度链接、组件重用、依赖注入。</li>
+<li>可测试性：单元测试、端到端测试、模拟对象（mocks）、测试工具。</li>
+<li>拥有一定目录结构和测试脚本的种子应用。</li>
+</ul>
+<h3 id="angularJS的不足之处"><a href="#angularJS的不足之处" class="headerlink" title="angularJS的不足之处"></a>angularJS的不足之处</h3><ul>
+<li>angularJS不适合做一些内容网站，游戏或者简单的网页</li>
+<li>angular太笨重了</li>
+</ul>
+<h3 id="angularJS减少了我们哪些工作"><a href="#angularJS减少了我们哪些工作" class="headerlink" title="angularJS减少了我们哪些工作"></a>angularJS减少了我们哪些工作</h3><ol>
+<li>频繁的dom操作</li>
+<li>表单操作</li>
+<li>大量的初始化代码</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.075Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularJS/">angularJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/&title=《angularJS基本概念》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/&title=《angularJS基本概念》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularJS基本概念》 — Bean blog&url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/05/angularjs/angularJS学习笔记二-服务/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">angularJS服务</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/05/js/var a和var a = void 0？/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">var a和var a = void 0?</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/&title=《angularJS基本概念》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/&title=《angularJS基本概念》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularJS基本概念》 — Bean blog&url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/03/angularjs/angularJS学习笔记一-基本概念/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADN0lEQVR42u3aQU7kQAwFUO5/6Z7NLFgw6f9dGaljXlaoIVX1jISxXV9f8fP69nz/JHmrXfl6x+tPbn6wsbGxH8J+XT75Bvl38/D96zxJIK7fxcbGxt7Hzg+aHKhNbPkn16k0sWBjY2Njz34+We0kUWFjY2Njtwms7dic9HnaNhM2Njb272QnW56UFidJLg/rf+mlYWNjY388u20DffLX/2W+jY2Njf3B7Ff5tG+1baNkMHBy/r8rYGNjYy9i5wngvFyZtfWvA5eXGdjY2Ni72W0Rkm9zV5HTrn/USMLGxsZexL5u8eclSjKmnQ2Dk9Jl2HLCxsbGfgg7B8y2zBtGs3ZVuz42Njb2PvYskbTDgDxk91YNUS8NGxsb++HshDprD+VtqXvDF50WGxsbexE7/4e+LSTy0UJ7Qac985tfMDY2NvYi9izBtImkTVSztlRd/GBjY2M/lp1fhcwZbYFxUlTMQoONjY29iT27TJMXDyfrn1/EvK38wMbGxv5g9mzjtgWft6hOBslFoYKNjY29iJ1sdt48ysuV/NrQrCj6yg+KjY2N/Sj2eQJrt8wHxnlohk0lbGxs7IezT67ptO/O1pkVHlH5gY2Njb2CnZQQeYu/bfonK8/OlgyVsbGxsXew20bPLCHll2+SHW8oTrCxsbHXsdt01Q4Aiv5WWQglV3l++HlsbGzsRexk+/NRwfmVnXsDh42Njb2JnYBng9uTK0Gz0BfrY2NjYy9i5y2h65dnzaBkdpEnwnx9bGxs7E3stsBI/v63KWeWMq/P/GZlbGxs7EXs5OV2fNuOHM6LmaPbSdjY2NiL2OeFxyyZ5YmwHTm8CQE2Njb2UnayUJu6kvFDW4Tka76ZjWBjY2MvZSf/4s+aTTN2W7RE58HGxsZewX6Vz8nAYNZaasfDUbrFxsbGXsQ+yXv3hmmW5PLkOgwBNjY29kPYydHPm0Tt50mgk2ZW1FTCxsbGXsGeJYa8KT+7ynM+KohuKmFjY2P/MnbeAJqlsTZkbeixsbGxsdtCJQ/ELFjt9R1sbGzsrey8YGgbTPmB8iFE28z64bvY2NjYi9jnySA/3Gz80O5183wbGxsb+3PZfwA8sj7achfV7gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

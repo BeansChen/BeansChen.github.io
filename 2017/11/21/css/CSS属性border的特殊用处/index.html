@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>CSS属性boder的特殊用处 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="CSS,border">
+    <meta name="description" content="border实现各种形状border实现三角形width: 0; height: 0; border-width: 100px 200px 0 0;/*border画三角形*/ border-style: solid; border-color: red transparent transparent transparent;   根据下面这个例子很容易得到我们想要什么样的三角形 width: 0">
+<meta name="keywords" content="CSS,border">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS属性boder的特殊用处">
+<meta property="og:url" content="https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="border实现各种形状border实现三角形width: 0; height: 0; border-width: 100px 200px 0 0;/*border画三角形*/ border-style: solid; border-color: red transparent transparent transparent;   根据下面这个例子很容易得到我们想要什么样的三角形 width: 0">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder6.png">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS属性boder的特殊用处">
+<meta name="twitter:description" content="border实现各种形状border实现三角形width: 0; height: 0; border-width: 100px 200px 0 0;/*border画三角形*/ border-style: solid; border-color: red transparent transparent transparent;   根据下面这个例子很容易得到我们想要什么样的三角形 width: 0">
+<meta name="twitter:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder6.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CSS属性boder的特殊用处</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CSS属性boder的特殊用处</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-21T15:33:57.000Z" itemprop="datePublished" class="page-time">
+  2017-11-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#border实现各种形状"><span class="post-toc-number">1.</span> <span class="post-toc-text">border实现各种形状</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#border实现三角形"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">border实现三角形</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#border实现梯形"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">border实现梯形</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#border画椭圆"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">border画椭圆</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#border实现左右等高布局"><span class="post-toc-number">2.</span> <span class="post-toc-text">border实现左右等高布局</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-css/CSS属性border的特殊用处"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CSS属性boder的特殊用处</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-21 23:33:57" datetime="2017-11-21T15:33:57.000Z"  itemprop="datePublished">2017-11-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="border实现各种形状"><a href="#border实现各种形状" class="headerlink" title="border实现各种形状"></a>border实现各种形状</h2><h3 id="border实现三角形"><a href="#border实现三角形" class="headerlink" title="border实现三角形"></a>border实现三角形</h3><pre><code>width: 0;
+height: 0;
+border-width: 100px 200px 0 0;/*border画三角形*/
+border-style: solid;
+border-color: red transparent transparent transparent;
+</code></pre><div style="width: 0;height: 0;border-width: 100px 200px 0 0;border-style: solid;border-color: red transparent transparent transparent;"></div>
+
+<p>根据下面这个例子很容易得到我们想要什么样的三角形</p>
+<pre><code>width: 0;
+height: 0;
+border-width: 20px 40px;/*border画三角形*/
+border-style: solid;
+border-color: red gold blue black;
+</code></pre><div style="width: 0;height: 0;border-width: 100px 200px;border-style: solid;border-color: red gold blue black;"></div>
+
+<h3 id="border实现梯形"><a href="#border实现梯形" class="headerlink" title="border实现梯形"></a>border实现梯形</h3><pre><code>width: 100px;
+height: 0;
+border-width: 0 100px 100px 200px;
+border-style: solid;
+border-color: transparent transparent red transparent;
+</code></pre><h3 id="border画椭圆"><a href="#border画椭圆" class="headerlink" title="border画椭圆"></a>border画椭圆</h3><blockquote>
+<p>border单独指定水平和垂直半径， 只要用一个斜杠（ /） 分隔这两个值即可;border-radius: 50%/100% 100% 0 0;其实相当于border-radius: 50% 50% 50% 50% /100% 100% 0 0;</p>
+</blockquote>
+<pre><code>border-top-left-radius: 50% 100%;
+border-top-right-radius: 50% 100%;
+border-bottom-right-radius: 50% 0;
+border-bottom-left-radius: 50% 0;
+</code></pre><p>例子：</p>
+<pre><code>width: 0;
+height: 0;
+border-width: 200px 100px 0 100px;
+border-style: solid;
+border-color:red red transparent red; 
+background: blue;
+border-radius: 50%/100% 100% 0 0;
+</code></pre><div style="    width: 0;
+height: 0;
+border-width: 200px 100px 0 100px;
+border-style: solid;
+border-color:red red transparent red; 
+background: blue;
+border-radius: 50%/100% 100% 0 0;"></div>
+
+<h2 id="border实现左右等高布局"><a href="#border实现左右等高布局" class="headerlink" title="border实现左右等高布局"></a>border实现左右等高布局</h2><pre><code>.fa{
+        border-left:300px solid #222;
+        display: inline-block;
+       background: gray;
+}
+.son1{
+    width: 300px;
+    margin-left: -300px;
+    float: left;
+}
+.son1 ul li{
+    color: white;
+}
+.son2{
+    float: left;
+}
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder6.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.078Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/border/">border</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/&title=《CSS属性boder的特殊用处》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/&title=《CSS属性boder的特殊用处》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS属性boder的特殊用处》 — Bean blog&url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/23/随笔/移动端rem自适应和发布npm包/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">移动端rem自适应和发布npm包</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/18/css/CSS多种边框的实现方式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CSS多种边框的实现方式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/&title=《CSS属性boder的特殊用处》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/&title=《CSS属性boder的特殊用处》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS属性boder的特殊用处》 — Bean blog&url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2017/11/21/css/CSS属性border的特殊用处/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3awYobMRAE0P3/n04gp0Cwp6pbwg68OZnd8UhPBklTrZ+f+Pr15/r7c3L9e3/y5KQPhy88PDy8UddPdfHVM9uOvm896TMeHh7ebV7bwPtmEnYyHMnnBwseHh7eR3ntpJ8vNu8XHjw8PLz/nZe877+/J9mm4+Hh4X0/L98cz7bOyf2zcORY1oKHh4cX8zaT8qc+X6/v4eHh4Y2q6nk4m7eSR8AHeouHh4d3gZcXn9puJbHvga1wMIh4eHh493izQwNtqLFvMR84PDw8vBu8thNtAayNcdvjX/UbAx4eHt6a1064bbA72wq3BbaHHwYPDw/vAm/4hTYUiJ8zO5j1cA8eHh7eUV4+Kc+aaQ9v5fExHh4e3rfxZgWwHJOU2dpS2cswAg8PD+8Qr8Xk0e1+j98eZXhIWfDw8PCO8trJd1MSm4UXbRSCh4eHd4+XhAjJpvnU1jm5sz5ThoeHh3eUlx8M3SwGydC0S0j0HDw8PLwLvNXXFgcI8um+7WGRuODh4eEteLMy/yzCyAdxFjE/9AQPDw9vzUseNLunLaQlwUTdOh4eHt4F3qlQID9GMCuGrZ6Ah4eHd5Q361w+BMlwtMtAfegKDw8P7wJvVmRKQoHNwal8m/7y73h4eHgXeJtt7iwgOLVdLn4APDw8vKO8doObLwNtcWtzKKEogOHh4eEd5SWdy5vZRLSzrflD6QsPDw/vEC//9yx+TboyO4hQvwDg4eHhHeLtt7x5gaoNJtrnRGEEHh4e3prXTrgzWI5sA5HZ5h4PDw9vz0sWg3zZyCOM/eGtOnHBw8PDO8rbRAZ5LLuJOWYLGB4eHt5neW13k4G4dwwLDw8P7zt5m1ihParVRrp4eHh4t3l5xJBP7psS16Z4hoeHh3eb177kzxaD/Gmz5acm4eHh4U1a/w2GXZxxBtzCiwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

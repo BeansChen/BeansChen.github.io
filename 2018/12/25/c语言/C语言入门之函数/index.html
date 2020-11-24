@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>C语言入门之函数 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="C语言">
+    <meta name="description" content="函数的定义类型 函数名(形参表说明) /*函数首部*/  {  说明语句 /*函数体*/  执行语句  }   “类型”是指函数返回值的类型。函数返回值不能是数组,也不能是函数,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当不指明函数类型时,系统默认的是整型。  函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言入门之函数">
+<meta property="og:url" content="https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="函数的定义类型 函数名(形参表说明) /*函数首部*/  {  说明语句 /*函数体*/  执行语句  }   “类型”是指函数返回值的类型。函数返回值不能是数组,也不能是函数,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当不指明函数类型时,系统默认的是整型。  函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.081Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言入门之函数">
+<meta name="twitter:description" content="函数的定义类型 函数名(形参表说明) /*函数首部*/  {  说明语句 /*函数体*/  执行语句  }   “类型”是指函数返回值的类型。函数返回值不能是数组,也不能是函数,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当不指明函数类型时,系统默认的是整型。  函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C语言入门之函数</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C语言入门之函数</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-25T09:20:13.000Z" itemprop="datePublished" class="page-time">
+  2018-12-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C语言入门/">C语言入门</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数的定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">函数的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-c语言/C语言入门之函数"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C语言入门之函数</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-25 17:20:13" datetime="2018-12-25T09:20:13.000Z"  itemprop="datePublished">2018-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C语言入门/">C语言入门</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><pre><code>类型 函数名(形参表说明) /*函数首部*/ 
+{ 
+说明语句 /*函数体*/ 
+执行语句 
+} 
+</code></pre><ol>
+<li>“类型”是指函数返回值的类型。函数<strong>返回值不能是数组,也不能是函数</strong>,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当<strong>不指明函数类型时,系统默认的是整型</strong>。 </li>
+<li>函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合 C 语言对标识符的规范, 用于标识函数,并用该标识符调用函数。另外函数名本身也有值,它代表了该函数的入口地址,使用指针 调用函数时,将用到此功能。 </li>
+<li>形参又称为“形式参数”。形参表是用逗号分隔的一组变量说明,包括形参的类型和形参的标识 符,其作用是指出每一个形参的类型和形参的名称,当调用函数时,接收来自主调函数的数据,确定各参 数的值。 </li>
+<li>用{ }括起来的部分是函数的主体,称为函数体。函数体是一段程序,确定该函数应完成的规定的 运算,应执行的规定的动作,集中体现了函数的功能。函数内部应有自己的说明语句和执行语句,但<strong>函数内定义的变量不可以与形参同名</strong>。花括号{ }是不可以省略的。</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
+<p>判断一个数是否为素数</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+void isPrime(int n);//函数声明 
+int main(){
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    isPrime(n);
+    return 0;
+} 
+
+void isPrime(int n){
+    int i,flag=1;
+    for (i = 2;i&lt;n;i++)    {
+        if(n%i==0){
+            flag = 0;
+            break;
+        }        
+    }
+    if(flag){
+        printf(&quot;prime&quot;);
+    }else{
+        printf(&quot;not prime&quot;);
+    }
+}
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.081Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/&title=《C语言入门之函数》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/&title=《C语言入门之函数》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言入门之函数》 — Bean blog&url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/28/c语言/C语言入门之指针/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">C语言入门之指针</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/25/c语言/C语言番外之内存/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C语言番外之内存</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/&title=《C语言入门之函数》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/&title=《C语言入门之函数》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言入门之函数》 — Bean blog&url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/25/c语言/C语言入门之函数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACu0lEQVR42u3aS47dMAwEwLn/pRMgqwCBnW5SmpcA5ZXxviovRKLFr6/4+vHr+vP+6ZX3X/j9lafvzv5leOHh4eGNlv50PS3lfblP331fYg5O1oyHh4d3mzcrBu3Sc9h7YcjLCR4eHt5necOtOd7083fx8PDw/ndeAm6jh6RNx8PDw/ssLwkj8tChbYuf8HnAcSBrwcPDw+t25uEB2Kfuv+l8Dw8PD688VW+b4+TdzXhBvTY8PDy8C7y8XU7C1lmc0Rah+jfx8PDwjvLyOCD/g1NhQV5aHn8TDw8P7wJv0+Aeq0tx63yYioeHhzfitcvNh6XaJeYHbEV5w8PDw7vGa6PYdnzqBiMqZnh4eHgXeEkBaMHteNbsMRVlDA8PD+8CL2+R84hhFq22TfMwt8bDw8Nb8DYbfd6Uvy+ufaBFAcPDw8O7zNuMEeQjAmfDjr/EGXh4eHgXeElLPQtYE14S8p6aAcDDw8M7xduMOiWbe/JKe+WlCw8PD+8GL2l5i6oShLOn2u52wAsPDw/vLG8WJcya8ryozEYHiuqHh4eHN+KdjU3z4tEeobUh8pVUGA8PDy8+5t8Uj3yAIH8E+REaHh4e3g3e7VO1/AG1D7coNnh4eHjfyMvD083Ywf6TUWONh4eHd4iXBw0JeDOOkDffeXnAw8PDu8E7dYiVRwP50vPBhXrEAQ8PD2/BywPc9j7HFzMO8dgBHh4e3j1e24zmR1+nxlU3o7F4eHh4N3inmtqc1z7KfBgrqnt4eHh4a95sw23b31mZmTXxRZiLh4eHt+AlxSAvG3lL3TbQ+cBWcSKHh4eHt+Dl40356MB+xCovWtFMGR4eHt5Hee3GnQ8ctAddeHh4eP8ybxMxzBrr2fjXsKXGw8PDK3ltGHFqdCBv3IdrwMPDw7vAq4eZyqhi0xYnmBUMDw8Pr+P9BGbR+T6Nsqg5AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

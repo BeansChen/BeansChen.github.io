@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>C语言番外之内存 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="编程基础">
+    <meta name="description" content="数据在内存中的储存数据在内存中的存储 载入内存载入内存，让程序运行起来">
+<meta name="keywords" content="编程基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言番外之内存">
+<meta property="og:url" content="https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="数据在内存中的储存数据在内存中的存储 载入内存载入内存，让程序运行起来">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言番外之内存">
+<meta name="twitter:description" content="数据在内存中的储存数据在内存中的存储 载入内存载入内存，让程序运行起来">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C语言番外之内存</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C语言番外之内存</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-25T09:20:13.000Z" itemprop="datePublished" class="page-time">
+  2018-12-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程基础/">编程基础</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据在内存中的储存"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据在内存中的储存</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#载入内存"><span class="post-toc-number">2.</span> <span class="post-toc-text">载入内存</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-c语言/C语言番外之内存"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C语言番外之内存</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-25 17:20:13" datetime="2018-12-25T09:20:13.000Z"  itemprop="datePublished">2018-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程基础/">编程基础</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="数据在内存中的储存"><a href="#数据在内存中的储存" class="headerlink" title="数据在内存中的储存"></a>数据在内存中的储存</h2><p><a href="http://c.biancheng.net/view/1726.html" target="_blank" rel="noopener">数据在内存中的存储</a></p>
+<h2 id="载入内存"><a href="#载入内存" class="headerlink" title="载入内存"></a>载入内存</h2><p><a href="http://c.biancheng.net/view/1727.html" target="_blank" rel="noopener">载入内存，让程序运行起来</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.084Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程基础/">编程基础</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/&title=《C语言番外之内存》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/&title=《C语言番外之内存》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言番外之内存》 — Bean blog&url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/25/c语言/C语言入门之函数/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">C语言入门之函数</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/25/c语言/C语言入门之条件判断和循环/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C语言入门之条件判断和循环</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/&title=《C语言番外之内存》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/&title=《C语言番外之内存》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言番外之内存》 — Bean blog&url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/25/c语言/C语言番外之内存/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQXLbQAwEQP//08rVKYfiAFjITFXz5LIkapuHXWiAr6/4el1c31/9+f78Pz9fzd9z4MLDw8M7tPQE8P5T1SVe3eHqPsm34+Hh4e3xJpvy1TvzB3ezxNZBgoeHh/dMXgJ7v/VX34mHh4f3f/Heb9zV6CGB4eHh4T2Zlxe+vQgjX27yIFayFjw8PLyYl3eRnvP3Sn8PDw8Pb9xVr7a1zj7p1/jCw8PD2+DNi+O8cVUttfPA4iaSwMPDw1vm5Zi8ofXJSAIPDw/vk7ykJVYdk5pEG3mr7GbNeHh4eGu8ZIuPWvXxqEHv+Ckj8fDw8I7yJhFA8mV5odw7NqIYAg8PD+8orxdGVDE9cBLdRp/Fw8PDW+blraxeI79aLlebXnh4eHjbvFMlci9KmAcfN//Bw8PDW+D1YtlJIFuNevOQN3pMeHh4eGNedbCpNxzQu3+vPfbXZ/Hw8PDWeElgmh8VvQBiUqZHvxjw8PDwjvJ6xWv1kDg1mlDOp/Hw8PCO8vLGfH4knCqUe3Ht5X3w8PDwDvHyRfRiiOp9JuU1Hh4e3m/xqqFtPj6VLOtsEw4PDw9vj9cbsap+ZT6AdWokCw8PD2+DV92Uq+FpXlJXqYWAGA8PD2+Bl7eUeu2oZOk5YFJ24+Hh4Z3i5Yvubeu9Flr1SGguHQ8PD2/A642u9orpV3zlx8nNwYCHh4e3xquWufPjpNpya8a4eHh4eId4r+I1CWGrYXG1efaPV/Hw8PAWeNVtdxIf9BLlfEhrMmKLh4eHV+XlcUDC67XEcmr1BwAeHh7eHi/ZlCdl7vy78hgCDw8P75m8PBSotrWqja6bx4eHh4f3AF5SXvfK9GrxPZopw8PDwxvzepFBr+yuPqY8IC4PEODh4eG1ePMf/Ak7H/PKt/5JhIGHh4fX4v0BjbvVYoO8Zg4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

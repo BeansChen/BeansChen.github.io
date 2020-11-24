@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>var a和var a = void 0? | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="javascript">
+    <meta name="description" content="昨天知道了为什么要用void 0 来替代undefined。  1.防止undefined被重写 2.减少3个字节  但直接声明var a;，那么这个变量就是undefined var a; console.log(a)；//undefined 那为什么要多此一举多写几个字符呢？">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="var a和var a = void 0?">
+<meta property="og:url" content="https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="昨天知道了为什么要用void 0 来替代undefined。  1.防止undefined被重写 2.减少3个字节  但直接声明var a;，那么这个变量就是undefined var a; console.log(a)；//undefined 那为什么要多此一举多写几个字符呢？">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://beanschen.github.io/images/d.jpg">
+<meta property="og:image" content="https://beanschen.github.io/images/a.jpg">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.085Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="var a和var a = void 0?">
+<meta name="twitter:description" content="昨天知道了为什么要用void 0 来替代undefined。  1.防止undefined被重写 2.减少3个字节  但直接声明var a;，那么这个变量就是undefined var a; console.log(a)；//undefined 那为什么要多此一举多写几个字符呢？">
+<meta name="twitter:image" content="https://beanschen.github.io/images/d.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">var a和var a = void 0?</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">var a和var a = void 0?</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-05T01:33:23.000Z" itemprop="datePublished" class="page-time">
+  2018-07-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/javascript/">javascript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-js/var a和var a = void 0？"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">var a和var a = void 0?</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-05 09:33:23" datetime="2018-07-05T01:33:23.000Z"  itemprop="datePublished">2018-07-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/javascript/">javascript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>昨天知道了为什么要用<code>void 0</code> 来替代undefined。</p>
+<blockquote>
+<p>1.防止undefined被重写 2.减少3个字节</p>
+</blockquote>
+<p>但直接声明<code>var a;</code>，那么这个变量就是undefined</p>
+<pre><code>var a;
+console.log(a)；//undefined
+</code></pre><p>那为什么要多此一举多写几个字符呢？</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/d.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>哒哒哒，哒哒哒，我又开始百度啦！然而这次百度并没有给我什么满意的答案。我又看了下大佬的代码，比如这样</p>
+<pre><code>function (){
+    var a = void 0;
+    a = document.getElementById(&apos;demo&apos;);
+}
+</code></pre><p>就这点内容为什么我不直接这样写呢</p>
+<pre><code>function (){
+    var a = document.getElementById(&apos;demo&apos;);
+}
+</code></pre><p>到这里，我认为在代码还不多的情况下，直接把变量声明在顶部或许更好，那么什么时候用void 0 呢？</p>
+<pre><code>var a = 10;
+...
+var a;
+console.log(a);//10
+</code></pre><p>比如这种时候，我们不确定变量是否在哪里声明过，这个时候就可以声明<code>void 0</code>了，就这样吧，巴拉巴拉</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>大佬！！！<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/a.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.085Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/&title=《var a和var a = void 0?》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/&title=《var a和var a = void 0?》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《var a和var a = void 0?》 — Bean blog&url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/03/angularjs/angularJS学习笔记一-基本概念/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">angularJS基本概念</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/04/js/为什么要用void 0 代替undefined？/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">为什么要用void 0 代替undefined？</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/&title=《var a和var a = void 0?》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/&title=《var a和var a = void 0?》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《var a和var a = void 0?》 — Bean blog&url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/07/05/js/var a和var a = void 0？/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACoUlEQVR42u3aQW7DMAwEwP7/0+21RWFnSYqpC4xPRmArmhxEZamPj/j6vLiunkzevRrn+ydX94cvPDw8vENT/z30/ef3YyZTT0bL54yHh4e3zbtf4u9J1Sfz55O3Xljw8PDwHsDb2C7nu2I8PDy8/8u7n1xeAObbcTw8PLy/4iVhxD0gD3OrReJNWQseHh5ezMs3tc+5X+nv4eHh4Y276tWN76lluloGLr8XDw8Pb4GXL7j5BnrS9MqDicI88fDw8JZ5SSO/ugk+BaseWcDDw8N7P68Xzk7ijN4Ix17Dw8PDC96aH6XKN9N5iyspFVEZw8PDw1vg7QWs+c+Xg3sFCQ8PD2+PV5305CDUvMzk4+Dh4eFt86oLbl4G8p+mmi1E8QQeHh7eIV6ypE6ih8nV23zj4eHhbfOS5laP2muP9bKTqDGGh4eHd4jXO8zUW8TzqGIytx/3eHh4eAu86qB5Oz8PYfNTUtU/A3h4eHh7vHzxnUe082JQDqDx8PDw3sLrbVhzQHVxr5aQy0gCDw8Pb8ybBxB5WjwPFMpHwfDw8PDWeNUvmJCqccbioSs8PDy8Fm8elVZLSG/7no/5IpLAw8PDW+CNhmixe0ey8png4eHhbfCqR6l6y/okbuiVBzw8PLxtXrW9VP3iZGOdlIc85sDDw8Pb5lVfrh6i6k09LyGjrBoPDw+vxcsjiV57rHdI68CFh4eHtwCrbpSrpWIywuinx8PDw1vgTdbYs4Xn1P2xEoKHh4fX6q3nzare0YFJQSoUBjw8PLw1XrXh1DsUlQe+efl5EYLg4eHhPYBXnVa15OQRcLTdx8PDw3sAL9naTrbI+edRRIKHh4e3xus1vaoNsLw9NilUeHh4eNu8+R/+fLHO2dWG2ajLh4eHh5fyvgCM/WnO10cXuwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

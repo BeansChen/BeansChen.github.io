@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>C语言入门之指针 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="C语言">
+    <meta name="description" content="地址何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：地址就是可以唯一标识某一点的一个编号，即一个数字！ 内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的十六进制数来表示，比如0x12ff">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言入门之指针">
+<meta property="og:url" content="https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="地址何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：地址就是可以唯一标识某一点的一个编号，即一个数字！ 内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的十六进制数来表示，比如0x12ff">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言入门之指针">
+<meta name="twitter:description" content="地址何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：地址就是可以唯一标识某一点的一个编号，即一个数字！ 内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的十六进制数来表示，比如0x12ff">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C语言入门之指针</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C语言入门之指针</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-28T09:00:13.000Z" itemprop="datePublished" class="page-time">
+  2018-12-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C语言入门/">C语言入门</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#地址"><span class="post-toc-number">1.</span> <span class="post-toc-text">地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针的定义"><span class="post-toc-number">2.</span> <span class="post-toc-text">指针的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针与数组"><span class="post-toc-number">3.</span> <span class="post-toc-text">指针与数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针与字符串"><span class="post-toc-number">4.</span> <span class="post-toc-text">指针与字符串</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-c语言/C语言入门之指针"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C语言入门之指针</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-28 17:00:13" datetime="2018-12-28T09:00:13.000Z"  itemprop="datePublished">2018-12-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C语言入门/">C语言入门</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：<strong>地址就是可以唯一标识某一点的一个编号</strong>，即一个数字！</p>
+<p>内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的<strong>十六进制</strong>数来表示，比如0x12ff7c这样。在我们的C程序中，每一个定义的变量，在内存中都占有一个内存单元，比如int类型占四个字节，char类型占一个字节等等，每个字节都在0~4,294,967,295之间都有一个对应的编号，C语言允许在程序中使用变量的地址，并可以通过地址运算符”&amp;”得到变量的地址。</p>
+<h2 id="指针的定义"><a href="#指针的定义" class="headerlink" title="指针的定义"></a>指针的定义</h2><blockquote>
+<p>对指针变量定义的一般形式为:<br>类型说明符 <em>变量名;<br>其中,这里的 </em> 与前面的类型说明符共同说明这是一个指针变量,类型说明符表示该指针变量所指向的变量为何种数据类型,变量名即为定义的指针变量名。除此之外，C还<strong>提供*运算符获取地址上对应的值</strong>。 </p>
+</blockquote>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+        int num=2014;
+        int *p=&amp;num;
+        printf(&quot;num Address = 0x%x,num=%d\n&quot;,&amp;num,num);
+        printf(&quot;p = 0x%x,*p=%d\n&quot;,p,*p);
+        printf(&quot;%d\n&quot;,*&amp;num);
+        return 0;
+
+        //num Address = 0x62fe44,num=2014
+        //p = 0x62fe44,*p=2014
+        //2014
+}
+</code></pre><h2 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h2><p>指向数组元素的指针变量的定义与一般的指针变量相同</p>
+<pre><code>int a[10]; /*定义 a 为包含 10 个整型数据的数组*/
+int *p; /*定义 p 为指向整型变量的指针*/
+p=&amp;a[0]; /*把 a[0]元素的地址赋给指针变量 p*/
+
+p=a; /*等价于 p=&amp;a[0]; */
+int *p=a; /*等价于 int *p=&amp;a[0]; */
+</code></pre><p>对于指向首地址的指针 p,p+i(或a+i)就是数组元素 a[i]的地址,<em>(p+i)( 或</em>(a+i) )就是 a[i]的值。 </p>
+<p>如果指针变量 p 已指向数组中的某一个元素,则 p+1 指向同一数组中的下一个元素。 </p>
+<p>引入指针变量后,就可以用以下两种方法来访问数组元素: </p>
+<ul>
+<li>(1)下标法,即用 a[i]形式访问数组元素,在前面介绍数组时都是采用这种方法。 </li>
+<li><p>(2)指针法,即采用<em>(a+i)或</em>(p+i)形式,用间接访问的方法来访问数组元素,其中 a 是数组名,p 是 指向数组的指针变量,其初值 p=a。    </p>
+<p>  #include&lt;stdio.h&gt;<br>  int main()<br>  {</p>
+<pre><code>int i;
+int a[10]={1,2,3,4,5,6,7,8,9,0};
+int *p=a;
+for(i=0;i&lt;10;i++)
+{
+        printf(&quot;P Value:%d   a Value :%d\n&quot;,*(p++),*(a+i));
+}
+printf(&quot;\n&quot;);
+return 0;
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p><strong>注：</strong>指针可以通过++或–并修改自身值的方式移动，然而数组名本身值不可以被更改。    </p>
+<h2 id="指针与字符串"><a href="#指针与字符串" class="headerlink" title="指针与字符串"></a>指针与字符串</h2><p>字符指针也可以指向一个字符串,可以用字符串常量对字符 指针进行初始化</p>
+<pre><code>char *str = &quot;www.dotcpp.com&quot; ;
+</code></pre><p>这是对字符指针进行初始化。此时,字符指针指向一个字符串常量的首地址。<br>还可以用字符数组来存放字符串,例如:     </p>
+<pre><code>char string[ ] = &quot;Welcome to dotcpp.com&quot;;
+</code></pre><blockquote>
+<p>在这个语句中,string 是数组名,代表字符数组的首地址。因此可以通过数组名 string 来访问字符串。<br>字符串指针和字符串数组两种方式都可以访问字符串,但它们有着本质的区别:字符指针 <strong>str 是个变量,可以改变 str 使它指向不同的字符串, 但不能改变 str 所指向的字符串常量的值</strong>。 而<strong>string 是一个数组,可以改变数组中保存的内容</strong>。应注意字符串指针和字符串数组的区别。    </p>
+</blockquote>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+        char *str = &quot;www.dotcpp.com&quot;;
+        char string[]=&quot;Welcome to dotcpp.com&quot;;
+        str[0]=&apos;C&apos;; //试图修改str指向的常量区的字符串内容
+        return 0;
+}
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.082Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/&title=《C语言入门之指针》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/&title=《C语言入门之指针》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言入门之指针》 — Bean blog&url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/28/c语言/C语言入门之数组/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">C语言入门之数组</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/25/c语言/C语言入门之函数/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C语言入门之函数</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/&title=《C语言入门之指针》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/&title=《C语言入门之指针》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言入门之指针》 — Bean blog&url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqUlEQVR42u3aQW7DMAwEwPz/0+65COIuSUlxgfGpcBJLo4PJrvR6xdf1dn369P7O/a/eP72/s+zCw8PDG089mdz7/eS391PMwcmc8fDw8HbzksflBeMKrkkJycsJHh4e3hN4+WDJq7/XUuPh4eH9F14eKOSN9f1vq605Hh4e3kle3vgmAyetcx5AVFt2PDw8vN28vBV+zt9b9vfw8PDwxrvqyQs3Lx7Jws1n+GtcPDw8vA28ydGBPNitfto75vVxyfDw8PCW8qoBRDWEzTGrDijg4eHhneT1BuvFBNXFah4mwMPDw9vGS6beixiqy5cXqgiJh4eHt4E32Uuqxgq97+eBLx4eHt4ZXu+wVHV7rAqexxy/wgg8PDy8pbx5/FodLF+s3qYXHh4e3hle/jpOhq9Sk6knMW4U5uLh4eEt4vUa1uqi9KLe6ugL6h4eHh7eLW/HdlcVnJeZapuOh4eHt4M32Xq/gqsXBPee2fyPAQ8PD6/Im4Sn84a4F+aWA1w8PDy8pbx8s3/yQk8a5epxq+phBTw8PLxVvLwkVAPcXrM+aa/x8PDwzvPy13EeNFQ32CY1LUqp8fDw8Ma8ydQnrXCvwCSRR7Pm4OHh4cW8vOXtNcpnvvmx4cbDw8PbwOtt7a8KDvJWu1qK8PDw8M7wesUgH7iwCxfPoXBcAA8PD28Db3JcoNoiz49eFe7j4eHhbeYlL9xecJAs3GtwRefI8PDw8Ma8q3j1tva/VU7w8PDwdvCqr91JbNGLJPYFInh4eHgTXl4M5qFt/uS8BcfDw8P7Fm/B8aalsW9euz7NAQ8PD+9pvF4AkcQN1YDjj+XDw8PDexgvwVRDhPnBAjw8PLwzvPzRkwMEeVPeC4jLBwjw8PDwWrzqP/y9IlEtJMmrfxJh4OHh4bV4P1Z69FHU3IN3AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

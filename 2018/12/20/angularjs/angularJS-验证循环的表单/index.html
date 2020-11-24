@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>angularJS验证ng-repeat循环出的表单 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="angularJS">
+    <meta name="description" content="angularJS验证ng-repeat循环出的表单前言在使用angularJS与后端做交互时，都会用它的表单验证功能，但有时候表单属性并不是一个对象，而是一个对象列表，比如需要提交一个不定长度的联系人列表。我在项目遇到这个情况的时候，第一时间就直接对form作了循环，遗憾的是angular并不能获取到form对象，中途试了很多种方法，都不尽人意，最后中总结了两种实现的方法： 使用ng-forma">
+<meta name="keywords" content="angularJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularJS验证ng-repeat循环出的表单">
+<meta property="og:url" content="https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="angularJS验证ng-repeat循环出的表单前言在使用angularJS与后端做交互时，都会用它的表单验证功能，但有时候表单属性并不是一个对象，而是一个对象列表，比如需要提交一个不定长度的联系人列表。我在项目遇到这个情况的时候，第一时间就直接对form作了循环，遗憾的是angular并不能获取到form对象，中途试了很多种方法，都不尽人意，最后中总结了两种实现的方法： 使用ng-forma">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularJS验证ng-repeat循环出的表单">
+<meta name="twitter:description" content="angularJS验证ng-repeat循环出的表单前言在使用angularJS与后端做交互时，都会用它的表单验证功能，但有时候表单属性并不是一个对象，而是一个对象列表，比如需要提交一个不定长度的联系人列表。我在项目遇到这个情况的时候，第一时间就直接对form作了循环，遗憾的是angular并不能获取到form对象，中途试了很多种方法，都不尽人意，最后中总结了两种实现的方法： 使用ng-forma">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">angularJS验证ng-repeat循环出的表单</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">angularJS验证ng-repeat循环出的表单</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-20T09:00:13.000Z" itemprop="datePublished" class="page-time">
+  2018-12-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/angularJS/">angularJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#angularJS验证ng-repeat循环出的表单"><span class="post-toc-number">1.</span> <span class="post-toc-text">angularJS验证ng-repeat循环出的表单</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用ng-form"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">使用ng-form</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用循环的div"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用循环的div</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-angularjs/angularJS-验证循环的表单"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">angularJS验证ng-repeat循环出的表单</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-20 17:00:13" datetime="2018-12-20T09:00:13.000Z"  itemprop="datePublished">2018-12-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/angularJS/">angularJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="angularJS验证ng-repeat循环出的表单"><a href="#angularJS验证ng-repeat循环出的表单" class="headerlink" title="angularJS验证ng-repeat循环出的表单"></a>angularJS验证ng-repeat循环出的表单</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在使用angularJS与后端做交互时，都会用它的表单验证功能，但有时候表单属性并不是一个对象，而是一个对象列表，比如需要提交一个不定长度的联系人列表。<br>我在项目遇到这个情况的时候，第一时间就直接对form作了循环，遗憾的是angular并不能获取到form对象，中途试了很多种方法，都不尽人意，最后中总结了两种<br>实现的方法：</p>
+<h3 id="使用ng-form"><a href="#使用ng-form" class="headerlink" title="使用ng-form"></a>使用ng-form</h3><p>angularjs的指令ng-form是支持嵌套的表单的，可以使用ng-form实现。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; ng-app=&quot;app&quot;&gt;
+
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+&lt;title&gt;Document&lt;/title&gt;
+&lt;script src=&quot;http://cdn.bootcss.com/angular.js/1.5.6/angular.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div ng-controller=&quot;formController&quot;&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;addContactObj()&quot;&gt;新增&lt;/button&gt;
+    &lt;form name=&quot;outerForm&quot; novalidate&gt;
+    &lt;ng-form name=&quot;innerForm&quot; ng-repeat=&quot;item in contactList&quot;&gt;
+        &lt;h2&gt;联系人{{$index}} &lt;button type=&quot;button&quot; ng-click=&quot;delContactObj($index,contactList)&quot;&gt;删除&lt;/button&gt;&lt;/h2&gt;
+        &lt;div&gt;
+        &lt;div&gt;&lt;input type=&quot;text&quot; ng-model=&quot;item.name&quot; name=&quot;username&quot; placeholder=&quot;请输入姓名&quot; ng-pattern=&quot;/^[\u4e00-\u9fff]{2,6}$/&quot;
+            required&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:red;&quot; ng-show=&quot;innerForm.username.$error.pattern &amp;&amp; !innerForm.username.$untouched&quot;&gt;请输入2~6位中文&lt;/div&gt;
+        &lt;div style=&quot;color:red;&quot; ng-show=&quot;innerForm.username.$error.required &amp;&amp; !innerForm.username.$untouched&quot;&gt;姓名不能为空&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+        &lt;div&gt;&lt;input type=&quot;text&quot; maxlength=&quot;3&quot; ng-model=&quot;item.age&quot; name=&quot;age&quot; placeholder=&quot;请输入年龄&quot; required&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:red;&quot; ng-show=&quot;innerForm.age.$error.required &amp;&amp; !innerForm.age.$untouched&quot;&gt;年龄不能为空&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/ng-form&gt;
+
+    &lt;/form&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;sub()&quot;&gt;提交&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var app = angular.module(&apos;app&apos;, []);
+    app.controller(&apos;formController&apos;, function ($scope) {
+    $scope.contactList = [];
+    $scope.addContactObj = function () {
+        var contactObj = {
+        name: &quot;&quot;,
+        age: &quot;&quot;
+        }
+        $scope.contactList.push(contactObj);
+    }
+    $scope.delContactObj = function (key, arr) {
+        arr.splice(key, 1);
+    }
+    $scope.sub = function () {
+        if(!validForm()) return;
+        alert(&quot;提交成功！&quot;);
+    }
+    function validForm(){
+        var error = $scope.outerForm.$error;
+        if (error &amp;&amp; error.required) {
+        for (var i in error.required) {
+            for(var j in error.required[i].$error.required){
+            error.required[i].$error.required[j].$touched = true;
+            error.required[i].$error.required[j].$untouched = false;
+            return false;
+            }
+        }
+        } else if (error.pattern) {
+        for (var i in error.pattern) {
+            for(var j in error.pattern[i].$error.pattern){
+            error.pattern[i].$error.pattern[j].$touched = true;
+            error.pattern[i].$error.pattern[j].$untouched = false;
+            return false;
+            }
+        }
+        } else if (error.maxlength) {
+        for (var i in error.maxlength) {
+            for(var j in error.maxlength[i].$error.maxlength){
+            error.maxlength[i].$error.maxlength[j].$touched = true;
+            error.maxlength[i].$error.maxlength[j].$untouched = false;
+            return false;
+            }
+        }
+        }
+        if(!$scope.outerForm.$valid)return false;
+        return true;      
+    }
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><h3 id="使用循环的div"><a href="#使用循环的div" class="headerlink" title="使用循环的div"></a>使用循环的div</h3><p>form元素不能循环，但是div元素却可以，再使用[]的方式取得对应的表单元素作验证</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; ng-app=&quot;app&quot;&gt;
+
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+&lt;title&gt;Document&lt;/title&gt;
+&lt;script src=&quot;http://cdn.bootcss.com/angular.js/1.5.6/angular.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div ng-controller=&quot;formController&quot;&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;addContactObj()&quot;&gt;新增&lt;/button&gt;
+    &lt;form name=&quot;outerForm&quot; novalidate&gt;
+    &lt;div ng-repeat=&quot;item in contactList&quot;&gt;
+        &lt;h2&gt;联系人{{$index}} &lt;button type=&quot;button&quot; ng-click=&quot;delContactObj($index,contactList)&quot;&gt;删除&lt;/button&gt;&lt;/h2&gt;
+        &lt;div&gt;
+        &lt;div&gt;&lt;input type=&quot;text&quot; ng-model=&quot;item.name&quot; name=&quot;{{'username'+$index}}&quot; placeholder=&quot;请输入姓名&quot; ng-pattern=&quot;/^[\u4e00-\u9fff]{2,6}$/&quot;
+            required&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:red;&quot; ng-show=&quot;outerForm[&apos;username&apos;+$index].$error.pattern &amp;&amp; !outerForm[&apos;username&apos;+$index].$untouched&quot;&gt;请输入2~6位中文&lt;/div&gt;
+        &lt;div style=&quot;color:red;&quot; ng-show=&quot;outerForm[&apos;username&apos;+$index].$error.required &amp;&amp; !outerForm[&apos;username&apos;+$index].$untouched&quot;&gt;姓名不能为空&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+        &lt;div&gt;&lt;input type=&quot;text&quot; maxlength=&quot;3&quot; ng-model=&quot;item.age&quot; name=&quot;{{'age'+$index}}&quot; placeholder=&quot;请输入年龄&quot; required&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:red;&quot; ng-show=&quot;outerForm[&apos;age&apos;+$index].$error.required &amp;&amp; !outerForm[&apos;age&apos;+$index].$untouched&quot;&gt;年龄不能为空&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;/form&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;sub()&quot;&gt;提交&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var app = angular.module(&apos;app&apos;, []);
+    app.controller(&apos;formController&apos;, function ($scope) {
+    $scope.contactList = [];
+    $scope.addContactObj = function () {
+        var contactObj = {
+        name: &quot;&quot;,
+        age: &quot;&quot;
+        }
+        $scope.contactList.push(contactObj);
+    }
+    $scope.delContactObj = function (key, arr) {
+        arr.splice(key, 1);
+    }
+    $scope.sub = function () {
+        if(!validForm()) return;
+        alert(&quot;提交成功！&quot;);
+    }
+    function validForm(){
+        var error = $scope.outerForm.$error;
+        if (error &amp;&amp; error.required) {
+        for (var i in error.required) {
+            error.required[i].$touched = true;
+            error.required[i].$untouched = false;
+            return false;
+        }
+        } else if (error.pattern) {
+        for (var i in error.pattern) {
+            error.pattern[i].$touched = true;
+            error.pattern[i].$untouched = false;
+            return false;
+        }
+        } else if (error.maxlength) {
+        for (var i in error.maxlength) {
+            error.maxlength[i].$touched = true;
+            error.maxlength[i].$untouched = false;
+            return false;
+        }
+        }
+        if(!$scope.outerForm.$valid)return false;
+        return true;      
+    }
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.074Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularJS/">angularJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/&title=《angularJS验证ng-repeat循环出的表单》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/&title=《angularJS验证ng-repeat循环出的表单》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularJS验证ng-repeat循环出的表单》 — Bean blog&url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/25/c语言/C语言入门之运算符和表达式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">C语言入门之运算符和表达式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/13/c语言/111111111111/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/&title=《angularJS验证ng-repeat循环出的表单》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/&title=《angularJS验证ng-repeat循环出的表单》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《angularJS验证ng-repeat循环出的表单》 — Bean blog&url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/20/angularjs/angularJS-验证循环的表单/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aQXIbMQwEQP//00ol11jWDEDKOvSeVGsny15XkdAAX1/x9fh3/X8nuf/s87M7z56e/ObwwsPDwxst/dmVYPJXky80eU0/rxkPDw/vNi9fVvKfzu7PPr+w4OHh4f0qL9nok5eS/DRfDx4eHt7n8/Ktf1aUz9aDh4eH935esolvSvA2npgdKnh4eHjv4bUNsE/4fLG/h4eHh7foqu8Pif3xsFotHh4e3gVeEh+0D5sB9sVx8Y0BDw8P7xAvb2jN4oY8tG2f+OIPg4eHh3eUl2zTbencvrI2aCiehYeHh3eNNxuimi0ip7bP+uYOHh4e3gVe22SaBQSnBrwO9+7w8PDw1kMDySExi33bUrst36PjBA8PD+8obxY9tIdK2zbLI+MXbTA8PDy8o7zNY5IGVbLQvIhPDp6nWQseHh7eIV4bJSRb/KlRgLzIHoYmeHh4eCPeI76SeKKNDDZDBsXQFR4eHt5RXhuStoVvHrluxhHqlBoPDw9vwZu1uPYxbn6otGHH03MPDw8P7wJvFpjOtvt80fkwQdEAw8PDw1vw8sK33cSjmYUyjBgW6Hh4eHhHee2Gm2/xbQE9a5VFQ1d4eHh4F3jthts+uG2PFeXyz/8KDw8P7wIvGWxqB0NnpfaNn+Lh4eG9h9eWuZsBgtnLrQMLPDw8vKO8fETg7OjV5vBIXhMeHh7e7/La39lEtDlglbXg4eHhbbvz9RZ8KqrI44zNGvDw8PDO8h7ltWFvBrOSMOKbFeLh4eFd4M023E1xfLYQn0UbeHh4eHteGz20h8FssGA/4IWHh4d3m9cGE5uBqjyKrU+w2SLw8PDwrvHaIYPZuFUeK0QvAg8PD+8DeGePlrxXlX8N+CaMwMPDw7vA2wes+7ZZgskPDDw8PLx7vFPf6PcHxqZwvx5Y4OHh4f29/gC0oeQp0B4EeAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

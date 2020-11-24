@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>CSS多种边框的实现方式 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="CSS">
+    <meta name="description" content="普通的边框普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的就只有outline是不占元素空间的 半透明边框背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围 background: blue; border:10px solid rgba(0,0,0,.3); background-clip: padding">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS多种边框的实现方式">
+<meta property="og:url" content="https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="普通的边框普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的就只有outline是不占元素空间的 半透明边框背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围 background: blue; border:10px solid rgba(0,0,0,.3); background-clip: padding">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder1.png">
+<meta property="og:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder4.png">
+<meta property="og:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder3.png">
+<meta property="og:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder5.png">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.077Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS多种边框的实现方式">
+<meta name="twitter:description" content="普通的边框普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的就只有outline是不占元素空间的 半透明边框背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围 background: blue; border:10px solid rgba(0,0,0,.3); background-clip: padding">
+<meta name="twitter:image" content="http://ovdnx588r.bkt.clouddn.com/cssborder1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CSS多种边框的实现方式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CSS多种边框的实现方式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-18T15:33:57.000Z" itemprop="datePublished" class="page-time">
+  2017-11-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#普通的边框"><span class="post-toc-number">1.</span> <span class="post-toc-text">普通的边框</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#半透明边框"><span class="post-toc-number">2.</span> <span class="post-toc-text">半透明边框</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多重边框"><span class="post-toc-number">3.</span> <span class="post-toc-text">多重边框</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#图片边框"><span class="post-toc-number">4.</span> <span class="post-toc-text">图片边框</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#边框内圆角"><span class="post-toc-number">5.</span> <span class="post-toc-text">边框内圆角</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-css/CSS多种边框的实现方式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CSS多种边框的实现方式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-18 23:33:57" datetime="2017-11-18T15:33:57.000Z"  itemprop="datePublished">2017-11-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="普通的边框"><a href="#普通的边框" class="headerlink" title="普通的边框"></a>普通的边框</h3><p>普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的<br>就只有outline是不占元素空间的</p>
+<h3 id="半透明边框"><a href="#半透明边框" class="headerlink" title="半透明边框"></a>半透明边框</h3><p>背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围</p>
+<pre><code>background: blue;
+border:10px solid rgba(0,0,0,.3);
+background-clip: padding-box;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="多重边框"><a href="#多重边框" class="headerlink" title="多重边框"></a>多重边框</h3><pre><code>box-shadow: 0 0 0 10px red,0 0 0 20px yellow,0 0 0 30px blue;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder4.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="图片边框"><a href="#图片边框" class="headerlink" title="图片边框"></a>图片边框</h3><pre><code>border: 40px solid transparent;
+background: linear-gradient(white,white),url(2.jpg);
+background-size: cover;
+background-clip: padding-box,border-box;
+background-origin: border-box;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="边框内圆角"><a href="#边框内圆角" class="headerlink" title="边框内圆角"></a>边框内圆角</h3><pre><code>border-radius: 10px;
+outline: 10px solid red;
+box-shadow: 0 0 0 10px red;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder5.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.077Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/&title=《CSS多种边框的实现方式》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/&title=《CSS多种边框的实现方式》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS多种边框的实现方式》 — Bean blog&url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/21/css/CSS属性border的特殊用处/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CSS属性boder的特殊用处</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/03/nodejs/使用nodejs批量修改文件后缀/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用nodejs批量修改文件后缀</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/&title=《CSS多种边框的实现方式》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/&title=《CSS多种边框的实现方式》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS多种边框的实现方式》 — Bean blog&url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2017/11/18/css/CSS多种边框的实现方式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrElEQVR42u3aMW4DMQwEQP//00mTIkCQ8y4pAS7mKsOx7zQKINIkX6/4+vp1/X7n7+vn7/53PX8yecrqwsPDw1ssPXnwHvC83GdwvmY8PDy827zkMc+P3weD9rnPa8bDw8P7TF6Sze7vmafXeHh4eJ/Jyxc0g51Kx/Hw8PBu82Yl1JZxNjAcrrXg4eHhxbw2Of6E11f6e3h4eHjrrvrzgZs3w/Lj/tQ6f+6Jh4eHd4GXH7izNlX+3dkWR1uGh4eHd423GRR4Tr5PNdLysjIeHh7ePd5sLDV/v97psgn35g54eHh413izn/15GNgUHdr33/xWwMPDw1vzZmMBm4N+k5on/4bXJprh4eHhlbzZuFVbtG0HBQ4EHjw8PLyjvLz0kIwOtGEjL/gOCyJ4eHh413hJ+tsWF/KxrbYAUbTH8PDw8K7xZi38fVqcwFbjCHh4eHiXeacGrWahYtaKe5O44+Hh4V3j5cXWtoXflhvyAkc9dIWHh4d3mdcudx9a6oGAZMvw8PDwLvBuHNk3MMl6/n06Hh4e3gVeO9I0S3PbO28aZkUMwcPDwyt5m1Z90hibBZL60E+GrvDw8PAO8fKG06nUdt8AO1CSwMPDwzvKawsQ7bfy8LMfO8DDw8O7zWsP5fYzeXjIh6tmbTM8PDy8Pa89amfHejLmNfvusD6Nh4eHt+blD9gc2XnqfHgyAg8PD+8CL0G2Lf/8nnmzrd4gPDw8vKO8r/KaJdyz4YD9SBYeHh7eDd4mnrSLzpPmU6/x8PDw7vHaYJAPS7X3z0NOvkF4eHh493ht82k2XLVJ3NsmGR4eHt6n8WaL2Le42oCBh4eH9zm85K+zkmsbVN5sBx4eHt413qZYMCvLthuXDBysyrh4eHh4Me/AD/44JCQF3zYpH44L4OHh4U1430BwK/ADsHu2AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

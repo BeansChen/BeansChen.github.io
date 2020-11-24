@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>C语言入门之数组 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="C语言">
+    <meta name="description" content="一维数组 在C语言中使用数组必须先进行定义,一维数组的定义方式如下:类型说明符 数组名 [常量表达式];其中类型说明符是任意一种基本数据类型或构造数据类型,它定义了全体数组成员的数据类型，可以发现要比我们定义N个元素要方便的多了，如果把一个元素看作一个点，那么一维数组就像一条线。名是用户定义的数组标识符;方括号中的常量表达式表示数据元素的个数,也称为数组的长度。需要注意的是，数组中的元素下标是从0">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言入门之数组">
+<meta property="og:url" content="https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="一维数组 在C语言中使用数组必须先进行定义,一维数组的定义方式如下:类型说明符 数组名 [常量表达式];其中类型说明符是任意一种基本数据类型或构造数据类型,它定义了全体数组成员的数据类型，可以发现要比我们定义N个元素要方便的多了，如果把一个元素看作一个点，那么一维数组就像一条线。名是用户定义的数组标识符;方括号中的常量表达式表示数据元素的个数,也称为数组的长度。需要注意的是，数组中的元素下标是从0">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言入门之数组">
+<meta name="twitter:description" content="一维数组 在C语言中使用数组必须先进行定义,一维数组的定义方式如下:类型说明符 数组名 [常量表达式];其中类型说明符是任意一种基本数据类型或构造数据类型,它定义了全体数组成员的数据类型，可以发现要比我们定义N个元素要方便的多了，如果把一个元素看作一个点，那么一维数组就像一条线。名是用户定义的数组标识符;方括号中的常量表达式表示数据元素的个数,也称为数组的长度。需要注意的是，数组中的元素下标是从0">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C语言入门之数组</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C语言入门之数组</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-28T09:00:13.000Z" itemprop="datePublished" class="page-time">
+  2018-12-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C语言入门/">C语言入门</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一维数组"><span class="post-toc-number">1.</span> <span class="post-toc-text">一维数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二维数组"><span class="post-toc-number">2.</span> <span class="post-toc-text">二维数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二维数组的定义："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">二维数组的定义：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二维数组的初始化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">二维数组的初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、按行给二维数组赋初值。"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">1、按行给二维数组赋初值。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、将所有的数组元素按行顺序写在一个大括号内。"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">2、将所有的数组元素按行顺序写在一个大括号内。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、对部分数组元素赋初值"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">3、对部分数组元素赋初值</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、如果对全部数组元素置初值，则二维数组的第一个下标可省略，但第二个下标不能省略"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">4、如果对全部数组元素置初值，则二维数组的第一个下标可省略，但第二个下标不能省略</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符数组和字符串"><span class="post-toc-number">3.</span> <span class="post-toc-text">字符数组和字符串</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-c语言/C语言入门之数组"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C语言入门之数组</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-28 17:00:13" datetime="2018-12-28T09:00:13.000Z"  itemprop="datePublished">2018-12-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C语言入门/">C语言入门</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><blockquote>
+<p>在C语言中使用数组必须先进行定义,一维数组的定义方式如下:<br>类型说明符 数组名 [常量表达式];<br>其中类型说明符是任意一种基本数据类型或构造数据类型,它定义了全体数组成员的数据类型，可以发现要比我们定义N个元素要方便的多了，如果把一个元素看作一个点，那么一维数组就像一条线。<br>名是用户定义的数组标识符;方括号中的常量表达式表示数据元素的个数,也称为数组的长度。需要注意的是，数组中的元素下标是从0开始计算的。例如: </p>
+</blockquote>
+<pre><code>int a[100];     //定义一个数组名为a，存储100个int类型的数组,其元素分别是a[0]~a[99]
+float b[10];    //数组名为b的，存储10个float类型的数组,其元素分别是b[0]~b[9]
+char c[256]；    //定义一个数组名为c的字符型数组 长度为256,其元素分别是c[0]~c[255]
+</code></pre><blockquote>
+<p>当在函数中只定义数组时，数组里的值和函数里定义一个变量的值一样，都是未初始化过的，我们也可以定义的时候并初始化赋值，并且，当给部分元素赋初值的时候，未被赋值的元素将自动赋值为0，更细一些，int类型未被赋值的元素为0，浮点型为小数类型，而字符类型则为’\0’。<br>如：</p>
+</blockquote>
+<pre><code>int a[100]={1,2,3,4,5}; //定义一个整型数组a，前5个元素即赋值为1，2，3，4，5,后95个元素值值全部为0
+float b[10]={1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,0.0};  //定义float数组b并对全部float类型的元素都分别赋值
+char c[256]={&apos;C&apos;,&apos;l&apos;，&apos;a&apos;,&apos;n&apos;,&apos;g&apos;,&apos;u&apos;,&apos;a&apos;,&apos;g&apos;,&apos;e&apos;}；  //定义一个数组名为c的字符型数组 并对前9个元素进行赋值，其余元素全部为&apos;\0&apos;
+int a［］=｛0，1，2，3，4｝;//在对全部数组元素赋初值时，可以不指定数组长度
+</code></pre><h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><h3 id="二维数组的定义："><a href="#二维数组的定义：" class="headerlink" title="二维数组的定义："></a>二维数组的定义：</h3><pre><code>int a[3][4];/*定义一个整形二维数组a，有3行4列共12个元素分别为:
+a[0][0] a[0][1] a[0][2] a[0][3]
+a[1][0] a[1][1] a[1][2] a[1][3]
+a[2][0] a[2][1] a[2][2] a[2][3]
+</code></pre><h3 id="二维数组的初始化"><a href="#二维数组的初始化" class="headerlink" title="二维数组的初始化"></a>二维数组的初始化</h3><h4 id="1、按行给二维数组赋初值。"><a href="#1、按行给二维数组赋初值。" class="headerlink" title="1、按行给二维数组赋初值。"></a>1、按行给二维数组赋初值。</h4><pre><code>int a[2][3] = {{1,2,3},{4,5,6}};
+</code></pre><p>在上述代码中，等号后面有一对大括号，大括号中的第一对括号代表的是第一行的数组元素，第二对括号代表的是第二行的数组元素。</p>
+<h4 id="2、将所有的数组元素按行顺序写在一个大括号内。"><a href="#2、将所有的数组元素按行顺序写在一个大括号内。" class="headerlink" title="2、将所有的数组元素按行顺序写在一个大括号内。"></a>2、将所有的数组元素按行顺序写在一个大括号内。</h4><pre><code>int a[2][3] = {1,2,3,4,5,6};
+</code></pre><p>在上述代码中，二维数组a共有两行，每行有三个元素，其中，第一行的元素依次为1、2、3，第二行元素依次为4、5、6。</p>
+<h4 id="3、对部分数组元素赋初值"><a href="#3、对部分数组元素赋初值" class="headerlink" title="3、对部分数组元素赋初值"></a>3、对部分数组元素赋初值</h4><pre><code>int b[3][4] = {{1},{4,3},{2,1,2}};
+</code></pre><p>在上述代码中，只为数组b中的部分元素进行了赋值，对于没有赋值的元素，系统会自动赋值为0</p>
+<h4 id="4、如果对全部数组元素置初值，则二维数组的第一个下标可省略，但第二个下标不能省略"><a href="#4、如果对全部数组元素置初值，则二维数组的第一个下标可省略，但第二个下标不能省略" class="headerlink" title="4、如果对全部数组元素置初值，则二维数组的第一个下标可省略，但第二个下标不能省略"></a>4、如果对全部数组元素置初值，则二维数组的第一个下标可省略，但第二个下标不能省略</h4><pre><code>int a[2][3] = {1,2,3,4,5,6};
+</code></pre><p>可以写为</p>
+<pre><code>int a[][3] = {1,2,3,4,5,6};
+</code></pre><h2 id="字符数组和字符串"><a href="#字符数组和字符串" class="headerlink" title="字符数组和字符串"></a>字符数组和字符串</h2><p>用来存放字符的数组称为字符数组。字符数组的各个元素依次存放字符串的各字符,字符数组的数组 名代表该数组的首地址,这为处理字符串中个别字符和引用整个字符串提供了极大的方便。 字符数组的定义形式与前面介绍的数值数组相同。例如: </p>
+<pre><code>char c[10];
+</code></pre><p>字符数组也允许在定义时进行初始化赋值。例如: </p>
+<pre><code>char c[6]={&apos;c&apos;, &apos; h &apos;, &apos;i&apos;, &apos;n&apos;, &apos;a&apos; , &apos;\0&apos; };    
+</code></pre><p>字符数组也可采用字符串常量的赋值方式,例如: </p>
+<pre><code>char a[]={&quot;china&quot;};    
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.082Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/&title=《C语言入门之数组》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/&title=《C语言入门之数组》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言入门之数组》 — Bean blog&url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/10/c语言/C语言入门之变量和数据类型/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">C语言入门之变量和数据类型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/28/c语言/C语言入门之指针/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C语言入门之指针</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/&title=《C语言入门之数组》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/&title=《C语言入门之数组》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言入门之数组》 — Bean blog&url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3a0W7CMAwFUP7/p7eXPUxCaa/tpGPS6ROiNOQEKTG2X6/4+lpcv+/mT72P8P7UapzXiQsPDw9v09TfAcn7q8ldv14xrl9HS4aHh4d3jHe9QV9vysm0kkPleoHyowgPDw/vv/DyrT8fvxfE4+Hh4X0yr7eVJyF4Hl7j4eHh/RWvmqjNUwbX4CRFmydB8PDw8J7h5VWkz3l9pL6Hh4eHN66q98r8u+5O5vkzMh4eHt4BXv41eYvAdfjbK3rl4TIeHh7eaV6vxSrf4quwPHkR/QHAw8PDO8yrJiAmadN5U0I0Dh4eHt4x3gSTLFBhKy+2I9wcUXh4eHgHeHnwOin5V0Pt/EiIDhg8PDy8A7z8YEiStvnd6vdu6CzDw8PD28SrFreSUDgvhs3ncLOgeHh4eFt5ediaF6Im4OTZ8u+Gh4eH9zivl8ztTav3yeXS4+Hh4R3jJdeu0tScVEhw4OHh4R3g9dIBSaGrWlTL36kW2/Dw8PD28nol/PlTvTRuwlvmp/Hw8PA28fJif69dYM6uHhg3nRF4eHh4m3hJSrR6PEwOmN7ylctgeHh4eC1eNS27N9WbL02vZQEPDw/vBC+5nX9xdYHyEfJAP8ry4uHh4Y151bC4lzioBuJ52uJmsfDw8PAe4eXIXgNBr5xWXQg8PDy8J3nVALraJpU3B1SXZhRS4+Hh4bV4k+072qaPsaP6Hh4eHt5WXi9lkE+i2sJVvW7SuHh4eHibeF/Fq7e5V9sLkqeiFDMeHh7eAV51260eIb0AfVepDA8PD+8crxdS5w0Ek+OnejAsWwfw8PDwDvB6hbHrZ59M/i7fwcPDw/sAXu+Tk0A5Jy2TuXh4eHh/yssTB3lonjQBNFPMeHh4eMd4k6Hz1EA17bshxMfDw8M7lT0o/OGf1Nkm1A0MPDw8vCnvG79sac6YapJSAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

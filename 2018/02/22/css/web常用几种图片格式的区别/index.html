@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>web常用几种图片格式的区别 | Bean blog | 很多事情努力了未必有结果，但是不努力却什么改变也没有</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="图片">
+    <meta name="description" content="索引色最多256种，直接色理论上rgba256256256*256，但实际上不会有这么多   点阵图，最小单位像素，每个像素都有自己的信息，放大会失真   矢量图，用直线曲线和绘制方法组成，无论怎么放大，计算方式不变，所以不会失真   gif:无损压缩，支持透明和动画，体积小，只支持8bit的索引色，即256种不同颜色，适用于色彩要求不高且体积较小的场景，一般做一些动画小图标  jpeg：有损压">
+<meta name="keywords" content="图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web常用几种图片格式的区别">
+<meta property="og:url" content="https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/index.html">
+<meta property="og:site_name" content="Bean blog">
+<meta property="og:description" content="索引色最多256种，直接色理论上rgba256256256*256，但实际上不会有这么多   点阵图，最小单位像素，每个像素都有自己的信息，放大会失真   矢量图，用直线曲线和绘制方法组成，无论怎么放大，计算方式不变，所以不会失真   gif:无损压缩，支持透明和动画，体积小，只支持8bit的索引色，即256种不同颜色，适用于色彩要求不高且体积较小的场景，一般做一些动画小图标  jpeg：有损压">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-07T08:42:39.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web常用几种图片格式的区别">
+<meta name="twitter:description" content="索引色最多256种，直接色理论上rgba256256256*256，但实际上不会有这么多   点阵图，最小单位像素，每个像素都有自己的信息，放大会失真   矢量图，用直线曲线和绘制方法组成，无论怎么放大，计算方式不变，所以不会失真   gif:无损压缩，支持透明和动画，体积小，只支持8bit的索引色，即256种不同颜色，适用于色彩要求不高且体积较小的场景，一般做一些动画小图标  jpeg：有损压">
+    
+        <link rel="alternate" type="application/atom+xml" title="Bean blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Bean</h5>
+          <a href="mailto:2013499216@qq.com" title="2013499216@qq.com" class="mail">2013499216@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BeansChen" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">web常用几种图片格式的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">web常用几种图片格式的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-22T13:10:13.000Z" itemprop="datePublished" class="page-time">
+  2018-02-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-css/web常用几种图片格式的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">web常用几种图片格式的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-22 21:10:13" datetime="2018-02-22T13:10:13.000Z"  itemprop="datePublished">2018-02-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>索引色最多256种，直接色理论上rgba256256256*256，但实际上不会有这么多</p>
+</blockquote>
+<blockquote>
+<p>点阵图，最小单位像素，每个像素都有自己的信息，放大会失真</p>
+</blockquote>
+<blockquote>
+<p>矢量图，用直线曲线和绘制方法组成，无论怎么放大，计算方式不变，所以不会失真</p>
+</blockquote>
+<ul>
+<li><p>gif:无损压缩，支持透明和动画，体积小，只支持8bit的索引色，即256种不同颜色，适用于色彩要求不高且体积较小的场景，一般做一些动画小图标</p>
+</li>
+<li><p>jpeg：有损压缩，在肉眼不能分辨的情况下尽可能的压缩，使用直接色，色彩丰富，且可以颜色渐变，适用于色彩丰富的商品图，照片等</p>
+</li>
+<li><p>png-8：无损压缩，png的索引色版本，是gif的替代者，比gif小，且支持透明度调整，适用于小图标</p>
+</li>
+<li><p>png-24:无损压缩，直接色，体积较大，不支持透明</p>
+</li>
+<li><p>png-32:无损压缩，直接色，体积较大，支持透明</p>
+</li>
+<li><p>svg:无损的矢量图，可以编辑</p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-04-07T08:42:39.079Z" itemprop="dateUpdated">2020-04-07 16:42:39</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://BeansChen.github.io">
+            <img src="/img/avatar.jpg" alt="Bean">
+            Bean
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片/">图片</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/&title=《web常用几种图片格式的区别》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/&title=《web常用几种图片格式的区别》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《web常用几种图片格式的区别》 — Bean blog&url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/07/04/js/为什么要用void 0 代替undefined？/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">为什么要用void 0 代替undefined？</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/23/css/CSS-四种颜色表示方法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CSS-四种颜色表示方法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Bean &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/&title=《web常用几种图片格式的区别》 — Bean blog&pic=https://BeansChen.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/&title=《web常用几种图片格式的区别》 — Bean blog&source=生如夏花" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《web常用几种图片格式的区别》 — Bean blog&url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/&via=https://BeansChen.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://BeansChen.github.io/2018/02/22/css/web常用几种图片格式的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3awWrkMBAE0Pn/n85CTrsEj6vUkicLz6chGFtPB3enWq9XfH19Xz9/v7//7+vn39snJ+9dvPDw8PCWln51XS3r3NZc3Xm1nqs14+Hh4Z3mJctqP/RryCtY+xY8PDy838Cbf7iTgpSsAQ8PD+9/5OWL2NWm4+Hh4f02XrKUpL1+n6PmLXK+NduyFjw8PLyYN/kof+r3Q/M9PDw8vHKq3n6U25H/2nOK1eLh4eEd4D3TIid3vue1x7xudgUPDw/vGG8tos1DjUkBKJpvPDw8vGO8tWCi3YL8WFVeSG6Ganh4eHgHeJOYoD1ekGxN+/b3z8TDw8M7zcvjgLzBnRzwmsTEeHh4eCd4bQubvLJdSvvkpPn+Z76Hh4eHt5WXN9D1wH4QTEyOW+Hh4eGd5k0+xPn9bcSQF5JisoeHh4e3lbcWws4D1vxAQD3iwsPDwzvGywPZdhzVNsHtcYGiTcfDw8M7xhtFpUslZxKCFJuLh4eHt5U3aWfnwe7kLVFhwMPDwzvAWxverx3byiOJtWJwM9/Dw8PD28RrA4hdLW9+6CrZ+pu6h4eHh7eVl0cM8xcnNWoeEF/WPTw8PLxNvLVF50OpNrpdOzSwYbKHh4eHF/Pa+CCKTeNntu9qCwkeHh7eM7z5h3jSRrfHEaJDD3h4eHhbeZMBf1IG8pF//uRi+/Dw8PAe4eWLWGtz6/FVHOZezvfw8PDwtvKStjVvcNtxWt37x0HGq100Hh4eXsz7Kq8iPC0PH7RPiAoYHh4e3gHepJ7kEW3bpuflp23K8fDw8Hbx8mKwduUhbN58F8UJDw8P7xivDSaSj3uylLXRWpG14OHh4X2Ut3Z8qt2+Nkoukmk8PDy8D/HW4tp2a/LW/ObveHh4eMd4eRiRbEpeNtpF14eu8PDw8A7w2n/ykxe0Y7OHGHh4eHhT3h99gNpP60MVugAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '休息，休息一会儿';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '我胡汉三又回来啦';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
