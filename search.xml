@@ -1,105 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>angularJS服务</title>
-    <url>/2018/12/05/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C-%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<h2 id="angularJS服务"><a href="#angularJS服务" class="headerlink" title="angularJS服务"></a>angularJS服务</h2><p>angular的注入器创建两类对象，<strong>服务</strong>和<strong>专用对象</strong>，专用对象包括控制器，指令，过滤器和动画</p>
-<p>一个好的angular应用，不该把业务代码放在控制器层，这个时候需要用到angular自定义服务。<br>angular实现服务的方式有5种：</p>
+    <title>angularJS基本概念</title>
+    <url>/2018/12/03/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h2 id="angularJS简介"><a href="#angularJS简介" class="headerlink" title="angularJS简介"></a>angularJS简介</h2><h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。</p>
+<h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><p>MVVM，模块化，语义化标签，双向数据绑定，依赖注入。</p>
+<h3 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h3><p>引入相应的<strong>头文件</strong>，再<strong>依赖注入</strong>既可以使用</p>
+<ol>
+<li>ui-Route    AngularJS是一套前端的MVC框架。那么，为了实现视图的中转，肯定会涉及到路由的概念。ui-Route即是AngularJS的路由模块。</li>
+<li>ngAnimate AngularJS的动画模块，使用ngAnimate各种核心指令能为你的应用程序提供动画效果。动画可使用css或者JavaScript回调函数。</li>
+<li>ngCookies ngCookies模块提供了一个方便的包用于读取和写入浏览器的cookies。</li>
+<li>ngSanitize ngSanitize模块可安全地在你的应用程序中解析和操作HTML数据。和$sce服务转化ng-bind-html一样，只是不用在js里面转化，直接引入便可以。</li>
+<li>ngMessages AngularJS表单验证模块。ngMessages模块完美的实现了很多表单验证的常用功能，简化你的开发流程。</li>
+<li>(本人弃用)ngAria 使用ngaria为指令注入共同的可达性属性和提高残疾人用户体验。</li>
+<li>(本人弃用)ngResource 当查询和发送数据到一个REST 服务器时，使用ngResource模块。</li>
+<li>(本人弃用)ngTouch    ngRoute模块提供触摸事件，方便的应用于移动触摸设备。它的实现是实现是基于jQuery移动触摸事件处理。</li>
+</ol>
+<h3 id="框架和类库"><a href="#框架和类库" class="headerlink" title="框架和类库"></a>框架和类库</h3><p>html用于构建静态的网页文档，如果需要构建动态的web应用，就需要浏览器脚本语言JavaScript来配合工作，原生js并不会那么容易，一般会用到框架或类库。</p>
 <ul>
-<li>provider</li>
-<li>factory</li>
-<li>service</li>
-<li>constant</li>
-<li>value </li>
+<li><strong>类库：</strong> 一些很有用的函数的集合，开发时自己的代码起主导作用，你在合适的时候调用它。</li>
+<li><strong>框架：</strong> 一个完整的应用解决方案，你在合适的地方写上自己的业务代码，框架来决定何时调用它。</li>
 </ul>
-<h3 id="value"><a href="#value" class="headerlink" title="value"></a>value</h3><p>用来定义一个值共享的字符串，可以在多个地方使用,不能被注入到config中</p>
-<pre><code>StarterCore.value(&quot;version&quot;,&apos;1.10&apos;);
-</code></pre><h3 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h3><p>用来定义一个<strong>常量</strong>，可以被注入到config中</p>
-<pre><code>myApp.constant(&apos;apiURL&apos;, &apos;http://192.169.0.1:8080&apos;);
-</code></pre><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>返回的是一个实例化后的构造函数</p>
-<pre><code>app.service(&apos;MyService&apos;, function () {
-    this.sayHello = function () {
-        console.log(&apos;hello&apos;);
-    };
-});
-</code></pre><h3 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h3><p>返回的是一个对象</p>
-<pre><code>app.factory(&apos;MyFactory&apos;, function () {
-    return {
-        sayHello:function(){
-            console.log(&apos;hello&apos;);
-        }
-    }
-});
-</code></pre><h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><p>可以在注入之前,在config中进行配置</p>
-<pre><code>Starter.provider(&quot;myProvider&quot;,function(){
-    var name=&quot;bean&quot;;
-    this.setName = function(n){
-        name = n;
-    }
-    this.$get = function(){
-        return {
-            name:name,
-            height:&quot;175cm&quot;
-        }
-    }
-})
-Starter.config(function(myProviderProvider){
-    myProviderProvider.setName=&quot;dou&quot;
-})
-</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>注入器使用图纸创建两类对象：服务和专用对象。</li>
-<li>总共有5类图纸来定义如何创建对象：Value，Factory，Service，Provicer以及Constant。</li>
-<li>Factory和Service是最常用的图纸。它们之间的唯一区别就是Service图纸在创建自定义对象时更适用，而Factory还可以创建Javascript原始类型以及函数。</li>
-<li>Provider图纸是最核心的图纸类型，而其它所有图纸都只是基于它的语法糖。</li>
-<li>Provider也是最复杂的图纸类型，除非你正在构建需要全局配置的可复用代码，否则不要使用它。</li>
-<li>除了控制器，其他所有专用对象都是通过Factory图纸来定义的。</li>
+<h3 id="angularJS的优势"><a href="#angularJS的优势" class="headerlink" title="angularJS的优势"></a>angularJS的优势</h3><p>在构建WEB应用的前端时，Angular提供的不是一个部分解决方案，而是一个完整的解决方案。它能够处理所有你写过的混杂了DOM和AJAX的代码，并能够将它们组织的结构良好。这使得Angular在决定应该怎样构建一个CRUD应用时显得甚至有些“偏执（opinionated）”，但是尽管它“偏执”，它也尝试确保使用它构建的应用能够灵活的适应变化。下面是Angular的一些出众之处：</p>
+<ul>
+<li>构建一个CRUD应用时可能用到的所有技术：数据绑定、基本模板指令、表单验证、路由、深度链接、组件重用、依赖注入。</li>
+<li>可测试性：单元测试、端到端测试、模拟对象（mocks）、测试工具。</li>
+<li>拥有一定目录结构和测试脚本的种子应用。</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">特性 / 图纸类型</th>
-<th style="text-align:center">Factory</th>
-<th style="text-align:center">Service</th>
-<th style="text-align:center">Value</th>
-<th style="text-align:center">Constant</th>
-<th style="text-align:left">Provider</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">可以有依赖</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">是</td>
-</tr>
-<tr>
-<td style="text-align:center">使用依赖注入友好</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">否</td>
-</tr>
-<tr>
-<td style="text-align:center">对象在配置阶段可访问</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">是</td>
-</tr>
-<tr>
-<td style="text-align:center">可以创建函数/原始类型</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">是</td>
-</tr>
-</tbody>
-</table>
+<h3 id="angularJS的不足之处"><a href="#angularJS的不足之处" class="headerlink" title="angularJS的不足之处"></a>angularJS的不足之处</h3><ul>
+<li>angularJS不适合做一些内容网站，游戏或者简单的网页</li>
+<li>angular太笨重了</li>
+</ul>
+<h3 id="angularJS减少了我们哪些工作"><a href="#angularJS减少了我们哪些工作" class="headerlink" title="angularJS减少了我们哪些工作"></a>angularJS减少了我们哪些工作</h3><ol>
+<li>频繁的dom操作</li>
+<li>表单操作</li>
+<li>大量的初始化代码</li>
+</ol>
 ]]></content>
       <categories>
         <category>angularJS</category>
@@ -287,115 +223,105 @@ Starter.config(function(myProviderProvider){
       </tags>
   </entry>
   <entry>
-    <title>CSS多种边框的实现方式</title>
-    <url>/2017/11/18/css/CSS%E5%A4%9A%E7%A7%8D%E8%BE%B9%E6%A1%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="普通的边框"><a href="#普通的边框" class="headerlink" title="普通的边框"></a>普通的边框</h3><p>普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的<br>就只有outline是不占元素空间的</p>
-<h3 id="半透明边框"><a href="#半透明边框" class="headerlink" title="半透明边框"></a>半透明边框</h3><p>背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围</p>
-<pre><code>background: blue;
-border:10px solid rgba(0,0,0,.3);
-background-clip: padding-box;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder1.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="多重边框"><a href="#多重边框" class="headerlink" title="多重边框"></a>多重边框</h3><pre><code>box-shadow: 0 0 0 10px red,0 0 0 20px yellow,0 0 0 30px blue;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder4.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="图片边框"><a href="#图片边框" class="headerlink" title="图片边框"></a>图片边框</h3><pre><code>border: 40px solid transparent;
-background: linear-gradient(white,white),url(2.jpg);
-background-size: cover;
-background-clip: padding-box,border-box;
-background-origin: border-box;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder3.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="边框内圆角"><a href="#边框内圆角" class="headerlink" title="边框内圆角"></a>边框内圆角</h3><pre><code>border-radius: 10px;
-outline: 10px solid red;
-box-shadow: 0 0 0 10px red;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder5.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS-四种颜色表示方法</title>
-    <url>/2018/01/23/css/CSS-%E5%9B%9B%E7%A7%8D%E9%A2%9C%E8%89%B2%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="1-颜色名表示"><a href="#1-颜色名表示" class="headerlink" title="1.颜色名表示"></a>1.颜色名表示</h3><p>例如：red、gold、yellow、green、blue、black、white等</p>
-<h3 id="2-16进制表示"><a href="#2-16进制表示" class="headerlink" title="2.16进制表示"></a>2.16进制表示</h3><p>即#RRGGBB 或 #RGB</p>
-<p>例如：#333、#666、#8B8B8B等，注意:#F00全称是#FF0000而不是#F00F00</p>
-<h3 id="3-rgba表示"><a href="#3-rgba表示" class="headerlink" title="3.rgba表示"></a>3.rgba表示</h3><p>即red、green、blue、alpha，正整数值的取值范围为：0 - 255。百分数值的取值范围为：0.0% - 100.0%。超出会自动取极值</p>
-<p>transparent是全透明黑色(black)的速记法，即一个类似rgba(0,0,0,0)这样的值</p>
-<h3 id="4-HSLA表示"><a href="#4-HSLA表示" class="headerlink" title="4.HSLA表示"></a>4.HSLA表示</h3><ul>
-<li>H：Hue(色调)。0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360</li>
-<li>S：Saturation(饱和度)。取值为：0.0% - 100.0%</li>
-<li>L：Lightness(亮度)。取值为：0.0% - 100.0%</li>
-<li>A：Alpha透明度。取值0~1之间。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>颜色</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>angularJS基本概念</title>
-    <url>/2018/12/03/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h2 id="angularJS简介"><a href="#angularJS简介" class="headerlink" title="angularJS简介"></a>angularJS简介</h2><h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。</p>
-<h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><p>MVVM，模块化，语义化标签，双向数据绑定，依赖注入。</p>
-<h3 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h3><p>引入相应的<strong>头文件</strong>，再<strong>依赖注入</strong>既可以使用</p>
-<ol>
-<li>ui-Route    AngularJS是一套前端的MVC框架。那么，为了实现视图的中转，肯定会涉及到路由的概念。ui-Route即是AngularJS的路由模块。</li>
-<li>ngAnimate AngularJS的动画模块，使用ngAnimate各种核心指令能为你的应用程序提供动画效果。动画可使用css或者JavaScript回调函数。</li>
-<li>ngCookies ngCookies模块提供了一个方便的包用于读取和写入浏览器的cookies。</li>
-<li>ngSanitize ngSanitize模块可安全地在你的应用程序中解析和操作HTML数据。和$sce服务转化ng-bind-html一样，只是不用在js里面转化，直接引入便可以。</li>
-<li>ngMessages AngularJS表单验证模块。ngMessages模块完美的实现了很多表单验证的常用功能，简化你的开发流程。</li>
-<li>(本人弃用)ngAria 使用ngaria为指令注入共同的可达性属性和提高残疾人用户体验。</li>
-<li>(本人弃用)ngResource 当查询和发送数据到一个REST 服务器时，使用ngResource模块。</li>
-<li>(本人弃用)ngTouch    ngRoute模块提供触摸事件，方便的应用于移动触摸设备。它的实现是实现是基于jQuery移动触摸事件处理。</li>
-</ol>
-<h3 id="框架和类库"><a href="#框架和类库" class="headerlink" title="框架和类库"></a>框架和类库</h3><p>html用于构建静态的网页文档，如果需要构建动态的web应用，就需要浏览器脚本语言JavaScript来配合工作，原生js并不会那么容易，一般会用到框架或类库。</p>
+    <title>angularJS服务</title>
+    <url>/2018/12/05/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C-%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<h2 id="angularJS服务"><a href="#angularJS服务" class="headerlink" title="angularJS服务"></a>angularJS服务</h2><p>angular的注入器创建两类对象，<strong>服务</strong>和<strong>专用对象</strong>，专用对象包括控制器，指令，过滤器和动画</p>
+<p>一个好的angular应用，不该把业务代码放在控制器层，这个时候需要用到angular自定义服务。<br>angular实现服务的方式有5种：</p>
 <ul>
-<li><strong>类库：</strong> 一些很有用的函数的集合，开发时自己的代码起主导作用，你在合适的时候调用它。</li>
-<li><strong>框架：</strong> 一个完整的应用解决方案，你在合适的地方写上自己的业务代码，框架来决定何时调用它。</li>
+<li>provider</li>
+<li>factory</li>
+<li>service</li>
+<li>constant</li>
+<li>value </li>
 </ul>
-<h3 id="angularJS的优势"><a href="#angularJS的优势" class="headerlink" title="angularJS的优势"></a>angularJS的优势</h3><p>在构建WEB应用的前端时，Angular提供的不是一个部分解决方案，而是一个完整的解决方案。它能够处理所有你写过的混杂了DOM和AJAX的代码，并能够将它们组织的结构良好。这使得Angular在决定应该怎样构建一个CRUD应用时显得甚至有些“偏执（opinionated）”，但是尽管它“偏执”，它也尝试确保使用它构建的应用能够灵活的适应变化。下面是Angular的一些出众之处：</p>
-<ul>
-<li>构建一个CRUD应用时可能用到的所有技术：数据绑定、基本模板指令、表单验证、路由、深度链接、组件重用、依赖注入。</li>
-<li>可测试性：单元测试、端到端测试、模拟对象（mocks）、测试工具。</li>
-<li>拥有一定目录结构和测试脚本的种子应用。</li>
+<h3 id="value"><a href="#value" class="headerlink" title="value"></a>value</h3><p>用来定义一个值共享的字符串，可以在多个地方使用,不能被注入到config中</p>
+<pre><code>StarterCore.value(&quot;version&quot;,&apos;1.10&apos;);
+</code></pre><h3 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h3><p>用来定义一个<strong>常量</strong>，可以被注入到config中</p>
+<pre><code>myApp.constant(&apos;apiURL&apos;, &apos;http://192.169.0.1:8080&apos;);
+</code></pre><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>返回的是一个实例化后的构造函数</p>
+<pre><code>app.service(&apos;MyService&apos;, function () {
+    this.sayHello = function () {
+        console.log(&apos;hello&apos;);
+    };
+});
+</code></pre><h3 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h3><p>返回的是一个对象</p>
+<pre><code>app.factory(&apos;MyFactory&apos;, function () {
+    return {
+        sayHello:function(){
+            console.log(&apos;hello&apos;);
+        }
+    }
+});
+</code></pre><h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><p>可以在注入之前,在config中进行配置</p>
+<pre><code>Starter.provider(&quot;myProvider&quot;,function(){
+    var name=&quot;bean&quot;;
+    this.setName = function(n){
+        name = n;
+    }
+    this.$get = function(){
+        return {
+            name:name,
+            height:&quot;175cm&quot;
+        }
+    }
+})
+Starter.config(function(myProviderProvider){
+    myProviderProvider.setName=&quot;dou&quot;
+})
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>注入器使用图纸创建两类对象：服务和专用对象。</li>
+<li>总共有5类图纸来定义如何创建对象：Value，Factory，Service，Provicer以及Constant。</li>
+<li>Factory和Service是最常用的图纸。它们之间的唯一区别就是Service图纸在创建自定义对象时更适用，而Factory还可以创建Javascript原始类型以及函数。</li>
+<li>Provider图纸是最核心的图纸类型，而其它所有图纸都只是基于它的语法糖。</li>
+<li>Provider也是最复杂的图纸类型，除非你正在构建需要全局配置的可复用代码，否则不要使用它。</li>
+<li>除了控制器，其他所有专用对象都是通过Factory图纸来定义的。</li>
 </ul>
-<h3 id="angularJS的不足之处"><a href="#angularJS的不足之处" class="headerlink" title="angularJS的不足之处"></a>angularJS的不足之处</h3><ul>
-<li>angularJS不适合做一些内容网站，游戏或者简单的网页</li>
-<li>angular太笨重了</li>
-</ul>
-<h3 id="angularJS减少了我们哪些工作"><a href="#angularJS减少了我们哪些工作" class="headerlink" title="angularJS减少了我们哪些工作"></a>angularJS减少了我们哪些工作</h3><ol>
-<li>频繁的dom操作</li>
-<li>表单操作</li>
-<li>大量的初始化代码</li>
-</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">特性 / 图纸类型</th>
+<th style="text-align:center">Factory</th>
+<th style="text-align:center">Service</th>
+<th style="text-align:center">Value</th>
+<th style="text-align:center">Constant</th>
+<th style="text-align:left">Provider</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">可以有依赖</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:center">使用依赖注入友好</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">否</td>
+</tr>
+<tr>
+<td style="text-align:center">对象在配置阶段可访问</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:center">可以创建函数/原始类型</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">是</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>angularJS</category>
@@ -482,37 +408,77 @@ border-radius: 50%/100% 100% 0 0;"></div>
       </tags>
   </entry>
   <entry>
-    <title>web常用几种图片格式的区别</title>
-    <url>/2018/02/22/css/web%E5%B8%B8%E7%94%A8%E5%87%A0%E7%A7%8D%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<blockquote>
-<p>索引色最多256种，直接色理论上rgba256256256*256，但实际上不会有这么多</p>
-</blockquote>
-<blockquote>
-<p>点阵图，最小单位像素，每个像素都有自己的信息，放大会失真</p>
-</blockquote>
-<blockquote>
-<p>矢量图，用直线曲线和绘制方法组成，无论怎么放大，计算方式不变，所以不会失真</p>
-</blockquote>
-<ul>
-<li><p>gif:无损压缩，支持透明和动画，体积小，只支持8bit的索引色，即256种不同颜色，适用于色彩要求不高且体积较小的场景，一般做一些动画小图标</p>
-</li>
-<li><p>jpeg：有损压缩，在肉眼不能分辨的情况下尽可能的压缩，使用直接色，色彩丰富，且可以颜色渐变，适用于色彩丰富的商品图，照片等</p>
-</li>
-<li><p>png-8：无损压缩，png的索引色版本，是gif的替代者，比gif小，且支持透明度调整，适用于小图标</p>
-</li>
-<li><p>png-24:无损压缩，直接色，体积较大，不支持透明</p>
-</li>
-<li><p>png-32:无损压缩，直接色，体积较大，支持透明</p>
-</li>
-<li><p>svg:无损的矢量图，可以编辑</p>
-</li>
+    <title>CSS-四种颜色表示方法</title>
+    <url>/2018/01/23/css/CSS-%E5%9B%9B%E7%A7%8D%E9%A2%9C%E8%89%B2%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="1-颜色名表示"><a href="#1-颜色名表示" class="headerlink" title="1.颜色名表示"></a>1.颜色名表示</h3><p>例如：red、gold、yellow、green、blue、black、white等</p>
+<h3 id="2-16进制表示"><a href="#2-16进制表示" class="headerlink" title="2.16进制表示"></a>2.16进制表示</h3><p>即#RRGGBB 或 #RGB</p>
+<p>例如：#333、#666、#8B8B8B等，注意:#F00全称是#FF0000而不是#F00F00</p>
+<h3 id="3-rgba表示"><a href="#3-rgba表示" class="headerlink" title="3.rgba表示"></a>3.rgba表示</h3><p>即red、green、blue、alpha，正整数值的取值范围为：0 - 255。百分数值的取值范围为：0.0% - 100.0%。超出会自动取极值</p>
+<p>transparent是全透明黑色(black)的速记法，即一个类似rgba(0,0,0,0)这样的值</p>
+<h3 id="4-HSLA表示"><a href="#4-HSLA表示" class="headerlink" title="4.HSLA表示"></a>4.HSLA表示</h3><ul>
+<li>H：Hue(色调)。0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360</li>
+<li>S：Saturation(饱和度)。取值为：0.0% - 100.0%</li>
+<li>L：Lightness(亮度)。取值为：0.0% - 100.0%</li>
+<li>A：Alpha透明度。取值0~1之间。</li>
 </ul>
 ]]></content>
       <categories>
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>图片</tag>
+        <tag>颜色</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS多种边框的实现方式</title>
+    <url>/2017/11/18/css/CSS%E5%A4%9A%E7%A7%8D%E8%BE%B9%E6%A1%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="普通的边框"><a href="#普通的边框" class="headerlink" title="普通的边框"></a>普通的边框</h3><p>普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的<br>就只有outline是不占元素空间的</p>
+<h3 id="半透明边框"><a href="#半透明边框" class="headerlink" title="半透明边框"></a>半透明边框</h3><p>背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围</p>
+<pre><code>background: blue;
+border:10px solid rgba(0,0,0,.3);
+background-clip: padding-box;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="多重边框"><a href="#多重边框" class="headerlink" title="多重边框"></a>多重边框</h3><pre><code>box-shadow: 0 0 0 10px red,0 0 0 20px yellow,0 0 0 30px blue;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder4.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="图片边框"><a href="#图片边框" class="headerlink" title="图片边框"></a>图片边框</h3><pre><code>border: 40px solid transparent;
+background: linear-gradient(white,white),url(2.jpg);
+background-size: cover;
+background-clip: padding-box,border-box;
+background-origin: border-box;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="边框内圆角"><a href="#边框内圆角" class="headerlink" title="边框内圆角"></a>边框内圆角</h3><pre><code>border-radius: 10px;
+outline: 10px solid red;
+box-shadow: 0 0 0 10px red;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder5.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -572,6 +538,151 @@ Bean © 2015 - 2018  Power by Hexo Theme indigo
       </categories>
       <tags>
         <tag>reset</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web常用几种图片格式的区别</title>
+    <url>/2018/02/22/css/web%E5%B8%B8%E7%94%A8%E5%87%A0%E7%A7%8D%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<blockquote>
+<p>索引色最多256种，直接色理论上rgba256256256*256，但实际上不会有这么多</p>
+</blockquote>
+<blockquote>
+<p>点阵图，最小单位像素，每个像素都有自己的信息，放大会失真</p>
+</blockquote>
+<blockquote>
+<p>矢量图，用直线曲线和绘制方法组成，无论怎么放大，计算方式不变，所以不会失真</p>
+</blockquote>
+<ul>
+<li><p>gif:无损压缩，支持透明和动画，体积小，只支持8bit的索引色，即256种不同颜色，适用于色彩要求不高且体积较小的场景，一般做一些动画小图标</p>
+</li>
+<li><p>jpeg：有损压缩，在肉眼不能分辨的情况下尽可能的压缩，使用直接色，色彩丰富，且可以颜色渐变，适用于色彩丰富的商品图，照片等</p>
+</li>
+<li><p>png-8：无损压缩，png的索引色版本，是gif的替代者，比gif小，且支持透明度调整，适用于小图标</p>
+</li>
+<li><p>png-24:无损压缩，直接色，体积较大，不支持透明</p>
+</li>
+<li><p>png-32:无损压缩，直接色，体积较大，支持透明</p>
+</li>
+<li><p>svg:无损的矢量图，可以编辑</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>图片</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实现一个3d正方体</title>
+    <url>/2017/07/06/css/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA3d%E6%AD%A3%E6%96%B9%E4%BD%93/</url>
+    <content><![CDATA[<p>在绘制一个 3d正方体之前，先了解几个css3的新属性</p>
+<h3 id="1-backface-visibility"><a href="#1-backface-visibility" class="headerlink" title="1.backface-visibility"></a>1.backface-visibility</h3><blockquote>
+<p>backface-visibility 属性指定当元素背面朝向观察者时是否可见。元素的背面总是透明的，当其朝向观察者时，显示正面的镜像。</p>
+</blockquote>
+<blockquote>
+<p>在某些情况下，我们不希望元素内容在背面可见，比如实现翻牌效果。</p>
+</blockquote>
+<blockquote>
+<p>因为2D变换无透视效果，故该属性对2D变换无效。</p>
+</blockquote>
+<h3 id="2-perspective"><a href="#2-perspective" class="headerlink" title="2.perspective"></a>2.perspective</h3><blockquote>
+<p>perspective 属性指定了观察者与z=0平面的距离，使具有三维位置变换的元素产生透视效果。z&gt;0的三维元素比正常大，而z&lt;0时则比正常小，大小程度由该属性的值决定。</p>
+</blockquote>
+<blockquote>
+<p>三维元素在观察者后面的部分不会绘制出来，即z轴坐标值大于perspective属性值的部分。</p>
+</blockquote>
+<blockquote>
+<p>默认情况下，消失点位于元素的中心，但是可以通过设置perspective-origin属性来改变其位置。</p>
+</blockquote>
+<h3 id="3-perspective-origin"><a href="#3-perspective-origin" class="headerlink" title="3.perspective-origin"></a>3.perspective-origin</h3><blockquote>
+<p>perspective-origin 属性指定了观察者的位置，在属性perspective中被用作消失点。</p>
+</blockquote>
+<h4 id="x-position"><a href="#x-position" class="headerlink" title="x-position"></a>x-position</h4><p>指定消失点的横坐标，其值有以下形式：</p>
+<ul>
+<li><percentage> 百分比，相对于元素宽度，可为负值。</percentage></li>
+<li><length> 长度值，可为负值。</length></li>
+<li>left，关键字，0值的简记。</li>
+<li>center，关键字，50%的简记。</li>
+<li><p>right，关键字，100%的简记。</p>
+<h4 id="y-position"><a href="#y-position" class="headerlink" title="y-position"></a>y-position</h4><p>指定消失点的纵坐标，其值有以下形式：</p>
+</li>
+<li><p><percentage> 百分比，相对于元素的高度，可为负值。</percentage></p>
+</li>
+<li><length> 长度值，可为负值。</length></li>
+<li>top，关键字，0值得简记。</li>
+<li>center，关键字，50%的简记。</li>
+<li>bottom，关键字，100%的简记。</li>
+</ul>
+<h3 id="4-transform-origin"><a href="#4-transform-origin" class="headerlink" title="4.transform-origin"></a>4.transform-origin</h3><blockquote>
+<p>转换起点是应用转换的点。例如，rotate()函数的转换原点是旋转中心。（这个属性的应用原理是先用这个属性的负值转换该元素，进行变形，然后再用这个属性的值把元素转换回去）</p>
+</blockquote>
+<h3 id="5-transform-style"><a href="#5-transform-style" class="headerlink" title="5.transform-style"></a>5.transform-style</h3><blockquote>
+<p>transform-style属性确定元素的子元素是否位于3D空间中，还是在该元素所在的平面内被扁平化。</p>
+</blockquote>
+<blockquote>
+<p>如果被扁平化，则子元素不会独立的存在于三维空间。</p>
+</blockquote>
+<blockquote>
+<p>因为该属性不会被（自动）继承，所以必须为元素所有非叶子后代节点设置该属性。</p>
+</blockquote>
+<h4 id="preserve-3d"><a href="#preserve-3d" class="headerlink" title="preserve-3d"></a>preserve-3d</h4><p>指定子元素定位在三维空间内。</p>
+<h4 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h4><p>指定子元素位于此元素所在平面内。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C语言入门之函数</title>
+    <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><pre><code>类型 函数名(形参表说明) /*函数首部*/ 
+{ 
+说明语句 /*函数体*/ 
+执行语句 
+} 
+</code></pre><ol>
+<li>“类型”是指函数返回值的类型。函数<strong>返回值不能是数组,也不能是函数</strong>,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当<strong>不指明函数类型时,系统默认的是整型</strong>。 </li>
+<li>函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合 C 语言对标识符的规范, 用于标识函数,并用该标识符调用函数。另外函数名本身也有值,它代表了该函数的入口地址,使用指针 调用函数时,将用到此功能。 </li>
+<li>形参又称为“形式参数”。形参表是用逗号分隔的一组变量说明,包括形参的类型和形参的标识 符,其作用是指出每一个形参的类型和形参的名称,当调用函数时,接收来自主调函数的数据,确定各参 数的值。 </li>
+<li>用{ }括起来的部分是函数的主体,称为函数体。函数体是一段程序,确定该函数应完成的规定的 运算,应执行的规定的动作,集中体现了函数的功能。函数内部应有自己的说明语句和执行语句,但<strong>函数内定义的变量不可以与形参同名</strong>。花括号{ }是不可以省略的。</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
+<p>判断一个数是否为素数</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+void isPrime(int n);//函数声明 
+int main(){
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    isPrime(n);
+    return 0;
+} 
+
+void isPrime(int n){
+    int i,flag=1;
+    for (i = 2;i&lt;n;i++)    {
+        if(n%i==0){
+            flag = 0;
+            break;
+        }        
+    }
+    if(flag){
+        printf(&quot;prime&quot;);
+    }else{
+        printf(&quot;not prime&quot;);
+    }
+}
+</code></pre>]]></content>
+      <categories>
+        <category>C语言入门</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -655,54 +766,6 @@ int main(void)
       </categories>
       <tags>
         <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C语言入门之函数</title>
-    <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><pre><code>类型 函数名(形参表说明) /*函数首部*/ 
-{ 
-说明语句 /*函数体*/ 
-执行语句 
-} 
-</code></pre><ol>
-<li>“类型”是指函数返回值的类型。函数<strong>返回值不能是数组,也不能是函数</strong>,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当<strong>不指明函数类型时,系统默认的是整型</strong>。 </li>
-<li>函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合 C 语言对标识符的规范, 用于标识函数,并用该标识符调用函数。另外函数名本身也有值,它代表了该函数的入口地址,使用指针 调用函数时,将用到此功能。 </li>
-<li>形参又称为“形式参数”。形参表是用逗号分隔的一组变量说明,包括形参的类型和形参的标识 符,其作用是指出每一个形参的类型和形参的名称,当调用函数时,接收来自主调函数的数据,确定各参 数的值。 </li>
-<li>用{ }括起来的部分是函数的主体,称为函数体。函数体是一段程序,确定该函数应完成的规定的 运算,应执行的规定的动作,集中体现了函数的功能。函数内部应有自己的说明语句和执行语句,但<strong>函数内定义的变量不可以与形参同名</strong>。花括号{ }是不可以省略的。</li>
-</ol>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
-<p>判断一个数是否为素数</p>
-</blockquote>
-<pre><code>#include &lt;stdio.h&gt;
-void isPrime(int n);//函数声明 
-int main(){
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    isPrime(n);
-    return 0;
-} 
-
-void isPrime(int n){
-    int i,flag=1;
-    for (i = 2;i&lt;n;i++)    {
-        if(n%i==0){
-            flag = 0;
-            break;
-        }        
-    }
-    if(flag){
-        printf(&quot;prime&quot;);
-    }else{
-        printf(&quot;not prime&quot;);
-    }
-}
-</code></pre>]]></content>
-      <categories>
-        <category>C语言入门</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -809,69 +872,6 @@ a=30;//重新赋值为30
       </categories>
       <tags>
         <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>实现一个3d正方体</title>
-    <url>/2017/07/06/css/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA3d%E6%AD%A3%E6%96%B9%E4%BD%93/</url>
-    <content><![CDATA[<p>在绘制一个 3d正方体之前，先了解几个css3的新属性</p>
-<h3 id="1-backface-visibility"><a href="#1-backface-visibility" class="headerlink" title="1.backface-visibility"></a>1.backface-visibility</h3><blockquote>
-<p>backface-visibility 属性指定当元素背面朝向观察者时是否可见。元素的背面总是透明的，当其朝向观察者时，显示正面的镜像。</p>
-</blockquote>
-<blockquote>
-<p>在某些情况下，我们不希望元素内容在背面可见，比如实现翻牌效果。</p>
-</blockquote>
-<blockquote>
-<p>因为2D变换无透视效果，故该属性对2D变换无效。</p>
-</blockquote>
-<h3 id="2-perspective"><a href="#2-perspective" class="headerlink" title="2.perspective"></a>2.perspective</h3><blockquote>
-<p>perspective 属性指定了观察者与z=0平面的距离，使具有三维位置变换的元素产生透视效果。z&gt;0的三维元素比正常大，而z&lt;0时则比正常小，大小程度由该属性的值决定。</p>
-</blockquote>
-<blockquote>
-<p>三维元素在观察者后面的部分不会绘制出来，即z轴坐标值大于perspective属性值的部分。</p>
-</blockquote>
-<blockquote>
-<p>默认情况下，消失点位于元素的中心，但是可以通过设置perspective-origin属性来改变其位置。</p>
-</blockquote>
-<h3 id="3-perspective-origin"><a href="#3-perspective-origin" class="headerlink" title="3.perspective-origin"></a>3.perspective-origin</h3><blockquote>
-<p>perspective-origin 属性指定了观察者的位置，在属性perspective中被用作消失点。</p>
-</blockquote>
-<h4 id="x-position"><a href="#x-position" class="headerlink" title="x-position"></a>x-position</h4><p>指定消失点的横坐标，其值有以下形式：</p>
-<ul>
-<li><percentage> 百分比，相对于元素宽度，可为负值。</percentage></li>
-<li><length> 长度值，可为负值。</length></li>
-<li>left，关键字，0值的简记。</li>
-<li>center，关键字，50%的简记。</li>
-<li><p>right，关键字，100%的简记。</p>
-<h4 id="y-position"><a href="#y-position" class="headerlink" title="y-position"></a>y-position</h4><p>指定消失点的纵坐标，其值有以下形式：</p>
-</li>
-<li><p><percentage> 百分比，相对于元素的高度，可为负值。</percentage></p>
-</li>
-<li><length> 长度值，可为负值。</length></li>
-<li>top，关键字，0值得简记。</li>
-<li>center，关键字，50%的简记。</li>
-<li>bottom，关键字，100%的简记。</li>
-</ul>
-<h3 id="4-transform-origin"><a href="#4-transform-origin" class="headerlink" title="4.transform-origin"></a>4.transform-origin</h3><blockquote>
-<p>转换起点是应用转换的点。例如，rotate()函数的转换原点是旋转中心。（这个属性的应用原理是先用这个属性的负值转换该元素，进行变形，然后再用这个属性的值把元素转换回去）</p>
-</blockquote>
-<h3 id="5-transform-style"><a href="#5-transform-style" class="headerlink" title="5.transform-style"></a>5.transform-style</h3><blockquote>
-<p>transform-style属性确定元素的子元素是否位于3D空间中，还是在该元素所在的平面内被扁平化。</p>
-</blockquote>
-<blockquote>
-<p>如果被扁平化，则子元素不会独立的存在于三维空间。</p>
-</blockquote>
-<blockquote>
-<p>因为该属性不会被（自动）继承，所以必须为元素所有非叶子后代节点设置该属性。</p>
-</blockquote>
-<h4 id="preserve-3d"><a href="#preserve-3d" class="headerlink" title="preserve-3d"></a>preserve-3d</h4><p>指定子元素定位在三维空间内。</p>
-<h4 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h4><p>指定子元素位于此元素所在平面内。</p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -1136,23 +1136,6 @@ int main()
       </tags>
   </entry>
   <entry>
-    <title>hexo使用文档</title>
-    <url>/2020/11/24/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/hexo%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<blockquote>
-<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-</blockquote>
-<h3 id="安装hexo-cli命令行界面"><a href="#安装hexo-cli命令行界面" class="headerlink" title="安装hexo-cli命令行界面"></a>安装hexo-cli命令行界面</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>### </p>
-]]></content>
-      <categories>
-        <category>工具使用</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ECMAScript对象类型</title>
     <url>/2017/11/23/js/ECMAScript%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<p>在 ECMAScript 中，所有对象并非同等创建的。一般来说，可以创建并使用的对象有三种：本地对象、内置对象和宿主对象。</p>
@@ -1238,44 +1221,6 @@ int main()
       </tags>
   </entry>
   <entry>
-    <title>为什么要用void 0 代替undefined？</title>
-    <url>/2018/07/04/js/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8void%200%20%E4%BB%A3%E6%9B%BFundefined%EF%BC%9F/</url>
-    <content><![CDATA[<p>这几天在框架源码的时候，偶然看到把变量声明为为<code>void 0</code>这种写法，前辈的代码果然是高深莫测，为什么要这样子写呢？这成功的激发了本宝宝的好奇心。<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/1.gif" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure><br>翻阅了多篇文章之后，总算明白了<code>void 0</code>使用来代替undefined，那么为什么直接用undefined不行，非得找个替代品？这个可以追溯到long long ago！</p>
-<h3 id="为什么不直接使用undefined呢"><a href="#为什么不直接使用undefined呢" class="headerlink" title="为什么不直接使用undefined呢"></a>为什么不直接使用undefined呢</h3><p>原来，<code>undefined</code>并不是保留字，他只是一个全局属性，在低版本的IE中可以被重写</p>
-<pre><code>var undefined = 8;
-alert(undefined);
-// undefined -- IE 10
-// 10 -- IE 8
-</code></pre><p>在es5之前在window对象下的<code>undefined</code>都可以被重写，es5之后虽然规定了全局变量的undefined为只读，但是在局部依然可以被改变</p>
-<pre><code>function a(){
-var undefined = 10;
-alert(undefined);//10            
-}
-a();
-</code></pre><h3 id="为什么用void-0来代替undefined呢"><a href="#为什么用void-0来代替undefined呢" class="headerlink" title="为什么用void 0来代替undefined呢"></a>为什么用void 0来代替undefined呢</h3><p>void操作符可以执行一个表达式，并会在在任何情况下总是返<code>undefined</code>，也就是说可以用来完美的替代undefined属性</p>
-<p>为什么是void 0 而不是void 1呢？其实这两者并没有什么区别，还有就是使用void 0 还可以减少3个字节。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以防止<code>undefined</code>被重写，并可以节约3个字节。老司机们真的666啊！<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2.gif" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>var a和var a = void 0?</title>
     <url>/2018/07/05/js/var%20a%E5%92%8Cvar%20a%20=%20void%200%EF%BC%9F/</url>
     <content><![CDATA[<p>昨天知道了为什么要用<code>void 0</code> 来替代undefined。</p>
@@ -1324,48 +1269,41 @@ console.log(a);//10
       </tags>
   </entry>
   <entry>
-    <title>正则表达式</title>
-    <url>/2017/11/23/js/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
-<li>正则表达式，就是一个匹配模式</li>
-<li>正则表达式，本身就是一个字符串（其中有一些特殊字符的语法规则）</li>
-<li>正则的字符串，一定要在函数中使用<h3 id="1-基本格式"><a href="#1-基本格式" class="headerlink" title="1.基本格式"></a>1.基本格式</h3><blockquote>
-<p>定界符号，很多符号都可以，常用/ /</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>原子：最小的一个匹配单位</p>
-</blockquote>
-<blockquote>
-<p>元字符：不能单独使用，修饰原子，用来扩展或者限定原子的功能</p>
-</blockquote>
-<blockquote>
-<p>模式修正符：写在右边</p>
-</blockquote>
-<h3 id="2-正则中的原子"><a href="#2-正则中的原子" class="headerlink" title="2.正则中的原子"></a>2.正则中的原子</h3><h5 id="2-1-打印字符和非打印字符"><a href="#2-1-打印字符和非打印字符" class="headerlink" title="2.1 打印字符和非打印字符"></a>2.1 打印字符和非打印字符</h5><blockquote>
-<p>打印字符指键盘可以打出来的字符，非打印字符指例如回车等打印不出来但是存在的字符</p>
-</blockquote>
-<h5 id="2-2-转义字符"><a href="#2-2-转义字符" class="headerlink" title="2.2 转义字符"></a>2.2 转义字符</h5><ol>
-<li>可以将有意义的字符转为没有意义的字符</li>
-<li>可以将没有意义的字符转为有意义的字符</li>
-<li><p>没有意义的字符，加上转义也没有意义，可转义也可以不转，不影响</p>
-<h5 id="2-3-特殊的原子"><a href="#2-3-特殊的原子" class="headerlink" title="2.3 特殊的原子"></a>2.3 特殊的原子</h5><p>|code|text|<br>|:-:|:-|<br>|\d|任意一个数字|<br>|\D|任意一个非数字|<br>|\w|任意一个字 a-z A-Z 0-9 _|<br>|\W|任意一个非字|<br>|\s|代表空白 空格，回车，tab键|<br>|\S|非空白|<br>|.|点代表所有|</p>
-<h4 id="2-4-自定义原子表"><a href="#2-4-自定义原子表" class="headerlink" title="2.4 自定义原子表"></a>2.4 自定义原子表</h4><p> [13579]<br> [^a-zA-Z] - 表示从哪到哪，^ 除了…..</p>
-<h3 id="3-正则的元字符"><a href="#3-正则的元字符" class="headerlink" title="3.正则的元字符"></a>3.正则的元字符</h3><p>符号|功能<br>:–:|–<br>*|匹配 0 次或者多次<br>+|匹配 1 次或者多次<br>?|匹配 0 次或 1 次<br>|匹配两个或多次分支选择，但优先级是最低的<br>{n}|匹配恰好出现n次<br>{n,}|匹配 n 次以上<br>{n,m}|匹配 n 次到 m 次<br>^ 和 \A|表示必须匹配字符串以什么开始，且必须写在正则表达式最前面<br>$ 和 \Z    |和上面相反</p>
-<h3 id="4-字符串和正则处理函数"><a href="#4-字符串和正则处理函数" class="headerlink" title="4.字符串和正则处理函数"></a>4.字符串和正则处理函数</h3><p>字符串处理的方式：（分割、匹配、查找、替换）</p>
-</li>
-<li><p>字符串处理函数（处理快，但有些功能做不到）</p>
-</li>
-<li>正则函数 （功能强，但是效率低）</li>
-<li>能使用字符串函数处理，就不用正则</li>
-</ol>
+    <title>为什么要用void 0 代替undefined？</title>
+    <url>/2018/07/04/js/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8void%200%20%E4%BB%A3%E6%9B%BFundefined%EF%BC%9F/</url>
+    <content><![CDATA[<p>这几天在框架源码的时候，偶然看到把变量声明为为<code>void 0</code>这种写法，前辈的代码果然是高深莫测，为什么要这样子写呢？这成功的激发了本宝宝的好奇心。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/1.gif" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>翻阅了多篇文章之后，总算明白了<code>void 0</code>使用来代替undefined，那么为什么直接用undefined不行，非得找个替代品？这个可以追溯到long long ago！</p>
+<h3 id="为什么不直接使用undefined呢"><a href="#为什么不直接使用undefined呢" class="headerlink" title="为什么不直接使用undefined呢"></a>为什么不直接使用undefined呢</h3><p>原来，<code>undefined</code>并不是保留字，他只是一个全局属性，在低版本的IE中可以被重写</p>
+<pre><code>var undefined = 8;
+alert(undefined);
+// undefined -- IE 10
+// 10 -- IE 8
+</code></pre><p>在es5之前在window对象下的<code>undefined</code>都可以被重写，es5之后虽然规定了全局变量的undefined为只读，但是在局部依然可以被改变</p>
+<pre><code>function a(){
+var undefined = 10;
+alert(undefined);//10            
+}
+a();
+</code></pre><h3 id="为什么用void-0来代替undefined呢"><a href="#为什么用void-0来代替undefined呢" class="headerlink" title="为什么用void 0来代替undefined呢"></a>为什么用void 0来代替undefined呢</h3><p>void操作符可以执行一个表达式，并会在在任何情况下总是返<code>undefined</code>，也就是说可以用来完美的替代undefined属性</p>
+<p>为什么是void 0 而不是void 1呢？其实这两者并没有什么区别，还有就是使用void 0 还可以减少3个字节。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以防止<code>undefined</code>被重写，并可以节约3个字节。老司机们真的666啊！<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2.gif" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 ]]></content>
       <categories>
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>正则</tag>
+        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -1441,6 +1379,144 @@ window.onscroll = function(){
       </categories>
       <tags>
         <tag>节流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/2017/11/23/js/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
+<li>正则表达式，就是一个匹配模式</li>
+<li>正则表达式，本身就是一个字符串（其中有一些特殊字符的语法规则）</li>
+<li>正则的字符串，一定要在函数中使用<h3 id="1-基本格式"><a href="#1-基本格式" class="headerlink" title="1.基本格式"></a>1.基本格式</h3><blockquote>
+<p>定界符号，很多符号都可以，常用/ /</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>原子：最小的一个匹配单位</p>
+</blockquote>
+<blockquote>
+<p>元字符：不能单独使用，修饰原子，用来扩展或者限定原子的功能</p>
+</blockquote>
+<blockquote>
+<p>模式修正符：写在右边</p>
+</blockquote>
+<h3 id="2-正则中的原子"><a href="#2-正则中的原子" class="headerlink" title="2.正则中的原子"></a>2.正则中的原子</h3><h5 id="2-1-打印字符和非打印字符"><a href="#2-1-打印字符和非打印字符" class="headerlink" title="2.1 打印字符和非打印字符"></a>2.1 打印字符和非打印字符</h5><blockquote>
+<p>打印字符指键盘可以打出来的字符，非打印字符指例如回车等打印不出来但是存在的字符</p>
+</blockquote>
+<h5 id="2-2-转义字符"><a href="#2-2-转义字符" class="headerlink" title="2.2 转义字符"></a>2.2 转义字符</h5><ol>
+<li>可以将有意义的字符转为没有意义的字符</li>
+<li>可以将没有意义的字符转为有意义的字符</li>
+<li><p>没有意义的字符，加上转义也没有意义，可转义也可以不转，不影响</p>
+<h5 id="2-3-特殊的原子"><a href="#2-3-特殊的原子" class="headerlink" title="2.3 特殊的原子"></a>2.3 特殊的原子</h5><p>|code|text|<br>|:-:|:-|<br>|\d|任意一个数字|<br>|\D|任意一个非数字|<br>|\w|任意一个字 a-z A-Z 0-9 _|<br>|\W|任意一个非字|<br>|\s|代表空白 空格，回车，tab键|<br>|\S|非空白|<br>|.|点代表所有|</p>
+<h4 id="2-4-自定义原子表"><a href="#2-4-自定义原子表" class="headerlink" title="2.4 自定义原子表"></a>2.4 自定义原子表</h4><p> [13579]<br> [^a-zA-Z] - 表示从哪到哪，^ 除了…..</p>
+<h3 id="3-正则的元字符"><a href="#3-正则的元字符" class="headerlink" title="3.正则的元字符"></a>3.正则的元字符</h3><p>符号|功能<br>:–:|–<br>*|匹配 0 次或者多次<br>+|匹配 1 次或者多次<br>?|匹配 0 次或 1 次<br>|匹配两个或多次分支选择，但优先级是最低的<br>{n}|匹配恰好出现n次<br>{n,}|匹配 n 次以上<br>{n,m}|匹配 n 次到 m 次<br>^ 和 \A|表示必须匹配字符串以什么开始，且必须写在正则表达式最前面<br>$ 和 \Z    |和上面相反</p>
+<h3 id="4-字符串和正则处理函数"><a href="#4-字符串和正则处理函数" class="headerlink" title="4.字符串和正则处理函数"></a>4.字符串和正则处理函数</h3><p>字符串处理的方式：（分割、匹配、查找、替换）</p>
+</li>
+<li><p>字符串处理函数（处理快，但有些功能做不到）</p>
+</li>
+<li>正则函数 （功能强，但是效率低）</li>
+<li>能使用字符串函数处理，就不用正则</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>正则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>node核心模块之http模块</title>
+    <url>/2018/12/25/nodejs/node%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E4%B9%8Bhttp%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<p>##</p>
+]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>http</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用nodejs批量修改文件后缀</title>
+    <url>/2017/09/03/nodejs/%E4%BD%BF%E7%94%A8nodejs%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80/</url>
+    <content><![CDATA[<p>前端在拿到新项目的原型图的时候，一般会先根据原型图搭好项目的目录结构，在进行多页面开发的时候，我们一般会把文件分为css，js，html的目录结构，比如下面这样：</p>
+<a id="more"></a>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/0903.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>通常 js 文件夹和 views 文件夹，也会有相同的文件结构，它们之间不同的只是后缀名，如果能有一个方法可以改后缀名，那么写一套另外两套也就高了，能省去一些重复性工作</p>
+<pre><code>// 使用方法为：
+// 把该文件复制到要修改文件名的目录下；
+// 然后打开node.js执行node changeName.js命令；
+// 修改完成！
+// 可以在下面注释的地方自定义修改的逻辑；
+var path = require(&quot;path&quot;);
+var fs = require(&quot;fs&quot;);
+var rootPath = __filename;
+renameFilesInDir(path.dirname(rootPath));
+
+function changeFileName(filepath){
+    fs.stat(filepath,function(err,stats){
+        if(stats.isFile()){
+            var filename = path.basename(filepath);
+            var parentDir =path.dirname(filepath);
+            var thisFilename = path.basename(__filename);
+            //这个if就是进行更改文件名的逻辑,可以自行定义,这里定义为更改文件名称后缀&quot;
+            if(filename!=thisFilename){
+                var newName = filename.replace(/html$/,&quot;js&quot;);
+                var newPath =parentDir+&quot;\\&quot;+newName;
+                console.log(&quot;改变文件 &quot;+filepath+&quot; 为 &quot;+newPath);
+                fs.rename(filepath,newPath);    
+            }
+        }else if(stats.isDirectory()){
+            console.log(&quot;=======[&quot;+filepath+&quot;] 是一个文件夹=====&quot;);
+            renameFilesInDir(filepath);
+        }else{
+        console.log(&quot;未知文件类型&quot;);
+        }
+    });
+}
+
+function renameFilesInDir(dir){
+    fs.readdir(dir,function(error,files){
+        var len = files.length;
+        var file = null;
+        for(var i=0;i&lt;len;i++){
+            file = files[i];
+            changeFileName(dir+&quot;\\&quot;+file);
+        }
+    });
+}
+</code></pre><p>重复的机械工作会抹掉我们的积极性，遇到这种情况应该想办法让它变得简单。</p>
+]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo使用文档</title>
+    <url>/2020/11/24/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/hexo%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<blockquote>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+</blockquote>
+<h3 id="安装hexo-cli命令行界面"><a href="#安装hexo-cli命令行界面" class="headerlink" title="安装hexo-cli命令行界面"></a>安装hexo-cli命令行界面</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>### </p>
+]]></content>
+      <categories>
+        <category>工具使用</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1744,82 +1820,6 @@ recalc();
       </categories>
       <tags>
         <tag>rem</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>node核心模块之http模块</title>
-    <url>/2018/12/25/nodejs/node%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E4%B9%8Bhttp%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[<p>##</p>
-]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>http</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用nodejs批量修改文件后缀</title>
-    <url>/2017/09/03/nodejs/%E4%BD%BF%E7%94%A8nodejs%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80/</url>
-    <content><![CDATA[<p>前端在拿到新项目的原型图的时候，一般会先根据原型图搭好项目的目录结构，在进行多页面开发的时候，我们一般会把文件分为css，js，html的目录结构，比如下面这样：</p>
-<a id="more"></a>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/0903.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>通常 js 文件夹和 views 文件夹，也会有相同的文件结构，它们之间不同的只是后缀名，如果能有一个方法可以改后缀名，那么写一套另外两套也就高了，能省去一些重复性工作</p>
-<pre><code>// 使用方法为：
-// 把该文件复制到要修改文件名的目录下；
-// 然后打开node.js执行node changeName.js命令；
-// 修改完成！
-// 可以在下面注释的地方自定义修改的逻辑；
-var path = require(&quot;path&quot;);
-var fs = require(&quot;fs&quot;);
-var rootPath = __filename;
-renameFilesInDir(path.dirname(rootPath));
-
-function changeFileName(filepath){
-    fs.stat(filepath,function(err,stats){
-        if(stats.isFile()){
-            var filename = path.basename(filepath);
-            var parentDir =path.dirname(filepath);
-            var thisFilename = path.basename(__filename);
-            //这个if就是进行更改文件名的逻辑,可以自行定义,这里定义为更改文件名称后缀&quot;
-            if(filename!=thisFilename){
-                var newName = filename.replace(/html$/,&quot;js&quot;);
-                var newPath =parentDir+&quot;\\&quot;+newName;
-                console.log(&quot;改变文件 &quot;+filepath+&quot; 为 &quot;+newPath);
-                fs.rename(filepath,newPath);    
-            }
-        }else if(stats.isDirectory()){
-            console.log(&quot;=======[&quot;+filepath+&quot;] 是一个文件夹=====&quot;);
-            renameFilesInDir(filepath);
-        }else{
-        console.log(&quot;未知文件类型&quot;);
-        }
-    });
-}
-
-function renameFilesInDir(dir){
-    fs.readdir(dir,function(error,files){
-        var len = files.length;
-        var file = null;
-        for(var i=0;i&lt;len;i++){
-            file = files[i];
-            changeFileName(dir+&quot;\\&quot;+file);
-        }
-    });
-}
-</code></pre><p>重复的机械工作会抹掉我们的积极性，遇到这种情况应该想办法让它变得简单。</p>
-]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>nodejs</tag>
       </tags>
   </entry>
 </search>
