@@ -71,6 +71,31 @@ a=20;//赋值
   </entry>
   
   <entry>
+    <title>C语言入门之指针</title>
+    <link href="https://BeansChen.github.io/2018/12/28/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E6%8C%87%E9%92%88/"/>
+    <id>https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/</id>
+    <published>2018-12-28T09:00:13.000Z</published>
+    <updated>2020-04-07T08:42:39.082Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：<strong>地址就是可以唯一标识某一点的一个编号</strong>，即一个数字！</p><p>内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的<strong>十六进制</strong>数来表示，比如0x12ff7c这样。在我们的C程序中，每一个定义的变量，在内存中都占有一个内存单元，比如int类型占四个字节，char类型占一个字节等等，每个字节都在0~4,294,967,295之间都有一个对应的编号，C语言允许在程序中使用变量的地址，并可以通过地址运算符”&amp;”得到变量的地址。</p><h2 id="指针的定义"><a href="#指针的定义" class="headerlink" title="指针的定义"></a>指针的定义</h2><blockquote><p>对指针变量定义的一般形式为:<br>类型说明符 <em>变量名;<br>其中,这里的 </em> 与前面的类型说明符共同说明这是一个指针变量,类型说明符表示该指针变量所指向的变量为何种数据类型,变量名即为定义的指针变量名。除此之外，C还<strong>提供*运算符获取地址上对应的值</strong>。 </p></blockquote><pre><code>#include&lt;stdio.h&gt;int main(){        int num=2014;        int *p=&amp;num;        printf(&quot;num Address = 0x%x,num=%d\n&quot;,&amp;num,num);        printf(&quot;p = 0x%x,*p=%d\n&quot;,p,*p);        printf(&quot;%d\n&quot;,*&amp;num);        return 0;        //num Address = 0x62fe44,num=2014        //p = 0x62fe44,*p=2014        //2014}</code></pre><h2 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h2><p>指向数组元素的指针变量的定义与一般的指针变量相同</p><pre><code>int a[10]; /*定义 a 为包含 10 个整型数据的数组*/int *p; /*定义 p 为指向整型变量的指针*/p=&amp;a[0]; /*把 a[0]元素的地址赋给指针变量 p*/p=a; /*等价于 p=&amp;a[0]; */int *p=a; /*等价于 int *p=&amp;a[0]; */</code></pre><p>对于指向首地址的指针 p,p+i(或a+i)就是数组元素 a[i]的地址,<em>(p+i)( 或</em>(a+i) )就是 a[i]的值。 </p><p>如果指针变量 p 已指向数组中的某一个元素,则 p+1 指向同一数组中的下一个元素。 </p><p>引入指针变量后,就可以用以下两种方法来访问数组元素: </p><ul><li>(1)下标法,即用 a[i]形式访问数组元素,在前面介绍数组时都是采用这种方法。 </li><li><p>(2)指针法,即采用<em>(a+i)或</em>(p+i)形式,用间接访问的方法来访问数组元素,其中 a 是数组名,p 是 指向数组的指针变量,其初值 p=a。    </p><p>  #include&lt;stdio.h&gt;<br>  int main()<br>  {</p><pre><code>int i;int a[10]={1,2,3,4,5,6,7,8,9,0};int *p=a;for(i=0;i&lt;10;i++){        printf(&quot;P Value:%d   a Value :%d\n&quot;,*(p++),*(a+i));}printf(&quot;\n&quot;);return 0;</code></pre><p>  }</p></li></ul><p><strong>注：</strong>指针可以通过++或–并修改自身值的方式移动，然而数组名本身值不可以被更改。    </p><h2 id="指针与字符串"><a href="#指针与字符串" class="headerlink" title="指针与字符串"></a>指针与字符串</h2><p>字符指针也可以指向一个字符串,可以用字符串常量对字符 指针进行初始化</p><pre><code>char *str = &quot;www.dotcpp.com&quot; ;</code></pre><p>这是对字符指针进行初始化。此时,字符指针指向一个字符串常量的首地址。<br>还可以用字符数组来存放字符串,例如:     </p><pre><code>char string[ ] = &quot;Welcome to dotcpp.com&quot;;</code></pre><blockquote><p>在这个语句中,string 是数组名,代表字符数组的首地址。因此可以通过数组名 string 来访问字符串。<br>字符串指针和字符串数组两种方式都可以访问字符串,但它们有着本质的区别:字符指针 <strong>str 是个变量,可以改变 str 使它指向不同的字符串, 但不能改变 str 所指向的字符串常量的值</strong>。 而<strong>string 是一个数组,可以改变数组中保存的内容</strong>。应注意字符串指针和字符串数组的区别。    </p></blockquote><pre><code>#include&lt;stdio.h&gt;int main(){        char *str = &quot;www.dotcpp.com&quot;;        char string[]=&quot;Welcome to dotcpp.com&quot;;        str[0]=&apos;C&apos;; //试图修改str指向的常量区的字符串内容        return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;地址&quot;&gt;&lt;a href=&quot;#地址&quot; class=&quot;headerlink&quot; title=&quot;地址&quot;&gt;&lt;/a&gt;地址&lt;/h2&gt;&lt;p&gt;何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：&lt;strong&gt;地址就是
+      
+    
+    </summary>
+    
+      <category term="C语言入门" scheme="https://BeansChen.github.io/categories/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8/"/>
+    
+    
+      <category term="C语言" scheme="https://BeansChen.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C语言入门之数组</title>
     <link href="https://BeansChen.github.io/2018/12/28/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E6%95%B0%E7%BB%84/"/>
     <id>https://BeansChen.github.io/2018/12/28/c语言/C语言入门之数组/</id>
@@ -85,31 +110,6 @@ a=20;//赋值
       
         &lt;h2 id=&quot;一维数组&quot;&gt;&lt;a href=&quot;#一维数组&quot; class=&quot;headerlink&quot; title=&quot;一维数组&quot;&gt;&lt;/a&gt;一维数组&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;在C语言中使用数组必须先进行定义,一维数组的定义方式如下:&lt;br&gt;类型说明符 数组名 [常量表达式
-      
-    
-    </summary>
-    
-      <category term="C语言入门" scheme="https://BeansChen.github.io/categories/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8/"/>
-    
-    
-      <category term="C语言" scheme="https://BeansChen.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C语言入门之指针</title>
-    <link href="https://BeansChen.github.io/2018/12/28/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E6%8C%87%E9%92%88/"/>
-    <id>https://BeansChen.github.io/2018/12/28/c语言/C语言入门之指针/</id>
-    <published>2018-12-28T09:00:13.000Z</published>
-    <updated>2020-04-07T08:42:39.082Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：<strong>地址就是可以唯一标识某一点的一个编号</strong>，即一个数字！</p><p>内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的<strong>十六进制</strong>数来表示，比如0x12ff7c这样。在我们的C程序中，每一个定义的变量，在内存中都占有一个内存单元，比如int类型占四个字节，char类型占一个字节等等，每个字节都在0~4,294,967,295之间都有一个对应的编号，C语言允许在程序中使用变量的地址，并可以通过地址运算符”&amp;”得到变量的地址。</p><h2 id="指针的定义"><a href="#指针的定义" class="headerlink" title="指针的定义"></a>指针的定义</h2><blockquote><p>对指针变量定义的一般形式为:<br>类型说明符 <em>变量名;<br>其中,这里的 </em> 与前面的类型说明符共同说明这是一个指针变量,类型说明符表示该指针变量所指向的变量为何种数据类型,变量名即为定义的指针变量名。除此之外，C还<strong>提供*运算符获取地址上对应的值</strong>。 </p></blockquote><pre><code>#include&lt;stdio.h&gt;int main(){        int num=2014;        int *p=&amp;num;        printf(&quot;num Address = 0x%x,num=%d\n&quot;,&amp;num,num);        printf(&quot;p = 0x%x,*p=%d\n&quot;,p,*p);        printf(&quot;%d\n&quot;,*&amp;num);        return 0;        //num Address = 0x62fe44,num=2014        //p = 0x62fe44,*p=2014        //2014}</code></pre><h2 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h2><p>指向数组元素的指针变量的定义与一般的指针变量相同</p><pre><code>int a[10]; /*定义 a 为包含 10 个整型数据的数组*/int *p; /*定义 p 为指向整型变量的指针*/p=&amp;a[0]; /*把 a[0]元素的地址赋给指针变量 p*/p=a; /*等价于 p=&amp;a[0]; */int *p=a; /*等价于 int *p=&amp;a[0]; */</code></pre><p>对于指向首地址的指针 p,p+i(或a+i)就是数组元素 a[i]的地址,<em>(p+i)( 或</em>(a+i) )就是 a[i]的值。 </p><p>如果指针变量 p 已指向数组中的某一个元素,则 p+1 指向同一数组中的下一个元素。 </p><p>引入指针变量后,就可以用以下两种方法来访问数组元素: </p><ul><li>(1)下标法,即用 a[i]形式访问数组元素,在前面介绍数组时都是采用这种方法。 </li><li><p>(2)指针法,即采用<em>(a+i)或</em>(p+i)形式,用间接访问的方法来访问数组元素,其中 a 是数组名,p 是 指向数组的指针变量,其初值 p=a。    </p><p>  #include&lt;stdio.h&gt;<br>  int main()<br>  {</p><pre><code>int i;int a[10]={1,2,3,4,5,6,7,8,9,0};int *p=a;for(i=0;i&lt;10;i++){        printf(&quot;P Value:%d   a Value :%d\n&quot;,*(p++),*(a+i));}printf(&quot;\n&quot;);return 0;</code></pre><p>  }</p></li></ul><p><strong>注：</strong>指针可以通过++或–并修改自身值的方式移动，然而数组名本身值不可以被更改。    </p><h2 id="指针与字符串"><a href="#指针与字符串" class="headerlink" title="指针与字符串"></a>指针与字符串</h2><p>字符指针也可以指向一个字符串,可以用字符串常量对字符 指针进行初始化</p><pre><code>char *str = &quot;www.dotcpp.com&quot; ;</code></pre><p>这是对字符指针进行初始化。此时,字符指针指向一个字符串常量的首地址。<br>还可以用字符数组来存放字符串,例如:     </p><pre><code>char string[ ] = &quot;Welcome to dotcpp.com&quot;;</code></pre><blockquote><p>在这个语句中,string 是数组名,代表字符数组的首地址。因此可以通过数组名 string 来访问字符串。<br>字符串指针和字符串数组两种方式都可以访问字符串,但它们有着本质的区别:字符指针 <strong>str 是个变量,可以改变 str 使它指向不同的字符串, 但不能改变 str 所指向的字符串常量的值</strong>。 而<strong>string 是一个数组,可以改变数组中保存的内容</strong>。应注意字符串指针和字符串数组的区别。    </p></blockquote><pre><code>#include&lt;stdio.h&gt;int main(){        char *str = &quot;www.dotcpp.com&quot;;        char string[]=&quot;Welcome to dotcpp.com&quot;;        str[0]=&apos;C&apos;; //试图修改str指向的常量区的字符串内容        return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;地址&quot;&gt;&lt;a href=&quot;#地址&quot; class=&quot;headerlink&quot; title=&quot;地址&quot;&gt;&lt;/a&gt;地址&lt;/h2&gt;&lt;p&gt;何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：&lt;strong&gt;地址就是
       
     
     </summary>

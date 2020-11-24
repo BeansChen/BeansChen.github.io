@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>angularJS服务</title>
+    <url>/2018/12/05/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C-%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<h2 id="angularJS服务"><a href="#angularJS服务" class="headerlink" title="angularJS服务"></a>angularJS服务</h2><p>angular的注入器创建两类对象，<strong>服务</strong>和<strong>专用对象</strong>，专用对象包括控制器，指令，过滤器和动画</p>
+<p>一个好的angular应用，不该把业务代码放在控制器层，这个时候需要用到angular自定义服务。<br>angular实现服务的方式有5种：</p>
+<ul>
+<li>provider</li>
+<li>factory</li>
+<li>service</li>
+<li>constant</li>
+<li>value </li>
+</ul>
+<h3 id="value"><a href="#value" class="headerlink" title="value"></a>value</h3><p>用来定义一个值共享的字符串，可以在多个地方使用,不能被注入到config中</p>
+<pre><code>StarterCore.value(&quot;version&quot;,&apos;1.10&apos;);
+</code></pre><h3 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h3><p>用来定义一个<strong>常量</strong>，可以被注入到config中</p>
+<pre><code>myApp.constant(&apos;apiURL&apos;, &apos;http://192.169.0.1:8080&apos;);
+</code></pre><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>返回的是一个实例化后的构造函数</p>
+<pre><code>app.service(&apos;MyService&apos;, function () {
+    this.sayHello = function () {
+        console.log(&apos;hello&apos;);
+    };
+});
+</code></pre><h3 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h3><p>返回的是一个对象</p>
+<pre><code>app.factory(&apos;MyFactory&apos;, function () {
+    return {
+        sayHello:function(){
+            console.log(&apos;hello&apos;);
+        }
+    }
+});
+</code></pre><h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><p>可以在注入之前,在config中进行配置</p>
+<pre><code>Starter.provider(&quot;myProvider&quot;,function(){
+    var name=&quot;bean&quot;;
+    this.setName = function(n){
+        name = n;
+    }
+    this.$get = function(){
+        return {
+            name:name,
+            height:&quot;175cm&quot;
+        }
+    }
+})
+Starter.config(function(myProviderProvider){
+    myProviderProvider.setName=&quot;dou&quot;
+})
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>注入器使用图纸创建两类对象：服务和专用对象。</li>
+<li>总共有5类图纸来定义如何创建对象：Value，Factory，Service，Provicer以及Constant。</li>
+<li>Factory和Service是最常用的图纸。它们之间的唯一区别就是Service图纸在创建自定义对象时更适用，而Factory还可以创建Javascript原始类型以及函数。</li>
+<li>Provider图纸是最核心的图纸类型，而其它所有图纸都只是基于它的语法糖。</li>
+<li>Provider也是最复杂的图纸类型，除非你正在构建需要全局配置的可复用代码，否则不要使用它。</li>
+<li>除了控制器，其他所有专用对象都是通过Factory图纸来定义的。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">特性 / 图纸类型</th>
+<th style="text-align:center">Factory</th>
+<th style="text-align:center">Service</th>
+<th style="text-align:center">Value</th>
+<th style="text-align:center">Constant</th>
+<th style="text-align:left">Provider</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">可以有依赖</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:center">使用依赖注入友好</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">否</td>
+</tr>
+<tr>
+<td style="text-align:center">对象在配置阶段可访问</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:center">可以创建函数/原始类型</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">是</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>angularJS</category>
+      </categories>
+      <tags>
+        <tag>angularJS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>angularJS验证ng-repeat循环出的表单</title>
     <url>/2018/12/20/angularjs/angularJS-%E9%AA%8C%E8%AF%81%E5%BE%AA%E7%8E%AF%E7%9A%84%E8%A1%A8%E5%8D%95/</url>
     <content><![CDATA[<h2 id="angularJS验证ng-repeat循环出的表单"><a href="#angularJS验证ng-repeat循环出的表单" class="headerlink" title="angularJS验证ng-repeat循环出的表单"></a>angularJS验证ng-repeat循环出的表单</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在使用angularJS与后端做交互时，都会用它的表单验证功能，但有时候表单属性并不是一个对象，而是一个对象列表，比如需要提交一个不定长度的联系人列表。<br>我在项目遇到这个情况的时候，第一时间就直接对form作了循环，遗憾的是angular并不能获取到form对象，中途试了很多种方法，都不尽人意，最后中总结了两种<br>实现的方法：</p>
@@ -179,6 +287,80 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS多种边框的实现方式</title>
+    <url>/2017/11/18/css/CSS%E5%A4%9A%E7%A7%8D%E8%BE%B9%E6%A1%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="普通的边框"><a href="#普通的边框" class="headerlink" title="普通的边框"></a>普通的边框</h3><p>普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的<br>就只有outline是不占元素空间的</p>
+<h3 id="半透明边框"><a href="#半透明边框" class="headerlink" title="半透明边框"></a>半透明边框</h3><p>背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围</p>
+<pre><code>background: blue;
+border:10px solid rgba(0,0,0,.3);
+background-clip: padding-box;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="多重边框"><a href="#多重边框" class="headerlink" title="多重边框"></a>多重边框</h3><pre><code>box-shadow: 0 0 0 10px red,0 0 0 20px yellow,0 0 0 30px blue;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder4.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="图片边框"><a href="#图片边框" class="headerlink" title="图片边框"></a>图片边框</h3><pre><code>border: 40px solid transparent;
+background: linear-gradient(white,white),url(2.jpg);
+background-size: cover;
+background-clip: padding-box,border-box;
+background-origin: border-box;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="边框内圆角"><a href="#边框内圆角" class="headerlink" title="边框内圆角"></a>边框内圆角</h3><pre><code>border-radius: 10px;
+outline: 10px solid red;
+box-shadow: 0 0 0 10px red;
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder5.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS-四种颜色表示方法</title>
+    <url>/2018/01/23/css/CSS-%E5%9B%9B%E7%A7%8D%E9%A2%9C%E8%89%B2%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="1-颜色名表示"><a href="#1-颜色名表示" class="headerlink" title="1.颜色名表示"></a>1.颜色名表示</h3><p>例如：red、gold、yellow、green、blue、black、white等</p>
+<h3 id="2-16进制表示"><a href="#2-16进制表示" class="headerlink" title="2.16进制表示"></a>2.16进制表示</h3><p>即#RRGGBB 或 #RGB</p>
+<p>例如：#333、#666、#8B8B8B等，注意:#F00全称是#FF0000而不是#F00F00</p>
+<h3 id="3-rgba表示"><a href="#3-rgba表示" class="headerlink" title="3.rgba表示"></a>3.rgba表示</h3><p>即red、green、blue、alpha，正整数值的取值范围为：0 - 255。百分数值的取值范围为：0.0% - 100.0%。超出会自动取极值</p>
+<p>transparent是全透明黑色(black)的速记法，即一个类似rgba(0,0,0,0)这样的值</p>
+<h3 id="4-HSLA表示"><a href="#4-HSLA表示" class="headerlink" title="4.HSLA表示"></a>4.HSLA表示</h3><ul>
+<li>H：Hue(色调)。0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360</li>
+<li>S：Saturation(饱和度)。取值为：0.0% - 100.0%</li>
+<li>L：Lightness(亮度)。取值为：0.0% - 100.0%</li>
+<li>A：Alpha透明度。取值0~1之间。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>颜色</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>angularJS基本概念</title>
     <url>/2018/12/03/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<h2 id="angularJS简介"><a href="#angularJS简介" class="headerlink" title="angularJS简介"></a>angularJS简介</h2><h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。</p>
@@ -220,195 +402,6 @@
       </categories>
       <tags>
         <tag>angularJS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS-四种颜色表示方法</title>
-    <url>/2018/01/23/css/CSS-%E5%9B%9B%E7%A7%8D%E9%A2%9C%E8%89%B2%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="1-颜色名表示"><a href="#1-颜色名表示" class="headerlink" title="1.颜色名表示"></a>1.颜色名表示</h3><p>例如：red、gold、yellow、green、blue、black、white等</p>
-<h3 id="2-16进制表示"><a href="#2-16进制表示" class="headerlink" title="2.16进制表示"></a>2.16进制表示</h3><p>即#RRGGBB 或 #RGB</p>
-<p>例如：#333、#666、#8B8B8B等，注意:#F00全称是#FF0000而不是#F00F00</p>
-<h3 id="3-rgba表示"><a href="#3-rgba表示" class="headerlink" title="3.rgba表示"></a>3.rgba表示</h3><p>即red、green、blue、alpha，正整数值的取值范围为：0 - 255。百分数值的取值范围为：0.0% - 100.0%。超出会自动取极值</p>
-<p>transparent是全透明黑色(black)的速记法，即一个类似rgba(0,0,0,0)这样的值</p>
-<h3 id="4-HSLA表示"><a href="#4-HSLA表示" class="headerlink" title="4.HSLA表示"></a>4.HSLA表示</h3><ul>
-<li>H：Hue(色调)。0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360</li>
-<li>S：Saturation(饱和度)。取值为：0.0% - 100.0%</li>
-<li>L：Lightness(亮度)。取值为：0.0% - 100.0%</li>
-<li>A：Alpha透明度。取值0~1之间。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>颜色</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>angularJS服务</title>
-    <url>/2018/12/05/angularjs/angularJS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C-%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<h2 id="angularJS服务"><a href="#angularJS服务" class="headerlink" title="angularJS服务"></a>angularJS服务</h2><p>angular的注入器创建两类对象，<strong>服务</strong>和<strong>专用对象</strong>，专用对象包括控制器，指令，过滤器和动画</p>
-<p>一个好的angular应用，不该把业务代码放在控制器层，这个时候需要用到angular自定义服务。<br>angular实现服务的方式有5种：</p>
-<ul>
-<li>provider</li>
-<li>factory</li>
-<li>service</li>
-<li>constant</li>
-<li>value </li>
-</ul>
-<h3 id="value"><a href="#value" class="headerlink" title="value"></a>value</h3><p>用来定义一个值共享的字符串，可以在多个地方使用,不能被注入到config中</p>
-<pre><code>StarterCore.value(&quot;version&quot;,&apos;1.10&apos;);
-</code></pre><h3 id="constant"><a href="#constant" class="headerlink" title="constant"></a>constant</h3><p>用来定义一个<strong>常量</strong>，可以被注入到config中</p>
-<pre><code>myApp.constant(&apos;apiURL&apos;, &apos;http://192.169.0.1:8080&apos;);
-</code></pre><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>返回的是一个实例化后的构造函数</p>
-<pre><code>app.service(&apos;MyService&apos;, function () {
-    this.sayHello = function () {
-        console.log(&apos;hello&apos;);
-    };
-});
-</code></pre><h3 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h3><p>返回的是一个对象</p>
-<pre><code>app.factory(&apos;MyFactory&apos;, function () {
-    return {
-        sayHello:function(){
-            console.log(&apos;hello&apos;);
-        }
-    }
-});
-</code></pre><h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><p>可以在注入之前,在config中进行配置</p>
-<pre><code>Starter.provider(&quot;myProvider&quot;,function(){
-    var name=&quot;bean&quot;;
-    this.setName = function(n){
-        name = n;
-    }
-    this.$get = function(){
-        return {
-            name:name,
-            height:&quot;175cm&quot;
-        }
-    }
-})
-Starter.config(function(myProviderProvider){
-    myProviderProvider.setName=&quot;dou&quot;
-})
-</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>注入器使用图纸创建两类对象：服务和专用对象。</li>
-<li>总共有5类图纸来定义如何创建对象：Value，Factory，Service，Provicer以及Constant。</li>
-<li>Factory和Service是最常用的图纸。它们之间的唯一区别就是Service图纸在创建自定义对象时更适用，而Factory还可以创建Javascript原始类型以及函数。</li>
-<li>Provider图纸是最核心的图纸类型，而其它所有图纸都只是基于它的语法糖。</li>
-<li>Provider也是最复杂的图纸类型，除非你正在构建需要全局配置的可复用代码，否则不要使用它。</li>
-<li>除了控制器，其他所有专用对象都是通过Factory图纸来定义的。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">特性 / 图纸类型</th>
-<th style="text-align:center">Factory</th>
-<th style="text-align:center">Service</th>
-<th style="text-align:center">Value</th>
-<th style="text-align:center">Constant</th>
-<th style="text-align:left">Provider</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">可以有依赖</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">是</td>
-</tr>
-<tr>
-<td style="text-align:center">使用依赖注入友好</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">否</td>
-</tr>
-<tr>
-<td style="text-align:center">对象在配置阶段可访问</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">是</td>
-</tr>
-<tr>
-<td style="text-align:center">可以创建函数/原始类型</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">是</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>angularJS</category>
-      </categories>
-      <tags>
-        <tag>angularJS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>reset参考</title>
-    <url>/2017/11/23/css/reset%E5%8F%82%E8%80%83/</url>
-    <content><![CDATA[<pre><code>@charset &quot;UTF-8&quot;;
-/*css reset 将元素的margin、padding设为0，使用的时候再重定义*/
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,    
-form,fieldset,input,textarea,p,blockquote,th,td,i {
-    padding: 0;
-    margin: 0;
-}    
-
-*{
-    box-sizing: border-box;
-    -moz-box-sizing:border-box; /* Firefox */
-    -webkit-box-sizing:border-box; /* Safari */ 
-}
-
-table {border-collapse: collapse;border-spacing: 0;}    
-address,caption,cite,code,dfn,em,strong,th,var,i {font-weight: normal;font-style: normal;}    
-ol,ul {list-style: none;}    
-h1,h2,h3,h4,h5,h6,b {font-weight: normal;}    
-h1 {font-size:20px; }
-h2 {font-size:16px; }
-h3 {font-size:14px; }
-a{text-decoration: none;color: #333;}
-abbr,acronym {border: 0;}
-/*定义字体和默认的字体大小*/
-body {color:#000; background:#f5f5f5; font-family: &quot;Microsoft YaHei&quot;, Verdana, Arial, sans-serif,&quot;宋体&quot;; font-size: 14px;line-height: 1.42857143;}
-/* 定义图片边框，当图片作为链接内容被填充时，会有默认边框出现，重定义掉 */
-img {border:none;max-width: 100%}
-/* 标签属性，textarea,input 强制输入时内容超出时换行 */
-textarea, input {word-wrap:break-word; word-break:break-all; padding:0px;font-family: &quot;Microsoft YaHei&quot;, Verdana, Arial, sans-serif,&quot;宋体&quot;;}
-/*浮动*/
-.lt{
-    float: left;
-}
-.rt{
-    float: right;
-}
-/* 清除浮动 */
-.clearfix{*zoom: 1;}.clearfix:before,.clearfix:after{display:table;line-height:0;content:&quot;&quot;;}.clearfix:after{clear: both;}
-/*页面主题颜色,一键定义网站的主题风格*/
-.my-color{color: #f37122;}
-.my-bgColor{background-color: #fc6e48;}
-联系邮箱2013499216@qq.com
-Bean Bean
-站点总访客数：280  站点总访问量：710
-
- 博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议
-
-Bean © 2015 - 2018  Power by Hexo Theme indigo
-</code></pre>]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>reset</tag>
       </tags>
   </entry>
   <entry>
@@ -523,334 +516,62 @@ border-radius: 50%/100% 100% 0 0;"></div>
       </tags>
   </entry>
   <entry>
-    <title>实现一个3d正方体</title>
-    <url>/2017/07/06/css/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA3d%E6%AD%A3%E6%96%B9%E4%BD%93/</url>
-    <content><![CDATA[<p>在绘制一个 3d正方体之前，先了解几个css3的新属性</p>
-<h3 id="1-backface-visibility"><a href="#1-backface-visibility" class="headerlink" title="1.backface-visibility"></a>1.backface-visibility</h3><blockquote>
-<p>backface-visibility 属性指定当元素背面朝向观察者时是否可见。元素的背面总是透明的，当其朝向观察者时，显示正面的镜像。</p>
-</blockquote>
-<blockquote>
-<p>在某些情况下，我们不希望元素内容在背面可见，比如实现翻牌效果。</p>
-</blockquote>
-<blockquote>
-<p>因为2D变换无透视效果，故该属性对2D变换无效。</p>
-</blockquote>
-<h3 id="2-perspective"><a href="#2-perspective" class="headerlink" title="2.perspective"></a>2.perspective</h3><blockquote>
-<p>perspective 属性指定了观察者与z=0平面的距离，使具有三维位置变换的元素产生透视效果。z&gt;0的三维元素比正常大，而z&lt;0时则比正常小，大小程度由该属性的值决定。</p>
-</blockquote>
-<blockquote>
-<p>三维元素在观察者后面的部分不会绘制出来，即z轴坐标值大于perspective属性值的部分。</p>
-</blockquote>
-<blockquote>
-<p>默认情况下，消失点位于元素的中心，但是可以通过设置perspective-origin属性来改变其位置。</p>
-</blockquote>
-<h3 id="3-perspective-origin"><a href="#3-perspective-origin" class="headerlink" title="3.perspective-origin"></a>3.perspective-origin</h3><blockquote>
-<p>perspective-origin 属性指定了观察者的位置，在属性perspective中被用作消失点。</p>
-</blockquote>
-<h4 id="x-position"><a href="#x-position" class="headerlink" title="x-position"></a>x-position</h4><p>指定消失点的横坐标，其值有以下形式：</p>
-<ul>
-<li><percentage> 百分比，相对于元素宽度，可为负值。</percentage></li>
-<li><length> 长度值，可为负值。</length></li>
-<li>left，关键字，0值的简记。</li>
-<li>center，关键字，50%的简记。</li>
-<li><p>right，关键字，100%的简记。</p>
-<h4 id="y-position"><a href="#y-position" class="headerlink" title="y-position"></a>y-position</h4><p>指定消失点的纵坐标，其值有以下形式：</p>
-</li>
-<li><p><percentage> 百分比，相对于元素的高度，可为负值。</percentage></p>
-</li>
-<li><length> 长度值，可为负值。</length></li>
-<li>top，关键字，0值得简记。</li>
-<li>center，关键字，50%的简记。</li>
-<li>bottom，关键字，100%的简记。</li>
-</ul>
-<h3 id="4-transform-origin"><a href="#4-transform-origin" class="headerlink" title="4.transform-origin"></a>4.transform-origin</h3><blockquote>
-<p>转换起点是应用转换的点。例如，rotate()函数的转换原点是旋转中心。（这个属性的应用原理是先用这个属性的负值转换该元素，进行变形，然后再用这个属性的值把元素转换回去）</p>
-</blockquote>
-<h3 id="5-transform-style"><a href="#5-transform-style" class="headerlink" title="5.transform-style"></a>5.transform-style</h3><blockquote>
-<p>transform-style属性确定元素的子元素是否位于3D空间中，还是在该元素所在的平面内被扁平化。</p>
-</blockquote>
-<blockquote>
-<p>如果被扁平化，则子元素不会独立的存在于三维空间。</p>
-</blockquote>
-<blockquote>
-<p>因为该属性不会被（自动）继承，所以必须为元素所有非叶子后代节点设置该属性。</p>
-</blockquote>
-<h4 id="preserve-3d"><a href="#preserve-3d" class="headerlink" title="preserve-3d"></a>preserve-3d</h4><p>指定子元素定位在三维空间内。</p>
-<h4 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h4><p>指定子元素位于此元素所在平面内。</p>
-]]></content>
+    <title>reset参考</title>
+    <url>/2017/11/23/css/reset%E5%8F%82%E8%80%83/</url>
+    <content><![CDATA[<pre><code>@charset &quot;UTF-8&quot;;
+/*css reset 将元素的margin、padding设为0，使用的时候再重定义*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,    
+form,fieldset,input,textarea,p,blockquote,th,td,i {
+    padding: 0;
+    margin: 0;
+}    
+
+*{
+    box-sizing: border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */ 
+}
+
+table {border-collapse: collapse;border-spacing: 0;}    
+address,caption,cite,code,dfn,em,strong,th,var,i {font-weight: normal;font-style: normal;}    
+ol,ul {list-style: none;}    
+h1,h2,h3,h4,h5,h6,b {font-weight: normal;}    
+h1 {font-size:20px; }
+h2 {font-size:16px; }
+h3 {font-size:14px; }
+a{text-decoration: none;color: #333;}
+abbr,acronym {border: 0;}
+/*定义字体和默认的字体大小*/
+body {color:#000; background:#f5f5f5; font-family: &quot;Microsoft YaHei&quot;, Verdana, Arial, sans-serif,&quot;宋体&quot;; font-size: 14px;line-height: 1.42857143;}
+/* 定义图片边框，当图片作为链接内容被填充时，会有默认边框出现，重定义掉 */
+img {border:none;max-width: 100%}
+/* 标签属性，textarea,input 强制输入时内容超出时换行 */
+textarea, input {word-wrap:break-word; word-break:break-all; padding:0px;font-family: &quot;Microsoft YaHei&quot;, Verdana, Arial, sans-serif,&quot;宋体&quot;;}
+/*浮动*/
+.lt{
+    float: left;
+}
+.rt{
+    float: right;
+}
+/* 清除浮动 */
+.clearfix{*zoom: 1;}.clearfix:before,.clearfix:after{display:table;line-height:0;content:&quot;&quot;;}.clearfix:after{clear: both;}
+/*页面主题颜色,一键定义网站的主题风格*/
+.my-color{color: #f37122;}
+.my-bgColor{background-color: #fc6e48;}
+联系邮箱2013499216@qq.com
+Bean Bean
+站点总访客数：280  站点总访问量：710
+
+ 博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议
+
+Bean © 2015 - 2018  Power by Hexo Theme indigo
+</code></pre>]]></content>
       <categories>
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS多种边框的实现方式</title>
-    <url>/2017/11/18/css/CSS%E5%A4%9A%E7%A7%8D%E8%BE%B9%E6%A1%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="普通的边框"><a href="#普通的边框" class="headerlink" title="普通的边框"></a>普通的边框</h3><p>普通边框一般用border或者outline属性来实现，这没有什么好说的，要注意的<br>就只有outline是不占元素空间的</p>
-<h3 id="半透明边框"><a href="#半透明边框" class="headerlink" title="半透明边框"></a>半透明边框</h3><p>背景色默认的剪裁区域是border-box,要定义透明边框，不仅要设置边框透明属性，还要改变背景的剪裁范围</p>
-<pre><code>background: blue;
-border:10px solid rgba(0,0,0,.3);
-background-clip: padding-box;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder1.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="多重边框"><a href="#多重边框" class="headerlink" title="多重边框"></a>多重边框</h3><pre><code>box-shadow: 0 0 0 10px red,0 0 0 20px yellow,0 0 0 30px blue;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder4.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="图片边框"><a href="#图片边框" class="headerlink" title="图片边框"></a>图片边框</h3><pre><code>border: 40px solid transparent;
-background: linear-gradient(white,white),url(2.jpg);
-background-size: cover;
-background-clip: padding-box,border-box;
-background-origin: border-box;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder3.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h3 id="边框内圆角"><a href="#边框内圆角" class="headerlink" title="边框内圆角"></a>边框内圆角</h3><pre><code>border-radius: 10px;
-outline: 10px solid red;
-box-shadow: 0 0 0 10px red;
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/cssborder5.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么要用void 0 代替undefined？</title>
-    <url>/2018/07/04/js/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8void%200%20%E4%BB%A3%E6%9B%BFundefined%EF%BC%9F/</url>
-    <content><![CDATA[<p>这几天在框架源码的时候，偶然看到把变量声明为为<code>void 0</code>这种写法，前辈的代码果然是高深莫测，为什么要这样子写呢？这成功的激发了本宝宝的好奇心。<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/1.gif" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure><br>翻阅了多篇文章之后，总算明白了<code>void 0</code>使用来代替undefined，那么为什么直接用undefined不行，非得找个替代品？这个可以追溯到long long ago！</p>
-<h3 id="为什么不直接使用undefined呢"><a href="#为什么不直接使用undefined呢" class="headerlink" title="为什么不直接使用undefined呢"></a>为什么不直接使用undefined呢</h3><p>原来，<code>undefined</code>并不是保留字，他只是一个全局属性，在低版本的IE中可以被重写</p>
-<pre><code>var undefined = 8;
-alert(undefined);
-// undefined -- IE 10
-// 10 -- IE 8
-</code></pre><p>在es5之前在window对象下的<code>undefined</code>都可以被重写，es5之后虽然规定了全局变量的undefined为只读，但是在局部依然可以被改变</p>
-<pre><code>function a(){
-var undefined = 10;
-alert(undefined);//10            
-}
-a();
-</code></pre><h3 id="为什么用void-0来代替undefined呢"><a href="#为什么用void-0来代替undefined呢" class="headerlink" title="为什么用void 0来代替undefined呢"></a>为什么用void 0来代替undefined呢</h3><p>void操作符可以执行一个表达式，并会在在任何情况下总是返<code>undefined</code>，也就是说可以用来完美的替代undefined属性</p>
-<p>为什么是void 0 而不是void 1呢？其实这两者并没有什么区别，还有就是使用void 0 还可以减少3个字节。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以防止<code>undefined</code>被重写，并可以节约3个字节。老司机们真的666啊！<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/2.gif" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ECMAScript对象类型</title>
-    <url>/2017/11/23/js/ECMAScript%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>在 ECMAScript 中，所有对象并非同等创建的。一般来说，可以创建并使用的对象有三种：本地对象、内置对象和宿主对象。</p>
-<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><p>独立于宿主环境的所有对象，默认已经实例化了，ECMA-262 只定义了两个内置对象，即 Global 和 Math （它们也是本地对象，根据定义，每个内置对象都是本地对象）</p>
-<h3 id="1-常用global对象方法"><a href="#1-常用global对象方法" class="headerlink" title="1.常用global对象方法"></a>1.常用global对象方法</h3><ul>
-<li>escape() 对字符串进行编码。</li>
-<li>unescape() 对由 escape() 编码的字符串进行解码。</li>
-<li>decodeURI() 解码某个编码的 URI。</li>
-<li>decodeURIComponent() 解码一个编码的 URI 组件。</li>
-<li>encodeURI() 把字符串编码为 URI。</li>
-<li>encodeURIComponent() 把字符串编码为 URI 组件。</li>
-</ul>
-<p><em>注：URI是资源标识符，url是资源定位符，encodeURIComponent会编码保留符</em></p>
-<ul>
-<li>isNaN() 检查某个值是否是数字。</li>
-<li>Number() 把对象的值转换为数字。</li>
-<li>parseFloat() 解析一个字符串并返回一个浮点数。</li>
-<li>parseInt() 解析一个字符串并返回一个整数。</li>
-<li>String() 把对象的值转换为字符串。<h3 id="2-常用Math对象方法"><a href="#2-常用Math对象方法" class="headerlink" title="2.常用Math对象方法"></a>2.常用Math对象方法</h3></li>
-<li>ceil(x) 对数进行上舍入。</li>
-<li>abs(x) 返回数的绝对值。</li>
-<li>floor(x) 对数进行下舍入。</li>
-<li>max(x,y) 返回 x 和 y 中的最高值。</li>
-<li>min(x,y) 返回 x 和 y 中的最低值。</li>
-<li>pow(x,y) 返回 x 的 y 次幂。</li>
-<li>random() 返回 0 ~ 1 之间的随机数。</li>
-<li>round(x) 把数四舍五入为最接近的整数。<h2 id="宿主对象"><a href="#宿主对象" class="headerlink" title="宿主对象"></a>宿主对象</h2>所有BOM,DOM对象</li>
-</ul>
-<h2 id="本地对象"><a href="#本地对象" class="headerlink" title="本地对象"></a>本地对象</h2><ul>
-<li>Object</li>
-<li>Function</li>
-<li>Array</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Number</li>
-<li>Date</li>
-<li>RegExp</li>
-<li>Error</li>
-<li>EvalError</li>
-<li>RangeError</li>
-<li>ReferenceError</li>
-<li>SyntaxError</li>
-<li>TypeError</li>
-<li>URIError<br>ECMA-262本地对象有15种，常用的8种</li>
-</ul>
-<h3 id="1-常用Object方法"><a href="#1-常用Object方法" class="headerlink" title="1.常用Object方法"></a>1.常用Object方法</h3><ul>
-<li>constructor 构造函数，指向对象本身</li>
-<li>Prototype 原型</li>
-<li>hasOwnProperty(property) 判断对象是否有某个特定的属性</li>
-<li>IsPrototypeOf(object) 判断该对象是否为另一个对象的原型<h3 id="2-function"><a href="#2-function" class="headerlink" title="2. function"></a>2. function</h3></li>
-<li>length 函数期望的参数个数</li>
-<li>arguments 参数集合<h3 id="3-常用array方法"><a href="#3-常用array方法" class="headerlink" title="3.常用array方法"></a>3.常用array方法</h3></li>
-<li>length 设置或返回数组中元素的数目。</li>
-<li>prototype 使您有能力向对象添加属性和方法。</li>
-<li>concat() 连接两个或更多的数组，并返回结果。</li>
-<li>join() 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。</li>
-<li>push() 向数组的末尾添加一个或更多元素，并返回新的长度。</li>
-<li>unshift() 向数组的开头添加一个或更多元素，并返回新的长度。</li>
-<li>reverse() 颠倒数组中元素的顺序。</li>
-<li>sort() 对数组的元素进行排序</li>
-<li>splice() 删除元素，并向数组添加新元素。<h3 id="4-Boolean"><a href="#4-Boolean" class="headerlink" title="4.Boolean"></a>4.Boolean</h3></li>
-<li>Boolean() 把它的参数转换成一个原始的布尔值，并且返回这个值<h3 id="5-Date"><a href="#5-Date" class="headerlink" title="5.Date"></a>5.Date</h3>……………….</li>
-</ul>
-<h3 id="6-Number"><a href="#6-Number" class="headerlink" title="6.Number"></a>6.Number</h3><ul>
-<li>toFixed 把数字转换为字符串，结果的小数点后有指定位数的数字。<h3 id="7-String"><a href="#7-String" class="headerlink" title="7.String"></a>7.String</h3></li>
-<li>charAt(index) 返回在指定位置的字符。</li>
-<li>indexOf() 检索字符串。</li>
-<li>match() 找到一个或多个正则表达式的匹配。</li>
-<li>replace() 替换与正则表达式匹配的子串</li>
-<li>search() 检索与正则表达式相匹配的值</li>
-<li>split() 把字符串分割为字符串数组</li>
-<li>slice() 提取字符串的片断，并在新的字符串中返回被提取的部分。</li>
-<li>substr() 从起始索引号提取字符串中指定数目的字符。<h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2></li>
-<li>i 执行对大小写不敏感的匹配。</li>
-<li>g 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>内置对象</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>var a和var a = void 0?</title>
-    <url>/2018/07/05/js/var%20a%E5%92%8Cvar%20a%20=%20void%200%EF%BC%9F/</url>
-    <content><![CDATA[<p>昨天知道了为什么要用<code>void 0</code> 来替代undefined。</p>
-<blockquote>
-<p>1.防止undefined被重写 2.减少3个字节</p>
-</blockquote>
-<p>但直接声明<code>var a;</code>，那么这个变量就是undefined</p>
-<pre><code>var a;
-console.log(a)；//undefined
-</code></pre><p>那为什么要多此一举多写几个字符呢？</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/d.jpg" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>哒哒哒，哒哒哒，我又开始百度啦！然而这次百度并没有给我什么满意的答案。我又看了下大佬的代码，比如这样</p>
-<pre><code>function (){
-    var a = void 0;
-    a = document.getElementById(&apos;demo&apos;);
-}
-</code></pre><p>就这点内容为什么我不直接这样写呢</p>
-<pre><code>function (){
-    var a = document.getElementById(&apos;demo&apos;);
-}
-</code></pre><p>到这里，我认为在代码还不多的情况下，直接把变量声明在顶部或许更好，那么什么时候用void 0 呢？</p>
-<pre><code>var a = 10;
-...
-var a;
-console.log(a);//10
-</code></pre><p>比如这种时候，我们不确定变量是否在哪里声明过，这个时候就可以声明<code>void 0</code>了，就这样吧，巴拉巴拉</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>大佬！！！<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/images/a.jpg" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>正则表达式</title>
-    <url>/2017/11/23/js/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
-<li>正则表达式，就是一个匹配模式</li>
-<li>正则表达式，本身就是一个字符串（其中有一些特殊字符的语法规则）</li>
-<li>正则的字符串，一定要在函数中使用<h3 id="1-基本格式"><a href="#1-基本格式" class="headerlink" title="1.基本格式"></a>1.基本格式</h3><blockquote>
-<p>定界符号，很多符号都可以，常用/ /</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>原子：最小的一个匹配单位</p>
-</blockquote>
-<blockquote>
-<p>元字符：不能单独使用，修饰原子，用来扩展或者限定原子的功能</p>
-</blockquote>
-<blockquote>
-<p>模式修正符：写在右边</p>
-</blockquote>
-<h3 id="2-正则中的原子"><a href="#2-正则中的原子" class="headerlink" title="2.正则中的原子"></a>2.正则中的原子</h3><h5 id="2-1-打印字符和非打印字符"><a href="#2-1-打印字符和非打印字符" class="headerlink" title="2.1 打印字符和非打印字符"></a>2.1 打印字符和非打印字符</h5><blockquote>
-<p>打印字符指键盘可以打出来的字符，非打印字符指例如回车等打印不出来但是存在的字符</p>
-</blockquote>
-<h5 id="2-2-转义字符"><a href="#2-2-转义字符" class="headerlink" title="2.2 转义字符"></a>2.2 转义字符</h5><ol>
-<li>可以将有意义的字符转为没有意义的字符</li>
-<li>可以将没有意义的字符转为有意义的字符</li>
-<li><p>没有意义的字符，加上转义也没有意义，可转义也可以不转，不影响</p>
-<h5 id="2-3-特殊的原子"><a href="#2-3-特殊的原子" class="headerlink" title="2.3 特殊的原子"></a>2.3 特殊的原子</h5><p>|code|text|<br>|:-:|:-|<br>|\d|任意一个数字|<br>|\D|任意一个非数字|<br>|\w|任意一个字 a-z A-Z 0-9 _|<br>|\W|任意一个非字|<br>|\s|代表空白 空格，回车，tab键|<br>|\S|非空白|<br>|.|点代表所有|</p>
-<h4 id="2-4-自定义原子表"><a href="#2-4-自定义原子表" class="headerlink" title="2.4 自定义原子表"></a>2.4 自定义原子表</h4><p> [13579]<br> [^a-zA-Z] - 表示从哪到哪，^ 除了…..</p>
-<h3 id="3-正则的元字符"><a href="#3-正则的元字符" class="headerlink" title="3.正则的元字符"></a>3.正则的元字符</h3><p>符号|功能<br>:–:|–<br>*|匹配 0 次或者多次<br>+|匹配 1 次或者多次<br>?|匹配 0 次或 1 次<br>|匹配两个或多次分支选择，但优先级是最低的<br>{n}|匹配恰好出现n次<br>{n,}|匹配 n 次以上<br>{n,m}|匹配 n 次到 m 次<br>^ 和 \A|表示必须匹配字符串以什么开始，且必须写在正则表达式最前面<br>$ 和 \Z    |和上面相反</p>
-<h3 id="4-字符串和正则处理函数"><a href="#4-字符串和正则处理函数" class="headerlink" title="4.字符串和正则处理函数"></a>4.字符串和正则处理函数</h3><p>字符串处理的方式：（分割、匹配、查找、替换）</p>
-</li>
-<li><p>字符串处理函数（处理快，但有些功能做不到）</p>
-</li>
-<li>正则函数 （功能强，但是效率低）</li>
-<li>能使用字符串函数处理，就不用正则</li>
-</ol>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>正则</tag>
+        <tag>reset</tag>
       </tags>
   </entry>
   <entry>
@@ -937,78 +658,51 @@ int main(void)
       </tags>
   </entry>
   <entry>
-    <title>函数节流和函数防抖</title>
-    <url>/2017/11/23/js/%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81%E5%92%8C%E5%87%BD%E6%95%B0%E9%98%B2%E6%8A%96/</url>
-    <content><![CDATA[<p>频繁的进行DOM操作者，或进行ajax请求，很可能会导致浏览器崩溃，请求被挂起，为了解决相同函数的频率触发，通常有3种情况，即函数节流，函数防抖和设置标识符</p>
-<h2 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h2><p>函数节流解决代码在不间断的情况下重复执行，思想是在函数被调用是设置一个定时器，当定时器未被触发的时候重复调用函数就清除定时器并重新计时。这样保证代码只有在操作间隔指定时间后才执行</p>
-<pre><code>var timer = null;
-function func(){
-    console.log(1)
-}
-function throttle(func,context){
-    clearTimeout(timer)
-    timer = setTimeout(function(){
-        func.call(context)
-    },500)
-}
-window.onresize = function(){
-    throttle(func,window)
-}
-</code></pre><h2 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h2><p>我们在做搜索框的时候，会有输入联想，需要请求后台数据，如果在oninput时触发，后台会忙不过来，但如果以节流的方式来做，当用户输入过快时，会没有提示，所以隔一段时间一定会执行一次</p>
-<pre><code>function func() {
-    console.log(arguments[0])
-}
-/**
- * 函数防抖
- * @param {Object} func
- * @param {number} dely 延迟
- * @param {Number} maximum  最大多久执行一次
- */
-var begin = 0,
-    timer = null;
+    <title>C语言入门之函数</title>
+    <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><pre><code>类型 函数名(形参表说明) /*函数首部*/ 
+{ 
+说明语句 /*函数体*/ 
+执行语句 
+} 
+</code></pre><ol>
+<li>“类型”是指函数返回值的类型。函数<strong>返回值不能是数组,也不能是函数</strong>,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当<strong>不指明函数类型时,系统默认的是整型</strong>。 </li>
+<li>函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合 C 语言对标识符的规范, 用于标识函数,并用该标识符调用函数。另外函数名本身也有值,它代表了该函数的入口地址,使用指针 调用函数时,将用到此功能。 </li>
+<li>形参又称为“形式参数”。形参表是用逗号分隔的一组变量说明,包括形参的类型和形参的标识 符,其作用是指出每一个形参的类型和形参的名称,当调用函数时,接收来自主调函数的数据,确定各参 数的值。 </li>
+<li>用{ }括起来的部分是函数的主体,称为函数体。函数体是一段程序,确定该函数应完成的规定的 运算,应执行的规定的动作,集中体现了函数的功能。函数内部应有自己的说明语句和执行语句,但<strong>函数内定义的变量不可以与形参同名</strong>。花括号{ }是不可以省略的。</li>
+</ol>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
+<p>判断一个数是否为素数</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+void isPrime(int n);//函数声明 
+int main(){
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+    isPrime(n);
+    return 0;
+} 
 
-function debounce(func, dely, maximum) {
-    return function() {
-        var args = arguments;
-        var context = this;
-        var cur = Date.parse(new Date());
-        clearTimeout(timer);
-        if(cur - begin &gt;= maximum) {
-            func.apply(context, args);
-            console.log(cur - begin);
-            begin = cur;
-        } else {
-            timer = setTimeout(function() {
-                func.apply(context, args);
-            }, dely)
-        }
+void isPrime(int n){
+    int i,flag=1;
+    for (i = 2;i&lt;n;i++)    {
+        if(n%i==0){
+            flag = 0;
+            break;
+        }        
     }
-}
-window.onresize = function() {
-    debounce(func, 500, 1000)(111)
-}
-</code></pre><h2 id="设置标识符"><a href="#设置标识符" class="headerlink" title="设置标识符"></a>设置标识符</h2><p>在做上拉加载的时候，滚动到底部会执行加载请求，只有请求成功了，才会执行下一次上拉，为避免重复请求，可以用设置标识符的方式</p>
-<pre><code>var flag = true;
-function get(){
-    flag = false;
-    console.log(arguments[0])
-    setTimeout(function(){
-        flag = true;
-    },1000)
-}
-function onScroll(){
-    if(!flag)return;
-    get.apply(window,arguments)
-}
-window.onscroll = function(){
-    onScroll(111)
+    if(flag){
+        printf(&quot;prime&quot;);
+    }else{
+        printf(&quot;not prime&quot;);
+    }
 }
 </code></pre>]]></content>
       <categories>
-        <category>javascript</category>
+        <category>C语言入门</category>
       </categories>
       <tags>
-        <tag>节流</tag>
+        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -1118,44 +812,131 @@ a=30;//重新赋值为30
       </tags>
   </entry>
   <entry>
-    <title>C语言入门之函数</title>
-    <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h2><pre><code>类型 函数名(形参表说明) /*函数首部*/ 
-{ 
-说明语句 /*函数体*/ 
-执行语句 
-} 
-</code></pre><ol>
-<li>“类型”是指函数返回值的类型。函数<strong>返回值不能是数组,也不能是函数</strong>,除此之外任何合法的数据类型都可以是函数的类型,如:int,long,float,char 等。函数类型可以省略,当<strong>不指明函数类型时,系统默认的是整型</strong>。 </li>
-<li>函数名是用户自定义的标识符,在 C 语言函数定义中不可省略,须符合 C 语言对标识符的规范, 用于标识函数,并用该标识符调用函数。另外函数名本身也有值,它代表了该函数的入口地址,使用指针 调用函数时,将用到此功能。 </li>
-<li>形参又称为“形式参数”。形参表是用逗号分隔的一组变量说明,包括形参的类型和形参的标识 符,其作用是指出每一个形参的类型和形参的名称,当调用函数时,接收来自主调函数的数据,确定各参 数的值。 </li>
-<li>用{ }括起来的部分是函数的主体,称为函数体。函数体是一段程序,确定该函数应完成的规定的 运算,应执行的规定的动作,集中体现了函数的功能。函数内部应有自己的说明语句和执行语句,但<strong>函数内定义的变量不可以与形参同名</strong>。花括号{ }是不可以省略的。</li>
-</ol>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
-<p>判断一个数是否为素数</p>
+    <title>实现一个3d正方体</title>
+    <url>/2017/07/06/css/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA3d%E6%AD%A3%E6%96%B9%E4%BD%93/</url>
+    <content><![CDATA[<p>在绘制一个 3d正方体之前，先了解几个css3的新属性</p>
+<h3 id="1-backface-visibility"><a href="#1-backface-visibility" class="headerlink" title="1.backface-visibility"></a>1.backface-visibility</h3><blockquote>
+<p>backface-visibility 属性指定当元素背面朝向观察者时是否可见。元素的背面总是透明的，当其朝向观察者时，显示正面的镜像。</p>
 </blockquote>
-<pre><code>#include &lt;stdio.h&gt;
-void isPrime(int n);//函数声明 
-int main(){
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    isPrime(n);
-    return 0;
-} 
+<blockquote>
+<p>在某些情况下，我们不希望元素内容在背面可见，比如实现翻牌效果。</p>
+</blockquote>
+<blockquote>
+<p>因为2D变换无透视效果，故该属性对2D变换无效。</p>
+</blockquote>
+<h3 id="2-perspective"><a href="#2-perspective" class="headerlink" title="2.perspective"></a>2.perspective</h3><blockquote>
+<p>perspective 属性指定了观察者与z=0平面的距离，使具有三维位置变换的元素产生透视效果。z&gt;0的三维元素比正常大，而z&lt;0时则比正常小，大小程度由该属性的值决定。</p>
+</blockquote>
+<blockquote>
+<p>三维元素在观察者后面的部分不会绘制出来，即z轴坐标值大于perspective属性值的部分。</p>
+</blockquote>
+<blockquote>
+<p>默认情况下，消失点位于元素的中心，但是可以通过设置perspective-origin属性来改变其位置。</p>
+</blockquote>
+<h3 id="3-perspective-origin"><a href="#3-perspective-origin" class="headerlink" title="3.perspective-origin"></a>3.perspective-origin</h3><blockquote>
+<p>perspective-origin 属性指定了观察者的位置，在属性perspective中被用作消失点。</p>
+</blockquote>
+<h4 id="x-position"><a href="#x-position" class="headerlink" title="x-position"></a>x-position</h4><p>指定消失点的横坐标，其值有以下形式：</p>
+<ul>
+<li><percentage> 百分比，相对于元素宽度，可为负值。</percentage></li>
+<li><length> 长度值，可为负值。</length></li>
+<li>left，关键字，0值的简记。</li>
+<li>center，关键字，50%的简记。</li>
+<li><p>right，关键字，100%的简记。</p>
+<h4 id="y-position"><a href="#y-position" class="headerlink" title="y-position"></a>y-position</h4><p>指定消失点的纵坐标，其值有以下形式：</p>
+</li>
+<li><p><percentage> 百分比，相对于元素的高度，可为负值。</percentage></p>
+</li>
+<li><length> 长度值，可为负值。</length></li>
+<li>top，关键字，0值得简记。</li>
+<li>center，关键字，50%的简记。</li>
+<li>bottom，关键字，100%的简记。</li>
+</ul>
+<h3 id="4-transform-origin"><a href="#4-transform-origin" class="headerlink" title="4.transform-origin"></a>4.transform-origin</h3><blockquote>
+<p>转换起点是应用转换的点。例如，rotate()函数的转换原点是旋转中心。（这个属性的应用原理是先用这个属性的负值转换该元素，进行变形，然后再用这个属性的值把元素转换回去）</p>
+</blockquote>
+<h3 id="5-transform-style"><a href="#5-transform-style" class="headerlink" title="5.transform-style"></a>5.transform-style</h3><blockquote>
+<p>transform-style属性确定元素的子元素是否位于3D空间中，还是在该元素所在的平面内被扁平化。</p>
+</blockquote>
+<blockquote>
+<p>如果被扁平化，则子元素不会独立的存在于三维空间。</p>
+</blockquote>
+<blockquote>
+<p>因为该属性不会被（自动）继承，所以必须为元素所有非叶子后代节点设置该属性。</p>
+</blockquote>
+<h4 id="preserve-3d"><a href="#preserve-3d" class="headerlink" title="preserve-3d"></a>preserve-3d</h4><p>指定子元素定位在三维空间内。</p>
+<h4 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h4><p>指定子元素位于此元素所在平面内。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C语言入门之指针</title>
+    <url>/2018/12/28/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：<strong>地址就是可以唯一标识某一点的一个编号</strong>，即一个数字！</p>
+<p>内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的<strong>十六进制</strong>数来表示，比如0x12ff7c这样。在我们的C程序中，每一个定义的变量，在内存中都占有一个内存单元，比如int类型占四个字节，char类型占一个字节等等，每个字节都在0~4,294,967,295之间都有一个对应的编号，C语言允许在程序中使用变量的地址，并可以通过地址运算符”&amp;”得到变量的地址。</p>
+<h2 id="指针的定义"><a href="#指针的定义" class="headerlink" title="指针的定义"></a>指针的定义</h2><blockquote>
+<p>对指针变量定义的一般形式为:<br>类型说明符 <em>变量名;<br>其中,这里的 </em> 与前面的类型说明符共同说明这是一个指针变量,类型说明符表示该指针变量所指向的变量为何种数据类型,变量名即为定义的指针变量名。除此之外，C还<strong>提供*运算符获取地址上对应的值</strong>。 </p>
+</blockquote>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+        int num=2014;
+        int *p=&amp;num;
+        printf(&quot;num Address = 0x%x,num=%d\n&quot;,&amp;num,num);
+        printf(&quot;p = 0x%x,*p=%d\n&quot;,p,*p);
+        printf(&quot;%d\n&quot;,*&amp;num);
+        return 0;
 
-void isPrime(int n){
-    int i,flag=1;
-    for (i = 2;i&lt;n;i++)    {
-        if(n%i==0){
-            flag = 0;
-            break;
-        }        
-    }
-    if(flag){
-        printf(&quot;prime&quot;);
-    }else{
-        printf(&quot;not prime&quot;);
-    }
+        //num Address = 0x62fe44,num=2014
+        //p = 0x62fe44,*p=2014
+        //2014
+}
+</code></pre><h2 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h2><p>指向数组元素的指针变量的定义与一般的指针变量相同</p>
+<pre><code>int a[10]; /*定义 a 为包含 10 个整型数据的数组*/
+int *p; /*定义 p 为指向整型变量的指针*/
+p=&amp;a[0]; /*把 a[0]元素的地址赋给指针变量 p*/
+
+p=a; /*等价于 p=&amp;a[0]; */
+int *p=a; /*等价于 int *p=&amp;a[0]; */
+</code></pre><p>对于指向首地址的指针 p,p+i(或a+i)就是数组元素 a[i]的地址,<em>(p+i)( 或</em>(a+i) )就是 a[i]的值。 </p>
+<p>如果指针变量 p 已指向数组中的某一个元素,则 p+1 指向同一数组中的下一个元素。 </p>
+<p>引入指针变量后,就可以用以下两种方法来访问数组元素: </p>
+<ul>
+<li>(1)下标法,即用 a[i]形式访问数组元素,在前面介绍数组时都是采用这种方法。 </li>
+<li><p>(2)指针法,即采用<em>(a+i)或</em>(p+i)形式,用间接访问的方法来访问数组元素,其中 a 是数组名,p 是 指向数组的指针变量,其初值 p=a。    </p>
+<p>  #include&lt;stdio.h&gt;<br>  int main()<br>  {</p>
+<pre><code>int i;
+int a[10]={1,2,3,4,5,6,7,8,9,0};
+int *p=a;
+for(i=0;i&lt;10;i++)
+{
+        printf(&quot;P Value:%d   a Value :%d\n&quot;,*(p++),*(a+i));
+}
+printf(&quot;\n&quot;);
+return 0;
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p><strong>注：</strong>指针可以通过++或–并修改自身值的方式移动，然而数组名本身值不可以被更改。    </p>
+<h2 id="指针与字符串"><a href="#指针与字符串" class="headerlink" title="指针与字符串"></a>指针与字符串</h2><p>字符指针也可以指向一个字符串,可以用字符串常量对字符 指针进行初始化</p>
+<pre><code>char *str = &quot;www.dotcpp.com&quot; ;
+</code></pre><p>这是对字符指针进行初始化。此时,字符指针指向一个字符串常量的首地址。<br>还可以用字符数组来存放字符串,例如:     </p>
+<pre><code>char string[ ] = &quot;Welcome to dotcpp.com&quot;;
+</code></pre><blockquote>
+<p>在这个语句中,string 是数组名,代表字符数组的首地址。因此可以通过数组名 string 来访问字符串。<br>字符串指针和字符串数组两种方式都可以访问字符串,但它们有着本质的区别:字符指针 <strong>str 是个变量,可以改变 str 使它指向不同的字符串, 但不能改变 str 所指向的字符串常量的值</strong>。 而<strong>string 是一个数组,可以改变数组中保存的内容</strong>。应注意字符串指针和字符串数组的区别。    </p>
+</blockquote>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+        char *str = &quot;www.dotcpp.com&quot;;
+        char string[]=&quot;Welcome to dotcpp.com&quot;;
+        str[0]=&apos;C&apos;; //试图修改str指向的常量区的字符串内容
+        return 0;
 }
 </code></pre>]]></content>
       <categories>
@@ -1284,78 +1065,6 @@ a[2][0] a[2][1] a[2][2] a[2][3]
       </tags>
   </entry>
   <entry>
-    <title>C语言入门之指针</title>
-    <url>/2018/12/28/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><p>何谓地址？在内存(注意，我们这里提到的内存并不是人们常说的计算机的物理内存，而是虚拟的逻辑内存空间)当中，简单点说：<strong>地址就是可以唯一标识某一点的一个编号</strong>，即一个数字！</p>
-<p>内存像尺子一样线性排布，只不过这个范围略大，在我们最广泛使用的32位操作系统下，是从0~4,294,967,295之间，而地址就是这之中的的一个编号而已，习惯上，在计算机里地址我们常常用其对应的<strong>十六进制</strong>数来表示，比如0x12ff7c这样。在我们的C程序中，每一个定义的变量，在内存中都占有一个内存单元，比如int类型占四个字节，char类型占一个字节等等，每个字节都在0~4,294,967,295之间都有一个对应的编号，C语言允许在程序中使用变量的地址，并可以通过地址运算符”&amp;”得到变量的地址。</p>
-<h2 id="指针的定义"><a href="#指针的定义" class="headerlink" title="指针的定义"></a>指针的定义</h2><blockquote>
-<p>对指针变量定义的一般形式为:<br>类型说明符 <em>变量名;<br>其中,这里的 </em> 与前面的类型说明符共同说明这是一个指针变量,类型说明符表示该指针变量所指向的变量为何种数据类型,变量名即为定义的指针变量名。除此之外，C还<strong>提供*运算符获取地址上对应的值</strong>。 </p>
-</blockquote>
-<pre><code>#include&lt;stdio.h&gt;
-int main()
-{
-        int num=2014;
-        int *p=&amp;num;
-        printf(&quot;num Address = 0x%x,num=%d\n&quot;,&amp;num,num);
-        printf(&quot;p = 0x%x,*p=%d\n&quot;,p,*p);
-        printf(&quot;%d\n&quot;,*&amp;num);
-        return 0;
-
-        //num Address = 0x62fe44,num=2014
-        //p = 0x62fe44,*p=2014
-        //2014
-}
-</code></pre><h2 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h2><p>指向数组元素的指针变量的定义与一般的指针变量相同</p>
-<pre><code>int a[10]; /*定义 a 为包含 10 个整型数据的数组*/
-int *p; /*定义 p 为指向整型变量的指针*/
-p=&amp;a[0]; /*把 a[0]元素的地址赋给指针变量 p*/
-
-p=a; /*等价于 p=&amp;a[0]; */
-int *p=a; /*等价于 int *p=&amp;a[0]; */
-</code></pre><p>对于指向首地址的指针 p,p+i(或a+i)就是数组元素 a[i]的地址,<em>(p+i)( 或</em>(a+i) )就是 a[i]的值。 </p>
-<p>如果指针变量 p 已指向数组中的某一个元素,则 p+1 指向同一数组中的下一个元素。 </p>
-<p>引入指针变量后,就可以用以下两种方法来访问数组元素: </p>
-<ul>
-<li>(1)下标法,即用 a[i]形式访问数组元素,在前面介绍数组时都是采用这种方法。 </li>
-<li><p>(2)指针法,即采用<em>(a+i)或</em>(p+i)形式,用间接访问的方法来访问数组元素,其中 a 是数组名,p 是 指向数组的指针变量,其初值 p=a。    </p>
-<p>  #include&lt;stdio.h&gt;<br>  int main()<br>  {</p>
-<pre><code>int i;
-int a[10]={1,2,3,4,5,6,7,8,9,0};
-int *p=a;
-for(i=0;i&lt;10;i++)
-{
-        printf(&quot;P Value:%d   a Value :%d\n&quot;,*(p++),*(a+i));
-}
-printf(&quot;\n&quot;);
-return 0;
-</code></pre><p>  }</p>
-</li>
-</ul>
-<p><strong>注：</strong>指针可以通过++或–并修改自身值的方式移动，然而数组名本身值不可以被更改。    </p>
-<h2 id="指针与字符串"><a href="#指针与字符串" class="headerlink" title="指针与字符串"></a>指针与字符串</h2><p>字符指针也可以指向一个字符串,可以用字符串常量对字符 指针进行初始化</p>
-<pre><code>char *str = &quot;www.dotcpp.com&quot; ;
-</code></pre><p>这是对字符指针进行初始化。此时,字符指针指向一个字符串常量的首地址。<br>还可以用字符数组来存放字符串,例如:     </p>
-<pre><code>char string[ ] = &quot;Welcome to dotcpp.com&quot;;
-</code></pre><blockquote>
-<p>在这个语句中,string 是数组名,代表字符数组的首地址。因此可以通过数组名 string 来访问字符串。<br>字符串指针和字符串数组两种方式都可以访问字符串,但它们有着本质的区别:字符指针 <strong>str 是个变量,可以改变 str 使它指向不同的字符串, 但不能改变 str 所指向的字符串常量的值</strong>。 而<strong>string 是一个数组,可以改变数组中保存的内容</strong>。应注意字符串指针和字符串数组的区别。    </p>
-</blockquote>
-<pre><code>#include&lt;stdio.h&gt;
-int main()
-{
-        char *str = &quot;www.dotcpp.com&quot;;
-        char string[]=&quot;Welcome to dotcpp.com&quot;;
-        str[0]=&apos;C&apos;; //试图修改str指向的常量区的字符串内容
-        return 0;
-}
-</code></pre>]]></content>
-      <categories>
-        <category>C语言入门</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C语言入门之运算符和表达式</title>
     <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E4%B9%8B%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="基本运算符"><a href="#基本运算符" class="headerlink" title="基本运算符"></a>基本运算符</h2><h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><p>在C里面，符号 = 不表示“相等”，而是表示赋值，例如<code>num=2019</code>，不应该读成“num等于2019”，而应该读为<strong>把值2019赋给变量num</strong>，赋值运算符的动作是从右到左。</p>
@@ -1414,6 +1123,19 @@ int main()
       </tags>
   </entry>
   <entry>
+    <title>C语言番外之内存</title>
+    <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E7%95%AA%E5%A4%96%E4%B9%8B%E5%86%85%E5%AD%98/</url>
+    <content><![CDATA[<h2 id="数据在内存中的储存"><a href="#数据在内存中的储存" class="headerlink" title="数据在内存中的储存"></a>数据在内存中的储存</h2><p><a href="http://c.biancheng.net/view/1726.html" target="_blank" rel="noopener">数据在内存中的存储</a></p>
+<h2 id="载入内存"><a href="#载入内存" class="headerlink" title="载入内存"></a>载入内存</h2><p><a href="http://c.biancheng.net/view/1727.html" target="_blank" rel="noopener">载入内存，让程序运行起来</a></p>
+]]></content>
+      <categories>
+        <category>编程基础</category>
+      </categories>
+      <tags>
+        <tag>编程基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo使用文档</title>
     <url>/2020/11/24/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/hexo%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<blockquote>
@@ -1431,92 +1153,424 @@ int main()
       </tags>
   </entry>
   <entry>
-    <title>node核心模块之http模块</title>
-    <url>/2018/12/25/nodejs/node%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E4%B9%8Bhttp%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[<p>##</p>
+    <title>ECMAScript对象类型</title>
+    <url>/2017/11/23/js/ECMAScript%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>在 ECMAScript 中，所有对象并非同等创建的。一般来说，可以创建并使用的对象有三种：本地对象、内置对象和宿主对象。</p>
+<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><p>独立于宿主环境的所有对象，默认已经实例化了，ECMA-262 只定义了两个内置对象，即 Global 和 Math （它们也是本地对象，根据定义，每个内置对象都是本地对象）</p>
+<h3 id="1-常用global对象方法"><a href="#1-常用global对象方法" class="headerlink" title="1.常用global对象方法"></a>1.常用global对象方法</h3><ul>
+<li>escape() 对字符串进行编码。</li>
+<li>unescape() 对由 escape() 编码的字符串进行解码。</li>
+<li>decodeURI() 解码某个编码的 URI。</li>
+<li>decodeURIComponent() 解码一个编码的 URI 组件。</li>
+<li>encodeURI() 把字符串编码为 URI。</li>
+<li>encodeURIComponent() 把字符串编码为 URI 组件。</li>
+</ul>
+<p><em>注：URI是资源标识符，url是资源定位符，encodeURIComponent会编码保留符</em></p>
+<ul>
+<li>isNaN() 检查某个值是否是数字。</li>
+<li>Number() 把对象的值转换为数字。</li>
+<li>parseFloat() 解析一个字符串并返回一个浮点数。</li>
+<li>parseInt() 解析一个字符串并返回一个整数。</li>
+<li>String() 把对象的值转换为字符串。<h3 id="2-常用Math对象方法"><a href="#2-常用Math对象方法" class="headerlink" title="2.常用Math对象方法"></a>2.常用Math对象方法</h3></li>
+<li>ceil(x) 对数进行上舍入。</li>
+<li>abs(x) 返回数的绝对值。</li>
+<li>floor(x) 对数进行下舍入。</li>
+<li>max(x,y) 返回 x 和 y 中的最高值。</li>
+<li>min(x,y) 返回 x 和 y 中的最低值。</li>
+<li>pow(x,y) 返回 x 的 y 次幂。</li>
+<li>random() 返回 0 ~ 1 之间的随机数。</li>
+<li>round(x) 把数四舍五入为最接近的整数。<h2 id="宿主对象"><a href="#宿主对象" class="headerlink" title="宿主对象"></a>宿主对象</h2>所有BOM,DOM对象</li>
+</ul>
+<h2 id="本地对象"><a href="#本地对象" class="headerlink" title="本地对象"></a>本地对象</h2><ul>
+<li>Object</li>
+<li>Function</li>
+<li>Array</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Number</li>
+<li>Date</li>
+<li>RegExp</li>
+<li>Error</li>
+<li>EvalError</li>
+<li>RangeError</li>
+<li>ReferenceError</li>
+<li>SyntaxError</li>
+<li>TypeError</li>
+<li>URIError<br>ECMA-262本地对象有15种，常用的8种</li>
+</ul>
+<h3 id="1-常用Object方法"><a href="#1-常用Object方法" class="headerlink" title="1.常用Object方法"></a>1.常用Object方法</h3><ul>
+<li>constructor 构造函数，指向对象本身</li>
+<li>Prototype 原型</li>
+<li>hasOwnProperty(property) 判断对象是否有某个特定的属性</li>
+<li>IsPrototypeOf(object) 判断该对象是否为另一个对象的原型<h3 id="2-function"><a href="#2-function" class="headerlink" title="2. function"></a>2. function</h3></li>
+<li>length 函数期望的参数个数</li>
+<li>arguments 参数集合<h3 id="3-常用array方法"><a href="#3-常用array方法" class="headerlink" title="3.常用array方法"></a>3.常用array方法</h3></li>
+<li>length 设置或返回数组中元素的数目。</li>
+<li>prototype 使您有能力向对象添加属性和方法。</li>
+<li>concat() 连接两个或更多的数组，并返回结果。</li>
+<li>join() 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。</li>
+<li>push() 向数组的末尾添加一个或更多元素，并返回新的长度。</li>
+<li>unshift() 向数组的开头添加一个或更多元素，并返回新的长度。</li>
+<li>reverse() 颠倒数组中元素的顺序。</li>
+<li>sort() 对数组的元素进行排序</li>
+<li>splice() 删除元素，并向数组添加新元素。<h3 id="4-Boolean"><a href="#4-Boolean" class="headerlink" title="4.Boolean"></a>4.Boolean</h3></li>
+<li>Boolean() 把它的参数转换成一个原始的布尔值，并且返回这个值<h3 id="5-Date"><a href="#5-Date" class="headerlink" title="5.Date"></a>5.Date</h3>……………….</li>
+</ul>
+<h3 id="6-Number"><a href="#6-Number" class="headerlink" title="6.Number"></a>6.Number</h3><ul>
+<li>toFixed 把数字转换为字符串，结果的小数点后有指定位数的数字。<h3 id="7-String"><a href="#7-String" class="headerlink" title="7.String"></a>7.String</h3></li>
+<li>charAt(index) 返回在指定位置的字符。</li>
+<li>indexOf() 检索字符串。</li>
+<li>match() 找到一个或多个正则表达式的匹配。</li>
+<li>replace() 替换与正则表达式匹配的子串</li>
+<li>search() 检索与正则表达式相匹配的值</li>
+<li>split() 把字符串分割为字符串数组</li>
+<li>slice() 提取字符串的片断，并在新的字符串中返回被提取的部分。</li>
+<li>substr() 从起始索引号提取字符串中指定数目的字符。<h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2></li>
+<li>i 执行对大小写不敏感的匹配。</li>
+<li>g 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。</li>
+</ul>
 ]]></content>
       <categories>
-        <category>nodejs</category>
+        <category>javascript</category>
       </categories>
       <tags>
-        <tag>http</tag>
+        <tag>内置对象</tag>
       </tags>
   </entry>
   <entry>
-    <title>C语言番外之内存</title>
-    <url>/2018/12/25/c%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80%E7%95%AA%E5%A4%96%E4%B9%8B%E5%86%85%E5%AD%98/</url>
-    <content><![CDATA[<h2 id="数据在内存中的储存"><a href="#数据在内存中的储存" class="headerlink" title="数据在内存中的储存"></a>数据在内存中的储存</h2><p><a href="http://c.biancheng.net/view/1726.html" target="_blank" rel="noopener">数据在内存中的存储</a></p>
-<h2 id="载入内存"><a href="#载入内存" class="headerlink" title="载入内存"></a>载入内存</h2><p><a href="http://c.biancheng.net/view/1727.html" target="_blank" rel="noopener">载入内存，让程序运行起来</a></p>
+    <title>为什么要用void 0 代替undefined？</title>
+    <url>/2018/07/04/js/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8void%200%20%E4%BB%A3%E6%9B%BFundefined%EF%BC%9F/</url>
+    <content><![CDATA[<p>这几天在框架源码的时候，偶然看到把变量声明为为<code>void 0</code>这种写法，前辈的代码果然是高深莫测，为什么要这样子写呢？这成功的激发了本宝宝的好奇心。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/1.gif" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>翻阅了多篇文章之后，总算明白了<code>void 0</code>使用来代替undefined，那么为什么直接用undefined不行，非得找个替代品？这个可以追溯到long long ago！</p>
+<h3 id="为什么不直接使用undefined呢"><a href="#为什么不直接使用undefined呢" class="headerlink" title="为什么不直接使用undefined呢"></a>为什么不直接使用undefined呢</h3><p>原来，<code>undefined</code>并不是保留字，他只是一个全局属性，在低版本的IE中可以被重写</p>
+<pre><code>var undefined = 8;
+alert(undefined);
+// undefined -- IE 10
+// 10 -- IE 8
+</code></pre><p>在es5之前在window对象下的<code>undefined</code>都可以被重写，es5之后虽然规定了全局变量的undefined为只读，但是在局部依然可以被改变</p>
+<pre><code>function a(){
+var undefined = 10;
+alert(undefined);//10            
+}
+a();
+</code></pre><h3 id="为什么用void-0来代替undefined呢"><a href="#为什么用void-0来代替undefined呢" class="headerlink" title="为什么用void 0来代替undefined呢"></a>为什么用void 0来代替undefined呢</h3><p>void操作符可以执行一个表达式，并会在在任何情况下总是返<code>undefined</code>，也就是说可以用来完美的替代undefined属性</p>
+<p>为什么是void 0 而不是void 1呢？其实这两者并没有什么区别，还有就是使用void 0 还可以减少3个字节。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以防止<code>undefined</code>被重写，并可以节约3个字节。老司机们真的666啊！<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2.gif" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 ]]></content>
       <categories>
-        <category>编程基础</category>
+        <category>javascript</category>
       </categories>
       <tags>
-        <tag>编程基础</tag>
+        <tag>javascript</tag>
       </tags>
   </entry>
   <entry>
-    <title>使用nodejs批量修改文件后缀</title>
-    <url>/2017/09/03/nodejs/%E4%BD%BF%E7%94%A8nodejs%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80/</url>
-    <content><![CDATA[<p>前端在拿到新项目的原型图的时候，一般会先根据原型图搭好项目的目录结构，在进行多页面开发的时候，我们一般会把文件分为css，js，html的目录结构，比如下面这样：</p>
-<a id="more"></a>
+    <title>var a和var a = void 0?</title>
+    <url>/2018/07/05/js/var%20a%E5%92%8Cvar%20a%20=%20void%200%EF%BC%9F/</url>
+    <content><![CDATA[<p>昨天知道了为什么要用<code>void 0</code> 来替代undefined。</p>
+<blockquote>
+<p>1.防止undefined被重写 2.减少3个字节</p>
+</blockquote>
+<p>但直接声明<code>var a;</code>，那么这个变量就是undefined</p>
+<pre><code>var a;
+console.log(a)；//undefined
+</code></pre><p>那为什么要多此一举多写几个字符呢？</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/0903.png" alt title>
+                    <img src="/images/d.jpg" alt title>
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<p>通常 js 文件夹和 views 文件夹，也会有相同的文件结构，它们之间不同的只是后缀名，如果能有一个方法可以改后缀名，那么写一套另外两套也就高了，能省去一些重复性工作</p>
-<pre><code>// 使用方法为：
-// 把该文件复制到要修改文件名的目录下；
-// 然后打开node.js执行node changeName.js命令；
-// 修改完成！
-// 可以在下面注释的地方自定义修改的逻辑；
-var path = require(&quot;path&quot;);
-var fs = require(&quot;fs&quot;);
-var rootPath = __filename;
-renameFilesInDir(path.dirname(rootPath));
-
-function changeFileName(filepath){
-    fs.stat(filepath,function(err,stats){
-        if(stats.isFile()){
-            var filename = path.basename(filepath);
-            var parentDir =path.dirname(filepath);
-            var thisFilename = path.basename(__filename);
-            //这个if就是进行更改文件名的逻辑,可以自行定义,这里定义为更改文件名称后缀&quot;
-            if(filename!=thisFilename){
-                var newName = filename.replace(/html$/,&quot;js&quot;);
-                var newPath =parentDir+&quot;\\&quot;+newName;
-                console.log(&quot;改变文件 &quot;+filepath+&quot; 为 &quot;+newPath);
-                fs.rename(filepath,newPath);    
-            }
-        }else if(stats.isDirectory()){
-            console.log(&quot;=======[&quot;+filepath+&quot;] 是一个文件夹=====&quot;);
-            renameFilesInDir(filepath);
-        }else{
-        console.log(&quot;未知文件类型&quot;);
-        }
-    });
+<p>哒哒哒，哒哒哒，我又开始百度啦！然而这次百度并没有给我什么满意的答案。我又看了下大佬的代码，比如这样</p>
+<pre><code>function (){
+    var a = void 0;
+    a = document.getElementById(&apos;demo&apos;);
 }
-
-function renameFilesInDir(dir){
-    fs.readdir(dir,function(error,files){
-        var len = files.length;
-        var file = null;
-        for(var i=0;i&lt;len;i++){
-            file = files[i];
-            changeFileName(dir+&quot;\\&quot;+file);
-        }
-    });
+</code></pre><p>就这点内容为什么我不直接这样写呢</p>
+<pre><code>function (){
+    var a = document.getElementById(&apos;demo&apos;);
 }
-</code></pre><p>重复的机械工作会抹掉我们的积极性，遇到这种情况应该想办法让它变得简单。</p>
+</code></pre><p>到这里，我认为在代码还不多的情况下，直接把变量声明在顶部或许更好，那么什么时候用void 0 呢？</p>
+<pre><code>var a = 10;
+...
+var a;
+console.log(a);//10
+</code></pre><p>比如这种时候，我们不确定变量是否在哪里声明过，这个时候就可以声明<code>void 0</code>了，就这样吧，巴拉巴拉</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>大佬！！！<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/a.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 ]]></content>
       <categories>
-        <category>nodejs</category>
+        <category>javascript</category>
       </categories>
       <tags>
-        <tag>nodejs</tag>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/2017/11/23/js/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
+<li>正则表达式，就是一个匹配模式</li>
+<li>正则表达式，本身就是一个字符串（其中有一些特殊字符的语法规则）</li>
+<li>正则的字符串，一定要在函数中使用<h3 id="1-基本格式"><a href="#1-基本格式" class="headerlink" title="1.基本格式"></a>1.基本格式</h3><blockquote>
+<p>定界符号，很多符号都可以，常用/ /</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>原子：最小的一个匹配单位</p>
+</blockquote>
+<blockquote>
+<p>元字符：不能单独使用，修饰原子，用来扩展或者限定原子的功能</p>
+</blockquote>
+<blockquote>
+<p>模式修正符：写在右边</p>
+</blockquote>
+<h3 id="2-正则中的原子"><a href="#2-正则中的原子" class="headerlink" title="2.正则中的原子"></a>2.正则中的原子</h3><h5 id="2-1-打印字符和非打印字符"><a href="#2-1-打印字符和非打印字符" class="headerlink" title="2.1 打印字符和非打印字符"></a>2.1 打印字符和非打印字符</h5><blockquote>
+<p>打印字符指键盘可以打出来的字符，非打印字符指例如回车等打印不出来但是存在的字符</p>
+</blockquote>
+<h5 id="2-2-转义字符"><a href="#2-2-转义字符" class="headerlink" title="2.2 转义字符"></a>2.2 转义字符</h5><ol>
+<li>可以将有意义的字符转为没有意义的字符</li>
+<li>可以将没有意义的字符转为有意义的字符</li>
+<li><p>没有意义的字符，加上转义也没有意义，可转义也可以不转，不影响</p>
+<h5 id="2-3-特殊的原子"><a href="#2-3-特殊的原子" class="headerlink" title="2.3 特殊的原子"></a>2.3 特殊的原子</h5><p>|code|text|<br>|:-:|:-|<br>|\d|任意一个数字|<br>|\D|任意一个非数字|<br>|\w|任意一个字 a-z A-Z 0-9 _|<br>|\W|任意一个非字|<br>|\s|代表空白 空格，回车，tab键|<br>|\S|非空白|<br>|.|点代表所有|</p>
+<h4 id="2-4-自定义原子表"><a href="#2-4-自定义原子表" class="headerlink" title="2.4 自定义原子表"></a>2.4 自定义原子表</h4><p> [13579]<br> [^a-zA-Z] - 表示从哪到哪，^ 除了…..</p>
+<h3 id="3-正则的元字符"><a href="#3-正则的元字符" class="headerlink" title="3.正则的元字符"></a>3.正则的元字符</h3><p>符号|功能<br>:–:|–<br>*|匹配 0 次或者多次<br>+|匹配 1 次或者多次<br>?|匹配 0 次或 1 次<br>|匹配两个或多次分支选择，但优先级是最低的<br>{n}|匹配恰好出现n次<br>{n,}|匹配 n 次以上<br>{n,m}|匹配 n 次到 m 次<br>^ 和 \A|表示必须匹配字符串以什么开始，且必须写在正则表达式最前面<br>$ 和 \Z    |和上面相反</p>
+<h3 id="4-字符串和正则处理函数"><a href="#4-字符串和正则处理函数" class="headerlink" title="4.字符串和正则处理函数"></a>4.字符串和正则处理函数</h3><p>字符串处理的方式：（分割、匹配、查找、替换）</p>
+</li>
+<li><p>字符串处理函数（处理快，但有些功能做不到）</p>
+</li>
+<li>正则函数 （功能强，但是效率低）</li>
+<li>能使用字符串函数处理，就不用正则</li>
+</ol>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>正则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>函数节流和函数防抖</title>
+    <url>/2017/11/23/js/%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81%E5%92%8C%E5%87%BD%E6%95%B0%E9%98%B2%E6%8A%96/</url>
+    <content><![CDATA[<p>频繁的进行DOM操作者，或进行ajax请求，很可能会导致浏览器崩溃，请求被挂起，为了解决相同函数的频率触发，通常有3种情况，即函数节流，函数防抖和设置标识符</p>
+<h2 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h2><p>函数节流解决代码在不间断的情况下重复执行，思想是在函数被调用是设置一个定时器，当定时器未被触发的时候重复调用函数就清除定时器并重新计时。这样保证代码只有在操作间隔指定时间后才执行</p>
+<pre><code>var timer = null;
+function func(){
+    console.log(1)
+}
+function throttle(func,context){
+    clearTimeout(timer)
+    timer = setTimeout(function(){
+        func.call(context)
+    },500)
+}
+window.onresize = function(){
+    throttle(func,window)
+}
+</code></pre><h2 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h2><p>我们在做搜索框的时候，会有输入联想，需要请求后台数据，如果在oninput时触发，后台会忙不过来，但如果以节流的方式来做，当用户输入过快时，会没有提示，所以隔一段时间一定会执行一次</p>
+<pre><code>function func() {
+    console.log(arguments[0])
+}
+/**
+ * 函数防抖
+ * @param {Object} func
+ * @param {number} dely 延迟
+ * @param {Number} maximum  最大多久执行一次
+ */
+var begin = 0,
+    timer = null;
+
+function debounce(func, dely, maximum) {
+    return function() {
+        var args = arguments;
+        var context = this;
+        var cur = Date.parse(new Date());
+        clearTimeout(timer);
+        if(cur - begin &gt;= maximum) {
+            func.apply(context, args);
+            console.log(cur - begin);
+            begin = cur;
+        } else {
+            timer = setTimeout(function() {
+                func.apply(context, args);
+            }, dely)
+        }
+    }
+}
+window.onresize = function() {
+    debounce(func, 500, 1000)(111)
+}
+</code></pre><h2 id="设置标识符"><a href="#设置标识符" class="headerlink" title="设置标识符"></a>设置标识符</h2><p>在做上拉加载的时候，滚动到底部会执行加载请求，只有请求成功了，才会执行下一次上拉，为避免重复请求，可以用设置标识符的方式</p>
+<pre><code>var flag = true;
+function get(){
+    flag = false;
+    console.log(arguments[0])
+    setTimeout(function(){
+        flag = true;
+    },1000)
+}
+function onScroll(){
+    if(!flag)return;
+    get.apply(window,arguments)
+}
+window.onscroll = function(){
+    onScroll(111)
+}
+</code></pre>]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>节流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo搭建个人博客</title>
+    <url>/2017/08/18/%E9%9A%8F%E7%AC%94/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h3><p>以前写笔记都是写在自己的电脑上，但有时候工作遇到了一些笔记上记载了的问题，每次又要重新找答案或是回家再翻笔记，所以也就越来越连笔记也懒得写了。</p>
+<p>把笔记写在博客中，以后遇到找答案方便，如果自己的某篇博客能帮助其他人解惑，那当然更加好了，这是我写博客的初衷。</p>
+<h3 id="为什么选择github-pages"><a href="#为什么选择github-pages" class="headerlink" title="为什么选择github pages"></a>为什么选择github pages</h3><p>最初有在博客园写过博客，但慢慢的觉得那界面风格有些不能接受，所以就有了搭建个人博客的打算，其实刚开始是想自己设计、自己写后台、买空间、买域名…..。于是乎百度百度，然后百度出了githubpages + hexo 搭建博客，仔细一看，哎这个不错免费空间，而且还有很多风格的模板可以选择，关键的是以上的步骤全省了，使用githubpages有以下优点：</p>
+<ul>
+<li>1G以下免费空间，完全够用了，超过似乎会收到GITHUB的通知邮件</li>
+<li>需要Git来进行版本管理，对程序员来说熟悉Git是很有必要的</li>
+<li>风格可以自定义，功能也可以自定义</li>
+</ul>
+<h2 id="第一步、准备"><a href="#第一步、准备" class="headerlink" title="第一步、准备"></a>第一步、准备</h2><p>使用github搭建博客之前首先要做的准备工作：注册github账号、安装nodejs，安装Git，安装hexo</p>
+<h3 id="注册github账号"><a href="#注册github账号" class="headerlink" title="注册github账号"></a>注册github账号</h3><p>如果还没有github账号，就先注册一个吧 <a href="https://github.com/" title="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>注册成功后，打开注册邮箱验证一下就可以了，下面开始新建一个项目</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/112.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>输入仓库名，与用户名一致，点击新增仓库</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118134634.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>进入仓库，选setting</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118135353.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>点击按钮</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118135350.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>随便选择一个主题，然后在浏览器输入刚刚的仓库名字，比如： <a href="https://testsblog.github.io" target="_blank" rel="noopener">https://testsblog.github.io</a> 就可以访问了 </p>
+<p><img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118135346.png" alt></p>
+<h3 id="下载安装Git"><a href="#下载安装Git" class="headerlink" title="下载安装Git"></a>下载安装Git</h3><p>首先安装Git并配置好环境变量，随便找一个教程安装就行了，<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000/" title="安装Git" target="_blank" rel="noopener">安装Git</a></p>
+<h5 id="添加SSH-Key到github"><a href="#添加SSH-Key到github" class="headerlink" title="添加SSH Key到github"></a>添加SSH Key到github</h5><p>检查ssh是否存在：</p>
+<p>打开git Bash：输入 cd ~/.ssh </p>
+<p>如果没有提示，则存在ssh，在系统User/当前用户/.ssh目录下找到id_rsa.pub文件，复制里面的内容，然后</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118144404.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118144400.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h5 id="配置账户"><a href="#配置账户" class="headerlink" title="配置账户"></a>配置账户</h5><pre><code>$ git config --global user.name “用户名” 
+$ git config --global user.email “邮箱” 
+</code></pre><h5 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h5><pre><code>$ ssh -T git@github.com
+</code></pre><p>如果提示Hi testsblog! You’ve successfully authenticated, but GitHub does not provide shell access.则是成功了</p>
+<h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>安装nodejs并配置环境变量，随便找个教程就行</p>
+<h2 id="第二步、安装hexo"><a href="#第二步、安装hexo" class="headerlink" title="第二步、安装hexo"></a>第二步、安装hexo</h2><p>新建一个文件夹hexo，打开cmd，进入文件夹，在命令行中依次执行以下步骤：</p>
+<p>1.全局安装hexo脚手架</p>
+<pre><code>npm install -g hexo-cli
+</code></pre><p>2.初始化hexo</p>
+<pre><code>hexo init hexo
+</code></pre><p>3.进入文件夹</p>
+<pre><code>cd  hexo
+</code></pre><p>4.安装依赖</p>
+<pre><code>npm install
+</code></pre><p>5.部署</p>
+<pre><code>hexo generate
+</code></pre><p>6.本地测试</p>
+<pre><code>hexo server
+</code></pre><p>7.在浏览器输入<a href="http://localhost:4000既可以访问了" target="_blank" rel="noopener">http://localhost:4000既可以访问了</a></p>
+<pre><code>E:\hexo&gt;hexo server
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+</code></pre><h2 id="第三步、将本地项目同步到github"><a href="#第三步、将本地项目同步到github" class="headerlink" title="第三步、将本地项目同步到github"></a>第三步、将本地项目同步到github</h2><h5 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h5><pre><code>npm install hexo-deployer-git --save
+</code></pre><h5 id="编辑器打开全局配置文件-config-yml，编辑"><a href="#编辑器打开全局配置文件-config-yml，编辑" class="headerlink" title="编辑器打开全局配置文件_config.yml，编辑"></a>编辑器打开全局配置文件_config.yml，编辑</h5><pre><code>deploy:
+  type: git
+  repository: ssh://git@github.com/github用户名/github用户名.github.io.git
+  branch: master
+</code></pre><h5 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h5><p>清除缓存</p>
+<pre><code>hexo clean  #清除缓存 网页正常情况下可以忽略此条命令
+</code></pre><p>生成器，生成静态文件</p>
+<pre><code>hexo g
+</code></pre><p>推送到github</p>
+<pre><code>hexo d
+</code></pre><p>最后一行会打印表示推送成功，浏览打开项目testsblog.github.io会发现已经成功</p>
+<pre><code>INFO  Deploy done: git
+</code></pre><h2 id="第四步，更改主题和其他"><a href="#第四步，更改主题和其他" class="headerlink" title="第四步，更改主题和其他"></a>第四步，更改主题和其他</h2><h5 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h5><p>如果想要更改主题，可以到hexo官网找自己喜欢的主题并下载下来<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<ul>
+<li><p>放到项目目录下的themes/目录中</p>
+</li>
+<li><p>更改全局配置文件_config.yml中的theme名字</p>
+</li>
+</ul>
+<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><pre><code>hexo new&quot;postName&quot; #新建文章
+hexo new page&quot;pageName&quot; #新建页面
+hexo generate #生成静态页面至public目录
+hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）
+hexo deploy #将.deploy目录部署到GitHub
+hexo help # 查看帮助
+hexo version #查看Hexo的版本
+</code></pre>]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>githubpages</tag>
       </tags>
   </entry>
   <entry>
@@ -1693,133 +1747,79 @@ recalc();
       </tags>
   </entry>
   <entry>
-    <title>Hexo搭建个人博客</title>
-    <url>/2017/08/18/%E9%9A%8F%E7%AC%94/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="为什么要写博客"><a href="#为什么要写博客" class="headerlink" title="为什么要写博客"></a>为什么要写博客</h3><p>以前写笔记都是写在自己的电脑上，但有时候工作遇到了一些笔记上记载了的问题，每次又要重新找答案或是回家再翻笔记，所以也就越来越连笔记也懒得写了。</p>
-<p>把笔记写在博客中，以后遇到找答案方便，如果自己的某篇博客能帮助其他人解惑，那当然更加好了，这是我写博客的初衷。</p>
-<h3 id="为什么选择github-pages"><a href="#为什么选择github-pages" class="headerlink" title="为什么选择github pages"></a>为什么选择github pages</h3><p>最初有在博客园写过博客，但慢慢的觉得那界面风格有些不能接受，所以就有了搭建个人博客的打算，其实刚开始是想自己设计、自己写后台、买空间、买域名…..。于是乎百度百度，然后百度出了githubpages + hexo 搭建博客，仔细一看，哎这个不错免费空间，而且还有很多风格的模板可以选择，关键的是以上的步骤全省了，使用githubpages有以下优点：</p>
-<ul>
-<li>1G以下免费空间，完全够用了，超过似乎会收到GITHUB的通知邮件</li>
-<li>需要Git来进行版本管理，对程序员来说熟悉Git是很有必要的</li>
-<li>风格可以自定义，功能也可以自定义</li>
-</ul>
-<h2 id="第一步、准备"><a href="#第一步、准备" class="headerlink" title="第一步、准备"></a>第一步、准备</h2><p>使用github搭建博客之前首先要做的准备工作：注册github账号、安装nodejs，安装Git，安装hexo</p>
-<h3 id="注册github账号"><a href="#注册github账号" class="headerlink" title="注册github账号"></a>注册github账号</h3><p>如果还没有github账号，就先注册一个吧 <a href="https://github.com/" title="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/1.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>注册成功后，打开注册邮箱验证一下就可以了，下面开始新建一个项目</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/112.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>输入仓库名，与用户名一致，点击新增仓库</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118134634.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>进入仓库，选setting</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118135353.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>点击按钮</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118135350.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>随便选择一个主题，然后在浏览器输入刚刚的仓库名字，比如： <a href="https://testsblog.github.io" target="_blank" rel="noopener">https://testsblog.github.io</a> 就可以访问了 </p>
-<p><img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118135346.png" alt></p>
-<h3 id="下载安装Git"><a href="#下载安装Git" class="headerlink" title="下载安装Git"></a>下载安装Git</h3><p>首先安装Git并配置好环境变量，随便找一个教程安装就行了，<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000/" title="安装Git" target="_blank" rel="noopener">安装Git</a></p>
-<h5 id="添加SSH-Key到github"><a href="#添加SSH-Key到github" class="headerlink" title="添加SSH Key到github"></a>添加SSH Key到github</h5><p>检查ssh是否存在：</p>
-<p>打开git Bash：输入 cd ~/.ssh </p>
-<p>如果没有提示，则存在ssh，在系统User/当前用户/.ssh目录下找到id_rsa.pub文件，复制里面的内容，然后</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118144404.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://ovdnx588r.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171118144400.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h5 id="配置账户"><a href="#配置账户" class="headerlink" title="配置账户"></a>配置账户</h5><pre><code>$ git config --global user.name “用户名” 
-$ git config --global user.email “邮箱” 
-</code></pre><h5 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h5><pre><code>$ ssh -T git@github.com
-</code></pre><p>如果提示Hi testsblog! You’ve successfully authenticated, but GitHub does not provide shell access.则是成功了</p>
-<h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>安装nodejs并配置环境变量，随便找个教程就行</p>
-<h2 id="第二步、安装hexo"><a href="#第二步、安装hexo" class="headerlink" title="第二步、安装hexo"></a>第二步、安装hexo</h2><p>新建一个文件夹hexo，打开cmd，进入文件夹，在命令行中依次执行以下步骤：</p>
-<p>1.全局安装hexo脚手架</p>
-<pre><code>npm install -g hexo-cli
-</code></pre><p>2.初始化hexo</p>
-<pre><code>hexo init hexo
-</code></pre><p>3.进入文件夹</p>
-<pre><code>cd  hexo
-</code></pre><p>4.安装依赖</p>
-<pre><code>npm install
-</code></pre><p>5.部署</p>
-<pre><code>hexo generate
-</code></pre><p>6.本地测试</p>
-<pre><code>hexo server
-</code></pre><p>7.在浏览器输入<a href="http://localhost:4000既可以访问了" target="_blank" rel="noopener">http://localhost:4000既可以访问了</a></p>
-<pre><code>E:\hexo&gt;hexo server
-INFO  Start processing
-INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
-</code></pre><h2 id="第三步、将本地项目同步到github"><a href="#第三步、将本地项目同步到github" class="headerlink" title="第三步、将本地项目同步到github"></a>第三步、将本地项目同步到github</h2><h5 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h5><pre><code>npm install hexo-deployer-git --save
-</code></pre><h5 id="编辑器打开全局配置文件-config-yml，编辑"><a href="#编辑器打开全局配置文件-config-yml，编辑" class="headerlink" title="编辑器打开全局配置文件_config.yml，编辑"></a>编辑器打开全局配置文件_config.yml，编辑</h5><pre><code>deploy:
-  type: git
-  repository: ssh://git@github.com/github用户名/github用户名.github.io.git
-  branch: master
-</code></pre><h5 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h5><p>清除缓存</p>
-<pre><code>hexo clean  #清除缓存 网页正常情况下可以忽略此条命令
-</code></pre><p>生成器，生成静态文件</p>
-<pre><code>hexo g
-</code></pre><p>推送到github</p>
-<pre><code>hexo d
-</code></pre><p>最后一行会打印表示推送成功，浏览打开项目testsblog.github.io会发现已经成功</p>
-<pre><code>INFO  Deploy done: git
-</code></pre><h2 id="第四步，更改主题和其他"><a href="#第四步，更改主题和其他" class="headerlink" title="第四步，更改主题和其他"></a>第四步，更改主题和其他</h2><h5 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h5><p>如果想要更改主题，可以到hexo官网找自己喜欢的主题并下载下来<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
-<ul>
-<li><p>放到项目目录下的themes/目录中</p>
-</li>
-<li><p>更改全局配置文件_config.yml中的theme名字</p>
-</li>
-</ul>
-<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><pre><code>hexo new&quot;postName&quot; #新建文章
-hexo new page&quot;pageName&quot; #新建页面
-hexo generate #生成静态页面至public目录
-hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）
-hexo deploy #将.deploy目录部署到GitHub
-hexo help # 查看帮助
-hexo version #查看Hexo的版本
-</code></pre>]]></content>
+    <title>node核心模块之http模块</title>
+    <url>/2018/12/25/nodejs/node%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E4%B9%8Bhttp%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<p>##</p>
+]]></content>
       <categories>
-        <category>随笔</category>
+        <category>nodejs</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>githubpages</tag>
+        <tag>http</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用nodejs批量修改文件后缀</title>
+    <url>/2017/09/03/nodejs/%E4%BD%BF%E7%94%A8nodejs%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80/</url>
+    <content><![CDATA[<p>前端在拿到新项目的原型图的时候，一般会先根据原型图搭好项目的目录结构，在进行多页面开发的时候，我们一般会把文件分为css，js，html的目录结构，比如下面这样：</p>
+<a id="more"></a>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://ovdnx588r.bkt.clouddn.com/0903.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>通常 js 文件夹和 views 文件夹，也会有相同的文件结构，它们之间不同的只是后缀名，如果能有一个方法可以改后缀名，那么写一套另外两套也就高了，能省去一些重复性工作</p>
+<pre><code>// 使用方法为：
+// 把该文件复制到要修改文件名的目录下；
+// 然后打开node.js执行node changeName.js命令；
+// 修改完成！
+// 可以在下面注释的地方自定义修改的逻辑；
+var path = require(&quot;path&quot;);
+var fs = require(&quot;fs&quot;);
+var rootPath = __filename;
+renameFilesInDir(path.dirname(rootPath));
+
+function changeFileName(filepath){
+    fs.stat(filepath,function(err,stats){
+        if(stats.isFile()){
+            var filename = path.basename(filepath);
+            var parentDir =path.dirname(filepath);
+            var thisFilename = path.basename(__filename);
+            //这个if就是进行更改文件名的逻辑,可以自行定义,这里定义为更改文件名称后缀&quot;
+            if(filename!=thisFilename){
+                var newName = filename.replace(/html$/,&quot;js&quot;);
+                var newPath =parentDir+&quot;\\&quot;+newName;
+                console.log(&quot;改变文件 &quot;+filepath+&quot; 为 &quot;+newPath);
+                fs.rename(filepath,newPath);    
+            }
+        }else if(stats.isDirectory()){
+            console.log(&quot;=======[&quot;+filepath+&quot;] 是一个文件夹=====&quot;);
+            renameFilesInDir(filepath);
+        }else{
+        console.log(&quot;未知文件类型&quot;);
+        }
+    });
+}
+
+function renameFilesInDir(dir){
+    fs.readdir(dir,function(error,files){
+        var len = files.length;
+        var file = null;
+        for(var i=0;i&lt;len;i++){
+            file = files[i];
+            changeFileName(dir+&quot;\\&quot;+file);
+        }
+    });
+}
+</code></pre><p>重复的机械工作会抹掉我们的积极性，遇到这种情况应该想办法让它变得简单。</p>
+]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>nodejs</tag>
       </tags>
   </entry>
 </search>
