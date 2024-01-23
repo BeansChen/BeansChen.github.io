@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[109],{409:function(t,s,n){"use strict";n.r(s);var e=n(14),r=Object(e.a)({},(function(){var t=this._self._c;return t("ContentSlotsDistributor",{attrs:{"slot-key":this.$parent.slotKey}},[t("p",[this._v("一直以来，在做字符串片段截取时多数都是用到了slice，对于同类型的substr和substring没怎么使用。")])])}),[],!1,null,null,null);s.default=r.exports}}]);

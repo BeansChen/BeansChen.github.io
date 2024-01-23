@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>蜡烛</title>
+    <style>
+        body {
+            background: black;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .candle {
+            position: relative;
+            margin: 300px;
+        }
+
+        .main-body {
+            position: relative;
+            width: 60px;
+            height: 120px;
+            background: red;
+            border-radius: 0 0 30px 30px/0 0 10px 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, .2) inset;
+        }
+
+        .main-body:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            width: 60px;
+            height: 20px;
+            background: red;
+            border-radius: 30px/10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, .2) inset;
+        }
+
+        .main-body:after {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: -20px;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(to bottom, #666, #fff);
+        }
+
+        .flame {
+            position: absolute;
+            left: 20px;
+            top: -70px;
+            width: 20px;
+            height: 60px;
+            border-radius: 50%;
+            animation: flicker 3s infinite ease-out alternate;
+            box-shadow: 0 -15px 15px gainsboro, 0 15px 15px #ffc inset, 0 25px 25px #f90 inset;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scale(1);
+            }
+
+            20% {
+                transform: scale(1.1, 0.9) rotate(3deg);
+            }
+
+            50% {
+                transform: scale(1, 1.2);
+            }
+
+            80% {
+                transform: scale(0.9, 1.1) rotate(-3deg);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .smoke {
+            position: absolute;
+            left: 30px;
+            top: -80px;
+            /*animation: smokeOut 30s infinite;*/
+        }
+
+        /*@keyframes smokeOut {
+				10% {
+					opacity: 1;
+				}
+				0%,
+				100% {
+					opacity: 0;
+				}
+			}*/
+
+        .smoke span {
+            position: absolute;
+            bottom: -9px;
+            left: -9px;
+            width: 18px;
+            height: 18px;
+            background-image: radial-gradient(closest-side circle, rgba(255, 255, 255, .75), rgba(255, 255, 255, .6), rgba(255, 255, 255, .4), rgba(255, 255, 255, 0));
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* 烟雾动画 */
+
+        @keyframes smokeL {
+            0% {
+                opacity: 0;
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1) translate(0, -30px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(3) translate(-4px, -60px);
+            }
+        }
+
+        @keyframes smokeR {
+            0% {
+                opacity: 0;
+                transform: scale(1) translate(0, 0);
+            }
+
+            10% {
+                opacity: .8;
+                transform: scale(1) translate(0, -7px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(5) translate(4px, -26px);
+            }
+        }
+
+        .smoke .s0 {
+            animation: smokeL 10s 0s infinite;
+        }
+
+        .smoke .s1 {
+            animation: smokeR 10s 1s infinite;
+        }
+
+        .smoke .s2 {
+            animation: smokeL 10s 2s infinite;
+        }
+
+        .smoke .s3 {
+            animation: smokeR 10s 3s infinite;
+        }
+
+        .smoke .s4 {
+            animation: smokeL 10s 4s infinite;
+        }
+
+        .smoke .s5 {
+            animation: smokeR 10s 5s infinite;
+        }
+
+        .smoke .s6 {
+            animation: smokeL 10s 6s infinite;
+        }
+
+        .smoke .s7 {
+            animation: smokeR 10s 7s infinite;
+        }
+
+        .smoke .s8 {
+            animation: smokeL 10s 8s infinite;
+        }
+
+        .smoke .s9 {
+            animation: smokeR 10s 9s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="candle">
+        <div class="main-body"></div>
+        <div class="flame"></div>
+        <div class="smoke">
+            <span class="s1 smokel"></span>
+            <span class="s2 smokel"></span>
+            <span class="s3 smokel"></span>
+            <span class="s4 smokel"></span>
+            <span class="s5 smokel"></span>
+            <span class="s6 smokel"></span>
+            <span class="s7 smokel"></span>
+            <span class="s8 smokel"></span>
+            <span class="s9 smokel"></span>
+        </div>
+    </div>
+</body>
+
+</html>
