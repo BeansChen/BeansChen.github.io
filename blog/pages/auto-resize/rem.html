@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script>
+    !(function (window, document) {
+      var docEl = document.documentElement;
+      var dpr = window.devicePixelRatio || 1;
+
+      // 设置data-dpr属性
+      docEl.setAttribute('data-dpr', dpr);
+
+      function resize() {
+        var width = docEl.offsetWidth;
+        width = Math.min(width, 750);
+        var rem = (width * 100) / 750;
+
+        // 根据dpr调整body字号
+        document.body.style.fontSize = (14 * dpr) + 'px';
+
+        // 设置根字体大小
+        docEl.style.fontSize = rem + 'px';
+      }
+
+      // 添加节流
+      var tid;
+      function debounceResize() {
+        clearTimeout(tid);
+        tid = setTimeout(resize, 300);
+      }
+
+      // 初始化执行
+      resize();
+
+      window.addEventListener('DOMContentLoaded', debounceResize);
+      window.addEventListener('resize', debounceResize);
+
+      // 处理Android WebView字体缩放
+      if (window.navigator.appVersion.match(/android/gi)) {
+        document.addEventListener('DOMContentLoaded', function () {
+          if (parseFloat(window.getComputedStyle(document.body).fontSize) < 14 * dpr) {
+            document.body.style.fontSize = 14 * dpr + 'px';
+          }
+        });
+      }
+    })(window, document);
+  </script>
+  <link rel="stylesheet" href="../styles/normalize.css" />
+  <style>
+    .app {
+      background-color: #eee;
+    }
+
+    .title {
+      font-size: 0.5rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      text-align: center;
+    }
+
+    .banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.4rem;
+      background-color: #999;
+    }
+
+    .section {
+      display: flex;
+    }
+
+    .section>div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="title">设计稿 750 x 1334</div>
+    <div class="banner">banner 750 x 240</div>
+    <div class="section">
+      <div class="red">红 250x250</div>
+      <div class="yellow">绿 250x250</div>
+      <div class="blue">蓝色 250x250</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS变量实用技巧</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* 定义CSS变量 */
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #17a398;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --spacing-small: 10px;
+            --spacing-medium: 20px;
+            --spacing-large: 40px;
+            --font-size-base: 16px;
+            --font-size-large: 24px;
+            --font-size-small: 14px;
+        }
+
+        /* 暗色主题变量 */
+        .dark-theme {
+            --primary-color: #6d9dc5;
+            --secondary-color: #1d4e89;
+            --accent-color: #20c9b5;
+            --light-color: #212529;
+            --dark-color: #f8f9fa;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 暖色主题变量 */
+        .warm-theme {
+            --primary-color: #e76f51;
+            --secondary-color: #f4a261;
+            --accent-color: #e9c46a;
+            --light-color: #fefae0;
+            --dark-color: #264653;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding: var(--spacing-medium);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+            padding-bottom: var(--spacing-medium);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-small);
+            font-size: var(--font-size-large);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin: var(--spacing-medium) 0 var(--spacing-small);
+            font-size: calc(var(--font-size-base) * 1.5);
+        }
+
+        .subtitle {
+            color: var(--accent-color);
+            font-size: var(--font-size-base);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .theme-switcher {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-small);
+            margin: var(--spacing-medium) 0;
+            flex-wrap: wrap;
+        }
+
+        .theme-btn {
+            padding: var(--spacing-small) var(--spacing-medium);
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .theme-btn.active {
+            background-color: var(--accent-color);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-medium);
+            margin: var(--spacing-large) 0;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-medium);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-small);
+        }
+
+        .card p {
+            margin-bottom: var(--spacing-small);
+            font-size: var(--font-size-small);
+        }
+
+        .variable-demo {
+            background-color: rgba(74, 111, 165, 0.1);
+            padding: var(--spacing-small);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-small) 0;
+            font-family: 'Courier New', monospace;
+            font-size: calc(var(--font-size-small) * 0.9);
+        }
+
+        .dynamic-controls {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-medium);
+            box-shadow: var(--box-shadow);
+            margin: var(--spacing-large) 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-medium);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .value-display {
+            font-size: var(--font-size-small);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .demo-element {
+            margin: var(--spacing-large) 0;
+            padding: var(--spacing-medium);
+            border-radius: var(--border-radius);
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+            /* 这些属性将通过CSS变量动态改变 */
+            padding: var(--element-padding, 20px);
+            border-radius: var(--element-radius, 8px);
+            font-size: var(--element-font-size, 16px);
+            opacity: var(--element-opacity, 1);
+        }
+
+        .responsive-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-small);
+            margin: var(--spacing-medium) 0;
+        }
+
+        .responsive-box {
+            flex: 1 1 calc(var(--responsive-columns, 4) * 25% - var(--spacing-small));
+            min-width: 150px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: var(--spacing-medium);
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-medium);
+            margin: var(--spacing-medium) 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: calc(var(--font-size-base) * 0.9);
+        }
+
+        .code-comment {
+            color: #75715e;
+        }
+
+        .code-property {
+            color: #a6e22e;
+        }
+
+        .code-value {
+            color: #ae81ff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: var(--spacing-large);
+            padding-top: var(--spacing-medium);
+            border-top: 1px solid #ddd;
+            color: var(--secondary-color);
+            font-size: var(--font-size-small);
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --spacing-large: 30px;
+                --spacing-medium: 15px;
+                --font-size-large: 20px;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --spacing-large: 20px;
+                --font-size-base: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-palette"></i> CSS变量实用技巧</h1>
+            <p class="subtitle">CSS自定义属性（CSS变量）是强大的工具，可以让你的样式表更加动态、可维护和灵活</p>
+
+            <div class="theme-switcher">
+                <button class="theme-btn active" data-theme="default">默认主题</button>
+                <button class="theme-btn" data-theme="dark">暗色主题</button>
+                <button class="theme-btn" data-theme="warm">暖色主题</button>
+            </div>
+        </header>
+
+        <main>
+            <section>
+                <h2><i class="fas fa-cube"></i> 基础用法</h2>
+                <p>CSS变量使用<code>--</code>前缀定义，通过<code>var()</code>函数使用。变量具有作用域，通常在<code>:root</code>中定义全局变量。</p>
+
+                <div class="cards-container">
+                    <div class="card">
+                        <h3>定义变量</h3>
+                        <p>在<code>:root</code>选择器中定义全局CSS变量：</p>
+                        <div class="variable-demo">
+                            :root {<br>
+                            &nbsp;&nbsp;--primary-color: #4a6fa5;<br>
+                            &nbsp;&nbsp;--spacing: 20px;<br>
+                            &nbsp;&nbsp;--border-radius: 8px;<br>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>使用变量</h3>
+                        <p>使用<code>var()</code>函数调用CSS变量：</p>
+                        <div class="variable-demo">
+                            .button {<br>
+                            &nbsp;&nbsp;background-color: var(--primary-color);<br>
+                            &nbsp;&nbsp;padding: var(--spacing);<br>
+                            &nbsp;&nbsp;border-radius: var(--border-radius);<br>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>变量回退值</h3>
+                        <p>当变量未定义时，可以提供一个回退值：</p>
+                        <div class="variable-demo">
+                            .element {<br>
+                            &nbsp;&nbsp;color: var(--custom-color, #333);<br>
+                            &nbsp;&nbsp;margin: var(--custom-margin, 10px 20px);<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-sliders-h"></i> 动态控制演示</h2>
+                <p>使用JavaScript动态改变CSS变量，创建交互式UI：</p>
+
+                <div class="dynamic-controls">
+                    <div class="control-group">
+                        <label for="padding-control">内边距: <span class="value-display" id="padding-value">20px</span></label>
+                        <input type="range" id="padding-control" min="5" max="50" value="20">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="radius-control">圆角半径: <span class="value-display" id="radius-value">8px</span></label>
+                        <input type="range" id="radius-control" min="0" max="30" value="8">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="font-control">字体大小: <span class="value-display" id="font-value">16px</span></label>
+                        <input type="range" id="font-control" min="12" max="32" value="16">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="opacity-control">不透明度: <span class="value-display" id="opacity-value">1</span></label>
+                        <input type="range" id="opacity-control" min="0" max="1" step="0.1" value="1">
+                    </div>
+                </div>
+
+                <div class="demo-element" id="demo-element">
+                    这个元素的所有样式都通过CSS变量控制！<br>
+                    尝试使用上面的滑块调整它的外观。
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-mobile-alt"></i> 响应式设计中的应用</h2>
+                <p>CSS变量可以与媒体查询结合，创建更灵活的响应式布局：</p>
+
+                <div class="responsive-demo" id="responsive-demo">
+                    <div class="responsive-box">项目 1</div>
+                    <div class="responsive-box">项目 2</div>
+                    <div class="responsive-box">项目 3</div>
+                    <div class="responsive-box">项目 4</div>
+                </div>
+
+                <div class="control-group">
+                    <label for="columns-control">列数: <span class="value-display" id="columns-value">4</span></label>
+                    <input type="range" id="columns-control" min="1" max="4" value="4">
+                </div>
+
+                <div class="code-block">
+                    <span class="code-comment">/* 使用CSS变量控制响应式列数 */</span><br>
+                    .responsive-box {<br>
+                    &nbsp;&nbsp;<span class="code-property">flex</span>: <span class="code-value">1 1 calc(var(--responsive-columns, 4) * 25% -
+                        var(--spacing-small))</span>;<br>
+                    &nbsp;&nbsp;<span class="code-property">min-width</span>: <span class="code-value">150px</span>;<br>
+                    }
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-code"></i> 实际应用示例</h2>
+                <p>CSS变量在实际项目中的应用代码示例：</p>
+
+                <div class="code-block">
+                    <span class="code-comment">/* 1. 主题切换系统 */</span><br>
+                    <span class="code-property">:root</span> {<br>
+                    &nbsp;&nbsp;<span class="code-property">--primary-light</span>: <span class="code-value">#4a6fa5</span>;<br>
+                    &nbsp;&nbsp;<span class="code-property">--background-light</span>: <span class="code-value">#ffffff</span>;<br>
+                    &nbsp;&nbsp;<span class="code-property">--text-light</span>: <span class="code-value">#333333</span>;<br>
+                    }<br><br>
+
+                    <span class="code-comment">/* 2. 动态间距系统 */</span><br>
+                    <span class="code-property">.container</span> {<br>
+                    &nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">var(--spacing-medium)</span>;<br>
+                    &nbsp;&nbsp;<span class="code-property">margin-bottom</span>: <span class="code-value">var(--spacing-large)</span>;<br>
+                    }<br><br>
+
+                    <span class="code-comment">/* 3. 一致性动画 */</span><br>
+                    <span class="code-property">:root</span> {<br>
+                    &nbsp;&nbsp;<span class="code-property">--transition-fast</span>: <span class="code-value">0.2s ease</span>;<br>
+                    &nbsp;&nbsp;<span class="code-property">--transition-normal</span>: <span class="code-value">0.3s ease</span>;<br>
+                    }<br>
+                    <span class="code-property">.button</span> {<br>
+                    &nbsp;&nbsp;<span class="code-property">transition</span>: <span class="code-value">all var(--transition-normal)</span>;<br>
+                    }
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>CSS变量实用技巧演示 | 使用纯CSS和JavaScript实现 | 兼容现代浏览器</p>
+            <p>提示：尝试切换不同主题和使用滑块控件体验CSS变量的动态特性</p>
+        </footer>
+    </div>
+
+    <script>
+        // 主题切换功能
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const body = document.body;
+
+        themeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有主题类
+                body.classList.remove('dark-theme', 'warm-theme');
+
+                // 更新按钮状态
+                themeButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // 应用选中的主题
+                const theme = button.getAttribute('data-theme');
+                if (theme !== 'default') {
+                    body.classList.add(`${theme}-theme`);
+                }
+            });
+        });
+
+        // 动态控制CSS变量
+        const paddingControl = document.getElementById('padding-control');
+        const radiusControl = document.getElementById('radius-control');
+        const fontControl = document.getElementById('font-control');
+        const opacityControl = document.getElementById('opacity-control');
+        const columnsControl = document.getElementById('columns-control');
+
+        const paddingValue = document.getElementById('padding-value');
+        const radiusValue = document.getElementById('radius-value');
+        const fontValue = document.getElementById('font-value');
+        const opacityValue = document.getElementById('opacity-value');
+        const columnsValue = document.getElementById('columns-value');
+
+        const demoElement = document.getElementById('demo-element');
+        const responsiveDemo = document.getElementById('responsive-demo');
+
+        // 更新CSS变量并显示当前值
+        function updateVariable(variableName, value, unit = 'px', displayElement) {
+            document.documentElement.style.setProperty(variableName, value + unit);
+            if (displayElement) {
+                displayElement.textContent = value + (unit === '' ? '' : unit);
+            }
+        }
+
+        // 绑定控件事件
+        paddingControl.addEventListener('input', () => {
+            updateVariable('--element-padding', paddingControl.value, 'px', paddingValue);
+        });
+
+        radiusControl.addEventListener('input', () => {
+            updateVariable('--element-radius', radiusControl.value, 'px', radiusValue);
+        });
+
+        fontControl.addEventListener('input', () => {
+            updateVariable('--element-font-size', fontControl.value, 'px', fontValue);
+        });
+
+        opacityControl.addEventListener('input', () => {
+            updateVariable('--element-opacity', opacityControl.value, '', opacityValue);
+        });
+
+        columnsControl.addEventListener('input', () => {
+            updateVariable('--responsive-columns', columnsControl.value, '', columnsValue);
+        });
+
+        // 初始化显示值
+        updateVariable('--element-padding', paddingControl.value, 'px', paddingValue);
+        updateVariable('--element-radius', radiusControl.value, 'px', radiusValue);
+        updateVariable('--element-font-size', fontControl.value, 'px', fontValue);
+        updateVariable('--element-opacity', opacityControl.value, '', opacityValue);
+        updateVariable('--responsive-columns', columnsControl.value, '', columnsValue);
+
+        // 添加一些交互效果
+        demoElement.addEventListener('mouseenter', () => {
+            demoElement.style.setProperty('--primary-color', 'var(--accent-color)');
+        });
+
+        demoElement.addEventListener('mouseleave', () => {
+            demoElement.style.removeProperty('--primary-color');
+        });
+
+        // 响应式演示框的交互
+        const responsiveBoxes = document.querySelectorAll('.responsive-box');
+        responsiveBoxes.forEach((box, index) => {
+            box.addEventListener('click', () => {
+                // 使用CSS变量设置随机背景色
+                const hue = Math.floor(Math.random() * 360);
+                box.style.setProperty('--accent-color', `hsl(${hue}, 70%, 60%)`);
+                box.textContent = `点击更改颜色 ${index + 1}`;
+            });
+        });
+    </script>
+</body>
+
+</html>

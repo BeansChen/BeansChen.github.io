@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>原生JS实现图片懒加载</title>
+    <style>
+        .lazy-image {
+            width: 100%;
+            height: 600px;
+            background: #f0f0f0;
+            margin: 20px 0;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height: 1000px;">
+        <h2>实现原理</h2>
+        <ol>
+            <li>使用 data-src 存储真实图片路径</li>
+            <li>通过 IntersectionObserver API 监听元素是否进入视口</li>
+            <li>进入视口时将 data-src 的值赋给 src 属性</li>
+        </ol>
+        <h2>IntersectionObserver 时间应用作用</h2>
+        <h4>相比手动监听scroll实现性能更佳（异步不阻塞主进程），如果需要兼容老浏览器，做降级处理</h4>
+        <ol>
+            <li>图片/内容懒加载（Lazy Load）</li>
+            <li>无限滚动（Infinite Scroll）</li>
+            <li> 广告/内容曝光统计（埋点上报）</li>
+            <li>动画触发（Scroll-triggered Animations）</li>
+            <li>固定导航栏（Sticky Header）优化</li>
+        </ol>
+        <h2>性能优化建议</h2>
+        <ol>
+            <li>使用CSS过渡：图片加载时添加淡入效果</li>
+            <li>设置合适阈值：根据实际需求调整提前加载距离</li>
+            <li>添加加载动画：在placeholder中显示加载动画</li>
+            <li>响应式图片：配合 srcset 实现响应式加载</li>
+            <li>内存管理：加载完成后解除事件监听</li>
+            <li>数据量过大，可以采取分批次监听和虚拟列表方式</li>
+        </ol>
+        <h2>总结</h2>
+        <h4>图片懒加载是提升页面加载速度的重要手段，合理应用 IntersectionObserver 可以实现高性能的图片加载，具体项目实现可以根据场景进行调整</h4>
+    </div>
+
+    <!-- 懒加载图片 -->
+    <img class="lazy-image"
+        data-src="http://gips3.baidu.com/it/u=100751361,1567855012&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280?random=1"
+        alt="图片1">
+    <img class="lazy-image"
+        data-src="http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280?random=2"
+        alt="图片2">
+    <img class="lazy-image"
+        data-src="http://gips1.baidu.com/it/u=3874647369,3220417986&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280?random=3"
+        alt="图片3">
+    <img class="lazy-image"
+        data-src="http://gips1.baidu.com/it/u=1647344915,1746921568&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280?random=4"
+        alt="图片4">
+
+    <div style="height: 1000px;"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lazyImages = document.querySelectorAll('.lazy-image');
+
+            // 现代浏览器支持的方式
+            if ('IntersectionObserver' in window) {
+                const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                }, {
+                    rootMargin: '0px 0px 100px 0px' // 提前100px加载
+                });
+
+                lazyImages.forEach(image => {
+                    lazyImageObserver.observe(image);
+                });
+            }
+            // 旧浏览器回退方案
+            else {
+                let active = false;
+
+                const lazyLoad = () => {
+                    if (active === false) {
+                        active = true;
+
+                        setTimeout(() => {
+                            lazyImages.forEach(image => {
+                                const rect = image.getBoundingClientRect();
+                                if (rect.top <= window.innerHeight + 100 && rect.bottom >= 0) {
+                                    image.src = image.dataset.src;
+                                    image.classList.remove('lazy-image');
+                                }
+                            });
+
+                            active = false;
+                        }, 200);
+                    }
+                };
+
+                document.addEventListener('scroll', lazyLoad);
+                window.addEventListener('resize', lazyLoad);
+                window.addEventListener('orientationchange', lazyLoad);
+                lazyLoad(); // 初始加载
+            }
+        });
+    </script>
+</body>
+
+</html>

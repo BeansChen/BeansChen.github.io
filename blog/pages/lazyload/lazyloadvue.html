@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件实现图片懒加载</title>
+    <style>
+        .lazy-container {
+            height: 600px;
+            margin: 20px 0;
+        }
+
+        .placeholder {
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .error {
+            background: #ffe6e6;
+            color: #ff3333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div style="height: 1000px;"></div>
+
+        <!-- 使用懒加载组件 -->
+        <lazy-image
+            src="http://gips3.baidu.com/it/u=100751361,1567855012&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280?random=1"
+            placeholder="https://pics5.baidu.com/feed/a044ad345982b2b73fc0fcdc932c25e477099bdd.jpeg@f_auto?token=12c2cb64ad829691944bc5226f5298fe?text=加载中..."></lazy-image>
+
+        <lazy-image
+            src="http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280?random=2"
+            placeholder="https://pics5.baidu.com/feed/a044ad345982b2b73fc0fcdc932c25e477099bdd.jpeg@f_auto?token=12c2cb64ad829691944bc5226f5298fe?text=加载中..."></lazy-image>
+
+        <lazy-image
+            src="http://gips1.baidu.com/it/u=3874647369,3220417986&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280?random=3"
+            placeholder="https://pics5.baidu.com/feed/a044ad345982b2b73fc0fcdc932c25e477099bdd.jpeg@f_auto?token=12c2cb64ad829691944bc5226f5298fe?text=加载中..."></lazy-image>
+        <lazy-image src="https://p0.itc.cn/q_70/images03/20220525/ec5c22bd64574bc9a41a1db3f2fba6c4.jpeg?random=4"
+            placeholder="https://pics5.baidu.com/feed/a044ad345982b2b73fc0fcdc932c25e477099bdd.jpeg@f_auto?token=12c2cb64ad829691944bc5226f5298fe?text=加载中..."></lazy-image>
+        <!--错误示例 -->
+        <lazy-image src="INVALID_URL"></lazy-image>
+
+        <div style="height: 1000px;"></div>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        // 自定义指令
+        Vue.directive('lazy', {
+            inserted: (el, binding) => {
+                const loadImage = () => {
+                    const realImage = new Image();
+                    realImage.src = binding.value;
+
+                    realImage.onload = () => {
+                        el.style.backgroundImage = `url(${binding.value})`;
+                        // el.classList.remove('placeholder');
+                    };
+
+                    realImage.onerror = () => {
+                        el.classList.add('error');
+                        el.innerHTML = '<p>图片加载失败</p>';
+                    };
+                };
+
+                // 使用IntersectionObserver
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                loadImage();
+                                observer.unobserve(el);
+                            }
+                        });
+                    }, {
+                        rootMargin: '0px 0px 100px 0px'
+                    });
+
+                    observer.observe(el);
+                }
+                // 旧浏览器回退
+                else {
+                    loadImage();
+                }
+            }
+        });
+
+        // 懒加载组件
+        Vue.component('lazy-image', {
+            props: {
+                src: {
+                    type: String,
+                    required: true
+                },
+                placeholder: {
+                    type: String,
+                    default: ''
+                }
+            },
+            template: `
+        <div class="lazy-container">
+          <div 
+            v-lazy="src"
+            class="placeholder"
+            :style="{ backgroundImage: placeholder ? 'url(' + placeholder + ')' : '' }"
+          ></div>
+        </div>
+      `
+        });
+
+        new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

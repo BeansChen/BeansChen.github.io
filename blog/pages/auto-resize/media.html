@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../styles/normalize.css" />
+  <style>
+    @media screen and (min-width: 414px) {
+      html {
+        font-size: 55.2px;
+      }
+    }
+
+    /*big*/
+    @media screen and (max-width: 414px) {
+      html {
+        font-size: 55.2px;
+      }
+    }
+
+    /*middle*/
+    @media screen and (max-width: 375px) {
+      html {
+        font-size: 50px;
+      }
+    }
+
+    /*small*/
+    @media screen and (max-width: 320px) {
+      html {
+        font-size: 42.6667px;
+      }
+    }
+  </style>
+  <style>
+    body {
+      font-size: 14px;
+    }
+
+    .app {
+      background-color: #eee;
+    }
+
+    .title {
+      font-size: 0.5rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      text-align: center;
+    }
+
+    .banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.4rem;
+      background-color: #999;
+    }
+
+    .section {
+      display: flex;
+    }
+
+    .section>div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="title">设计稿 750 x 1334</div>
+    <div class="banner">banner 750 x 240</div>
+    <div class="section">
+      <div class="red">红 250x250</div>
+      <div class="yellow">绿 250x250</div>
+      <div class="blue">蓝色 250x250</div>
+    </div>
+  </div>
+</body>
+
+</html>

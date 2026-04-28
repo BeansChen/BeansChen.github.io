@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>虚拟滚动-固定子项高度</title>
+  <link rel="stylesheet" href="../styles/normalize.css" />
+  <script src="../js/vue.min.js"></script>
+  <style>
+    .container {
+      width: 200px;
+      height: 300px;
+      -webkit-overflow-scrolling: touch;
+      overflow: auto;
+      position: relative;
+      background-color: aqua;
+    }
+
+    .content {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      background-color: yellow;
+    }
+
+    .content-item {
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      text-align: center;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 可视区 -->
+    <div ref="container" class="container" @scroll="onScroll">
+      <!-- 内容撑开区 -->
+      <div class="phantom" :style="{height:phantomHeight+'px'}"></div>
+      <!-- 可视内容区 -->、
+      <div class="content" :style="{ transform: getTransform }">
+        <div ref="items" v-for="item in visibleData" :key="item.id"
+          :style="{ height: itemHeight + 'px', lineHeight: itemHeight + 'px' }" class="content-item">
+          {{ item.id }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          // 10万条数据
+          listData: new Array(20)
+            .fill({})
+            .map((item, index) => ({ id: index })),
+          // 固定子项高度
+          itemHeight: 60,
+          // 可视区数据
+          visibleInfo: {
+            startIndex: 0, // 起始索引
+            endIndex: 0, // 结束索引
+            height: 0, // 可视区高度
+          },
+          // 内容区需要被撑开的高度
+          phantomHeight: 0,
+          // 偏移量
+          startOffset: 0,
+        };
+      },
+      computed: {
+        visibleData() {
+          return this.listData.slice(
+            this.visibleInfo.startIndex,
+            Math.min(this.visibleInfo.endIndex, this.listData.length)
+          );
+        },
+        visibleCount() {
+          // 为什么是ceil：ceil是向上取整 有小数就+1 确保足量数量不留白
+          return Math.ceil(this.visibleInfo.height / this.itemHeight);
+        },
+        getTransform() {
+          return `translate3d(0,${this.startOffset}px,0)`;
+        },
+      },
+      mounted() {
+        this.visibleInfo.height = this.$refs.container.clientHeight;
+        this.phantomHeight = this.listData.length * this.itemHeight;
+        this.visibleInfo.startIndex = 0;
+        this.visibleInfo.endIndex =
+          this.visibleInfo.startIndex + this.visibleCount;
+      },
+      methods: {
+        onScroll(e) {
+          const scrollTop = e.target.scrollTop;
+          // 为什么是floor：floor是向下取整 取整数部分 确保每个子项完整滚动
+          this.visibleInfo.startIndex = Math.floor(
+            scrollTop / this.itemHeight
+          );
+          this.visibleInfo.endIndex =
+            this.visibleInfo.startIndex + this.visibleCount;
+          this.startOffset = this.visibleInfo.startIndex * this.itemHeight;
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

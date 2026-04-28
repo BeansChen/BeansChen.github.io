@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/normalize.css">
+    <link rel="stylesheet" href="../styles/border.css">
+    <style>
+        .box {
+            margin: 20px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+        }
+
+        .item2::before {
+            border-radius: 16px;
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+        <div class="item border-bottom">item</div>
+    </div>
+
+    <div class="box">
+        <div class="item item2 border">item</div>
+    </div>
+
+
+</body>
+
+</html>
